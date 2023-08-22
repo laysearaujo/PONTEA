@@ -1,4 +1,4 @@
-# SensibiliTEA - Inclusive Learning Platform for Children with Autism Spectrum Disorder
+# PONTEA - Inclusive Learning Platform for Children with Autism Spectrum Disorder
 
 Welcome to the SensibiliTEA project repository! Our platform is designed to create inclusive learning environments for children with Autism Spectrum Disorder (ASD). It offers teachers a collaborative space to share and discover customized activities that enhance engagement and development in children with ASD.
 
