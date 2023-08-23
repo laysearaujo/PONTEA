@@ -17,13 +17,13 @@ Before you begin, make sure you have the following prerequisites installed:
 1. Clone the repository using Git:
 
     ```sh
-   git clone https://github.com/your-username/sensibilitea.git
+   git clone https://github.com/your-username/PONTEA.git
     ```
     Replace your-username with your GitHub username
     
 2. Navigate to the project directory:
    ```sh
-    cd sensibilitea
+    cd PONTEA
    
 3. Install the Quasar CLI globally using npm:
    ```sh
