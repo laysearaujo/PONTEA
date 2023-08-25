@@ -1,23 +1,30 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header reveal style="background-color: white; color: black;">
-      <q-toolbar>
-        <q-toolbar-title>
-          Pontea.
-        </q-toolbar-title>
-        <q-btn flat round dense icon="filter_list" class="q-mr-md" />
-        <q-input outlined rounded dense class="search-input" label="Busca" style="max-width: 400px;">
-          <template #prepend>
-            <q-icon name="search" />
-          </template>
-        </q-input>
-        <q-avatar size="36px">
-          <q-icon name="account_circle" size="36px" />
-        </q-avatar>
+    <q-header reveal style="background-color: white; color: black; margin-top: 1%;">
+      <q-toolbar class="q-space-between">
+        <div>
+          <img src="/../public/images/logo.svg" alt="Logo" class="logo-image" style="max-width: 300px; min-width: 150px;"/>
+        </div>
+        <div class="toolbar-icons">
+          <q-btn flat round dense icon="filter_list" class="q-mr-md" />
+          <q-input outlined rounded dense class="search-input" label="Busca" style="max-width: 700px; min-width: 300px;">
+            <template #prepend>
+              <q-icon name="search" />
+            </template>
+          </q-input>
+          <q-avatar size="36px" class="q-ml-sm">
+            <q-icon name="account_circle" size="36px" />
+          </q-avatar>
+        </div>
       </q-toolbar>
-      <div class="toolbar-icons">
-        <div class="icon-button" @click="tab = 'home'">Início</div>
-        <div class="icon-button" @click="tab = 'search'">Buscar</div>
+      <div class="toolbar-icons" style="margin-top: 2%; margin-left: 15px;">
+        <div
+          class="icon-button"
+          :class="{ 'active-button': tab === 'home' }"
+          @click="tab = 'home'"
+        >
+          Home
+        </div>
       </div>
     </q-header>
 
@@ -50,6 +57,12 @@ export default defineComponent({
 
 <style scoped>
 /* Add any custom styles you might need */
+
+.active-button {
+  font-weight: bold; /* Exemplo: deixa o texto em negrito quando o botão está ativo */
+  color: #144ec0; /* Exemplo: muda a cor do texto quando o botão está ativo */
+}
+ 
 .toolbar-icons {
   display: flex;
   align-items: center;
@@ -73,6 +86,11 @@ export default defineComponent({
 }
 .q-mr-md {
     margin-right: 0px;
+}
+.row, .column, .flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 </style>
