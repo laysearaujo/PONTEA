@@ -21,16 +21,19 @@
             </template>
           </q-input>
         </div>
-        <div style="display: flex; align-items: center; gap: 0.20rem;">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
           <div class="icon-button">
             <img src="/../public/icons/notification.svg" alt="Notifications" class="icon-svg" />
           </div>
           <div class="icon-button">
             <img src="/../public/icons/shoppingCart.svg" alt="Cart" class="icon-svg" />
           </div>
-          <q-avatar size="36px" class="q-ml-sm">
-            <q-icon name="account_circle" size="36px" />
-          </q-avatar>
+          <div class="icon-avatar">
+            <q-avatar size="40px" class="custom-avatar">
+              <img src="/../public/icons/favicon-96x96.png" alt="Foto de Perfil" class="avatar-image" />
+            </q-avatar>
+          </div>
+
         </div>
       </div>
     </q-toolbar>
@@ -45,6 +48,7 @@
     </div>
   </q-header>
 </template>
+
 
 <script>
 import { defineComponent, ref, toRefs } from 'vue';
@@ -93,7 +97,6 @@ export default defineComponent({
 
 .icon-button {
   cursor: pointer;
-  margin-right: 10px;
   font-size: 16px;
 }
 
@@ -111,9 +114,9 @@ export default defineComponent({
 .rounded-input {
   width: 20rem;
   min-width: 5rem;
-  border-radius: 30px; /* Match the rounded corners of the input */
-  overflow: hidden; /* Apply a clipping mask to the input */
-  background-color: #FBFDFF; /* Set the background color of the input */
+  border-radius: 30px;
+  overflow: hidden;
+  background-color: #FBFDFF;
   border: 0.09rem solid #144ec0;
 }
 
@@ -124,17 +127,31 @@ export default defineComponent({
   width: 2rem;
   height: 100%;
   background-color: #FBFDFF;
-  border-radius: 30px 0 0 30px; /* Match the rounded corners of the input */
+  border-radius: 30px 0 0 30px;
 }
 
-.q-mr-md {
-  margin-right: 0px;
+.icon-avatar {
+  margin-left: 0.45rem;
+  display: flex;
+  width: 1.5rem;
+  height: 1.5rem;
+  justify-content: center;
+  align-items: center;
 }
 
-.row, .column, .flex {
+.q-ml-sm {
+  margin-left: 10px;
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
+.row,
+.column,
+.flex {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-
 </style>
