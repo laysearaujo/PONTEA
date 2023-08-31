@@ -5,12 +5,22 @@
         <img src="/../public/images/logo.svg" alt="Logo" class="logo-image" style="max-width: 300px; min-width: 150px;  z-index: 1; "/>
       </div>
       <div class="toolbar-icons">
-        <q-btn flat round dense icon="filter_list" class="q-mr-md" />
-        <q-input outlined rounded dense class="search-input" label="Busca" style="max-width: 700px; min-width: 300px;">
-          <template #prepend>
-            <q-icon name="search" />
-          </template>
-        </q-input>
+        <div class="search-input">
+          <q-input
+            outlined
+            rounded
+            dense
+            class="rounded-input"
+            label="Busca"
+            v-model="searchQuery"
+          >
+            <template v-slot:prepend>
+              <div class="search-icon">
+                <q-icon name="search" />
+              </div>
+            </template>
+          </q-input>
+        </div>
         <q-avatar size="36px" class="q-ml-sm">
           <q-icon name="account_circle" size="36px" />
         </q-avatar>
@@ -80,8 +90,28 @@ export default defineComponent({
 }
 
 .search-input {
-  flex: 1;
-  max-width: 500px;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.rounded-input {
+  width: 20rem;
+  min-width: 5rem;
+  border-radius: 30px; /* Match the rounded corners of the input */
+  overflow: hidden; /* Apply a clipping mask to the input */
+  background-color: #FBFDFF; /* Set the background color of the input */
+  border: 0.09rem solid #144ec0;
+}
+
+.search-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 100%;
+  background-color: #FBFDFF;
+  border-radius: 30px 0 0 30px; /* Match the rounded corners of the input */
 }
 
 .q-mr-md {
