@@ -21,9 +21,17 @@
             </template>
           </q-input>
         </div>
-        <q-avatar size="36px" class="q-ml-sm">
-          <q-icon name="account_circle" size="36px" />
-        </q-avatar>
+        <div style="display: flex; align-items: center; gap: 0.20rem;">
+          <div class="icon-button">
+            <img src="/../public/icons/notification.svg" alt="Notifications" class="icon-svg" />
+          </div>
+          <div class="icon-button">
+            <img src="/../public/icons/shoppingCart.svg" alt="Cart" class="icon-svg" />
+          </div>
+          <q-avatar size="36px" class="q-ml-sm">
+            <q-icon name="account_circle" size="36px" />
+          </q-avatar>
+        </div>
       </div>
     </q-toolbar>
     <div class="toolbar-icons" style="margin-top: 2%; margin-left: 15px;">
@@ -69,8 +77,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-/* Add any custom styles you might need */
-
 .active-button {
   font-weight: bold;
   color: #144ec0;
@@ -81,12 +87,19 @@ export default defineComponent({
   align-items: center;
   margin-left: 10px;
   padding-right: 20px;
+  display: flex;
+  gap: 1.5rem;
 }
 
 .icon-button {
   cursor: pointer;
   margin-right: 10px;
   font-size: 16px;
+}
+
+.icon-svg {
+  width: 24px;
+  height: 24px;
 }
 
 .search-input {
@@ -123,4 +136,5 @@ export default defineComponent({
   flex-wrap: wrap;
   justify-content: space-between;
 }
+
 </style>
