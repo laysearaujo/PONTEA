@@ -1,8 +1,8 @@
 <template>
-  <q-header reveal style="background-color: white; color: black; padding-top: 1%;">
-    <q-toolbar class="q-space-between">
+  <q-header reveal style="background-color: white; color: black;">
+    <q-toolbar class="q-space-between" style="background-color: #D9DCF9; padding: 1%;">
       <div>
-        <img src="/../public/images/logo.svg" alt="Logo" class="logo-image" style="max-width: 300px; min-width: 150px;"/>
+        <img src="/../public/images/logo.svg" alt="Logo" class="logo-image" style="max-width: 300px; min-width: 150px;  z-index: 1; "/>
       </div>
       <div class="toolbar-icons">
         <q-btn flat round dense icon="filter_list" class="q-mr-md" />
