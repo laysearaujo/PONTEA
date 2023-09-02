@@ -10,17 +10,29 @@
         class="card-wrapper"
       />
     </div>
+    <h5 class="sub-title col-12 q-mb-sm"> Educadores Bem Avaliados</h5>
+    <div class="educadores-avaliados">
+      <TeacherCard  v-for="teacher in teachers"
+      :key="teacher.name"
+      :name="teacher.name"
+      :rating="teacher.rating"
+      :quantity="teacher.quantity"
+      :img_src="teacher.src"
+      class="teacher-wrapper"/>
+    </div>
   </div>
 </template>
 
 <script>
 import KnowledgeCard from 'components/KnowledgeCard.vue';
+import TeacherCard from 'src/components/TeacherCard.vue';
 
 export default {
   name: 'HomePage',
   components: {
     KnowledgeCard,
-  },
+    TeacherCard
+},
   data() {
     return {
       items: [
@@ -34,6 +46,11 @@ export default {
         { title: 'O Eu, o outro e o nós', quantity: 1 },
         // ... more items ...
       ],
+      teachers:[
+        { name: 'Testando um nome grande', rating: 4.2, quantity: 2, src: "https://cdn.quasar.dev/img/avatar2.jpg"},
+        { name: 'Estela Mendes', rating: 5, quantity: 21, src: "https://cdn.quasar.dev/img/avatar2.jpg"},
+        { name: 'Ana', rating: 4, quantity: 2, src: "https://cdn.quasar.dev/img/avatar2.jpg"}
+      ]
     };
   }
   // ... outras configurações do componente ...
@@ -50,6 +67,16 @@ export default {
 }
 
 .card-wrapper {
+  flex-basis: calc(33.33% - 20px); /* Defina o tamanho base dos cards */
+  margin: 0; /* Remova as margens padrão */
+}
+
+.educadores-avaliados{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.teacher-wrapper {
   flex-basis: calc(33.33% - 20px); /* Defina o tamanho base dos cards */
   margin: 0; /* Remova as margens padrão */
 }
