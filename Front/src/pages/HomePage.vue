@@ -24,8 +24,14 @@ export default {
   data() {
     return {
       items: [
-        { title: 'Title 1', quantity: 5 },
-        { title: 'Title 2', quantity: 10 },
+        { title: 'Escuta, fala, pensamento e imaginação', quantity: 5 },
+        { title: 'Corpo, gestos e movimento', quantity: 2 },
+        { title: 'Espaços, tempo, quantidades, relações e transformações', quantity: 3 },
+        { title: 'Traços, sons, cores e formas', quantity: 7 },
+        { title: 'O Eu, o outro e o nós', quantity: 1 },
+        { title: 'Espaços, tempo, quantidades, relações e transformações', quantity: 3 },
+        { title: 'Traços, sons, cores e formas', quantity: 7 },
+        { title: 'O Eu, o outro e o nós', quantity: 1 },
         // ... more items ...
       ],
     };
@@ -38,6 +44,7 @@ export default {
 
 .cards-container {
   display: flex;
+  width: 100%;
   flex-wrap: wrap;
   gap: 20px; /* Espaçamento entre os cards */
 }

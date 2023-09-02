@@ -1,20 +1,26 @@
 <template>
   <div class="my-card">
-    <q-card>
-      <div class="card-image">
-        <img src="/../public/images/knowledgeCard.svg" alt="Knowledge Card">
-        <div class="title-overlay">{{ title }}</div>
-      </div>
-      <q-card-section class="q-pt-none">
-        <div class="icon-and-quantity q-mt-sm">
-          <img src="/../public/images/notebook.svg" class="icon" alt="Icon" />
-          <span class="quantity">{{ quantity }}</span>
+    <q-card class="card-content">
+      <div class="title-overlay" v-tooltip="title">{{ truncatedTitle }}</div>
+      <div class="text-card" :style="{ background: titleIconMap[title]?.color || '#FF7A92' }">
+        <div class="icon">
+          <img
+            :src="`/../public/icons/${titleIconMap[title]?.icon}`"
+            alt="image"
+            class="logo-image"
+          />
         </div>
-      </q-card-section>
+        <div class="bottom-content">
+          <div class="icon-bottom">
+            <img src="/../public/icons/quantify.svg" alt="New Icon" class="new-icon" />
+            <div class="number">{{ quantity }}</div>
+          </div>
+        </div>
+      </div>
     </q-card>
-    <img src="/images/corner.svg" class="corner-image" alt="Catavento">
   </div>
 </template>
+
 
 <script>
 export default {
@@ -23,56 +29,160 @@ export default {
     title: String,
     quantity: Number,
   },
+  computed: {
+    truncatedTitle() {
+      // Limita o título a duas linhas e adiciona "..." quando cortado
+      const maxLineCount = 2;
+      const maxTextLength = 40; // Tamanho máximo para duas linhas
+      if (this.title.length <= maxTextLength) {
+        return this.title;
+      }
+      const words = this.title.split(' ');
+      let truncatedText = '';
+      let lineCount = 0;
+      for (const word of words) {
+        if (truncatedText.length + word.length + 1 <= maxTextLength && lineCount < maxLineCount) {
+          truncatedText += word + ' ';
+        } else {
+          break;
+        }
+      }
+      if (truncatedText.trim() !== this.title.trim()) {
+        truncatedText = truncatedText.trim() + '...';
+      }
+      return truncatedText;
+    },
+    // Mapeamento de títulos para ícones e cores
+    titleIconMap() {
+      return {
+        'Escuta, fala, pensamento e imaginação': {
+          icon: 'escuta.svg',
+          color: '#FF7A92',
+        },
+        'Corpo, gestos e movimento': {
+          icon: 'corpo.svg',
+          color: '#FF8616',
+        },
+        'Espaços, tempo, quantidades, relações e transformações': {
+          icon: 'espacos.svg',
+          color: '#FECE25',
+        },
+        'Traços, sons, cores e formas': {
+          icon: 'tracos.svg',
+          color: '#14A5C0',
+        },
+        'O Eu, o outro e o nós': {
+          icon: 'eu.svg',
+          color: '#8CC640',
+        }
+      };
+    },
+  },
 };
 </script>
 
+
 <style scoped>
 .my-card {
-  position: relative;
-  display: inline-block; /* Ajusta o tamanho do bloco conforme o conteúdo */
-}
-
-.corner-image {
-  position: absolute;
-  bottom: 0; /* Posiciona a imagem no canto inferior */
-  left: 0; /* Posiciona a imagem no canto esquerdo */
-  width: 50px; /* Defina a largura desejada para a imagem do catavento */
-  height: 35%; /* Define a altura desejada para a imagem do catavento */
-  object-fit: cover; /* Ajusta a imagem para preencher o espaço mantendo a proporção */
-  object-position: top; /* Posiciona a imagem no topo */
-  z-index: 1; /* Coloca a imagem sobre o cartão */
-}
-
-.icon-and-quantity {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%; /* Certifica-se de que ocupa toda a altura disponível */
+  flex-direction: column;
+  align-items: flex-start;
+  gap: -2.5rem;
+  align-self: stretch;
+  background: var(--reas-bncc-rosa-2, #FF7A92); /* Manter o fundo rosa */
+  box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.15);
+  min-width: 10rem; /* Largura mínima do card */
+  max-width: 16rem; /* Largura máxima do card */
+  height: 13.5rem; /* Fixa a altura em 50% da altura da janela */
+  aspect-ratio: 0.8 / 1; /* Proporção fixa entre largura e altura */
 }
 
-.icon {
-  width: 1rem; /* Largura da imagem do ícone */
-  height: auto;
-  margin-right: 8px; /* Espaçamento entre o ícone e o número */
-}
-
-.quantity {
-  font-size: 1rem; /* Mesmo tamanho do ícone */
+.card-content {
   display: flex;
-  align-items: center;
-}
-
-.card-image {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  flex: 1;
+  align-self: stretch;
   position: relative;
-  text-align: center; /* Centraliza o título horizontalmente */
+  overflow: hidden;
+  padding: 0;
 }
 
 .title-overlay {
   position: absolute;
-  top: 50%; /* Move o título para o centro vertical */
-  left: 50%; /* Move o título para o centro horizontal */
-  transform: translate(-50%, -50%); /* Centraliza o título precisamente */
-  font-size: 1.2rem; /* Tamanho do título */
-  color: white; /* Cor do título, ajuste conforme necessário */
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.2rem;
+  color: var(--textos-branco, #FBFDFF);
+  text-align: center;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.5rem; /* 150% */
+}
+
+.title-overlay:hover {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: initial;
+}
+
+.text-card {
+  display: flex;
+  flex-direction: column; /* Alterado para column */
+  flex-wrap: nowrap;
+  align-content: stretch;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--reas-bncc-rosa-2, #FF7A92);
+  padding: 0.625rem;
+  color: white;
+  font-size: 1rem;
+  flex: 1;
+  width: 100%;
+}
+
+.q-card > div:not(:first-child),
+.q-card > img:not(:first-child) {
+  border-radius: 0rem 6.25rem;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 4.48944rem;
+}
+
+.logo-image {
+  max-height: 100%; /* Ocupará toda a altura disponível */
+  max-width: 100%; /* Ocupará toda a largura disponível */
+}
+
+.bottom-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Alterado para center */
+  padding: 0.625rem;
+}
+
+.icon-bottom {
+  display: flex;
+  align-items: center;
+  gap: 0.3125rem; /* Espaço entre o ícone e o número */
+}
+
+.new-icon {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.number {
+  font-size: 1rem;
+  color: var(--textos-branco, #FBFDFF);
+  font-weight: 500;
 }
 </style>
+

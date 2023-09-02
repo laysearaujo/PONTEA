@@ -30,7 +30,7 @@
           </div>
           <div class="icon-avatar">
             <q-avatar size="34px" class="custom-avatar">
-              <img src="/../public/icons/favicon-96x96.png" alt="Foto de Perfil" class="avatar-image" />
+              <img src="/../public/images/profile.jpeg" alt="Foto de Perfil" class="avatar-image" />
             </q-avatar>
           </div>
 
