@@ -37,48 +37,54 @@
         </div>
       </div>
     </q-toolbar>
-    <div class="toolbar-icons" style="margin-top: 2%; margin-left: 15px;">
-      <div
-        class="icon-button"
-        :class="{ 'active-button': isActiveTab('home') }"
-        @click="changeTab('home')"
+    <div class="toolbar-options" style="margin-top: 2%; margin-left: 15px;">
+      <router-link
+        to="/atividades"
+        class="icon-button-option"
+        :class="{ 'active-button': isActiveTab('/atividades') }"
       >
-        Home
-      </div>
+        Atividades
+      </router-link>
+      <router-link
+        to="/experiencias"
+        class="icon-button-option"
+        :class="{ 'active-button': isActiveTab('/experiencias') }"
+      >
+        Campos de experiências
+      </router-link>
+      <router-link
+        to="/educadores"
+        class="icon-button-option"
+        :class="{ 'active-button': isActiveTab('/educadores') }"
+      >
+        Educadores
+      </router-link>
     </div>
   </q-header>
 </template>
 
 
 <script>
-import { defineComponent, ref, toRefs } from 'vue';
+import { defineComponent } from 'vue';
+import { useRoute } from 'vue-router';
 
 export default defineComponent({
   name: 'HeaderComponent',
 
-  props: {
-    tab: String // Recebe a prop 'tab' do componente pai (MainLayout.vue)
-  },
+  setup() {
+    const route = useRoute();
 
-  setup(props) {
-    const { tab } = toRefs(props); // Convert props to reactive references
-    const activeTab = ref(tab.value);
-
-    const isActiveTab = (tabName) => {
-      return activeTab.value === tabName;
-    };
-
-    const changeTab = (newTab) => {
-      activeTab.value = newTab;
+    const isActiveTab = (tabRoute) => {
+      return route.path === tabRoute;
     };
 
     return {
       isActiveTab,
-      changeTab
     };
-  }
+  },
 });
 </script>
+
 
 <style scoped>
 .active-button {
@@ -95,11 +101,33 @@ export default defineComponent({
   gap: 1.5rem;
 }
 
+.toolbar-options {
+  display: flex;
+  width: 76rem;
+  align-items: center;
+  gap: 1rem;
+}
 .icon-button {
   cursor: pointer;
   font-size: 16px;
 }
 
+.icon-button-option {
+  color: var(--textos-cinza, #616167);
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 0.90rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1rem; /* 125% */
+}
+
+.icon-button-option.active-button {
+  text-decoration: underline; /* Adiciona um sublinhado quando ativo */
+  color: #144EC0; /* Cor azul para ativo */
+  text-decoration-skip-ink: auto; /* Controlar a posição do sublinhado */
+  text-underline-offset: 0.5rem; /* Ajustar o deslocamento vertical (aumente conforme necessário) */
+}
 .icon-svg {
   width: 24px;
   height: 24px;
