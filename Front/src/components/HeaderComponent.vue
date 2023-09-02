@@ -21,7 +21,7 @@
             </template>
           </q-input>
         </div>
-        <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <div style="display: flex; align-items: stretch; gap: 0.75rem;">
           <div class="icon-button">
             <img src="/../public/icons/notification.svg" alt="Notifications" class="icon-svg" />
           </div>
@@ -29,7 +29,7 @@
             <img src="/../public/icons/shoppingCart.svg" alt="Cart" class="icon-svg" />
           </div>
           <div class="icon-avatar">
-            <q-avatar size="40px" class="custom-avatar">
+            <q-avatar size="34px" class="custom-avatar">
               <img src="/../public/icons/favicon-96x96.png" alt="Foto de Perfil" class="avatar-image" />
             </q-avatar>
           </div>
@@ -131,7 +131,7 @@ export default defineComponent({
 }
 
 .icon-avatar {
-  margin-left: 0.45rem;
+  margin-left: 0.20rem;
   display: flex;
   width: 1.5rem;
   height: 1.5rem;
