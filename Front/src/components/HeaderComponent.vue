@@ -1,19 +1,25 @@
 <template>
-  <q-header reveal style="background-color: white; color: black;">
+  <q-header
+    reveal
+    style="
+      background-color: white;
+      color: black;
+      box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+      padding-bottom: 1%;
+    "
+  >
     <q-toolbar class="q-space-between" style="background-color: #D9DCF9; padding: 1%;">
       <div>
-        <img src="/../public/images/logo.svg" alt="Logo" class="logo-image" style="max-width: 300px; min-width: 150px; z-index: 1;" />
+        <img
+          src="/../public/images/logo.svg"
+          alt="Logo"
+          class="logo-image"
+          style="max-width: 300px; min-width: 150px; z-index: 1;"
+        />
       </div>
       <div class="toolbar-icons">
         <div class="search-input">
-          <q-input
-            outlined
-            rounded
-            dense
-            class="rounded-input"
-            label="Busca"
-            v-model="searchQuery"
-          >
+          <q-input outlined rounded dense class="rounded-input" label="Busca" v-model="searchQuery">
             <template v-slot:prepend>
               <div class="search-icon">
                 <q-icon name="search" />
@@ -45,27 +51,60 @@
     </div>
 
     <div class="toolbar-options" style="margin-top: 1%; margin-left: 15px;">
-      <router-link
-        to="/atividades"
-        class="icon-button-option"
-        :class="{ 'active-button': isActiveTab('/atividades') }"
-      >
+      <router-link to="/atividades" class="icon-button-option" :class="{ 'active-button': isActiveTab('/atividades') }">
         Atividades
       </router-link>
-      <router-link
-        to="/experiencias"
-        class="icon-button-option"
-        :class="{ 'active-button': isActiveTab('/experiencias') }"
-      >
+      <router-link to="/experiencias" class="icon-button-option" :class="{ 'active-button': isActiveTab('/experiencias') }">
         Campos de experiências
       </router-link>
-      <router-link
-        to="/educadores"
-        class="icon-button-option"
-        :class="{ 'active-button': isActiveTab('/educadores') }"
-      >
+      <router-link to="/educadores" class="icon-button-option" :class="{ 'active-button': isActiveTab('/educadores') }">
         Educadores
       </router-link>
+    </div>
+
+    <div class="selectActivate">
+      <q-select
+        outlined dense
+        v-model="model.supportLevel"
+        :options="options"
+        label="Nivel de suporte do TEA"
+        class="custom-q-select narrower-select"
+      />
+      <q-select
+        outlined dense
+        v-model="model.experienceFields"
+        :options="options"
+        label="Campos de experiência"
+        class="custom-q-select narrower-select"
+      />
+      <q-select
+        outlined dense
+        v-model="model.ageRange"
+        :options="options"
+        label="Faixa etária"
+        class="custom-q-select narrower-select"
+      />
+      <q-select
+        outlined dense
+        v-model="model.activityLevel"
+        :options="options"
+        label="Nível da atividade"
+        class="custom-q-select narrower-select"
+      />
+      <q-select
+        outlined dense
+        v-model="model.multimediaResources"
+        :options="options"
+        label="Recursos multimídia"
+        class="custom-q-select narrower-select"
+      />
+      <q-select
+        outlined dense
+        v-model="model.visualInstructions"
+        :options="options"
+        label="Instruções visuais"
+        class="custom-q-select narrower-select"
+      />
     </div>
   </q-header>
 </template>
@@ -96,16 +135,41 @@ export default defineComponent({
       return route.path === tabRoute;
     };
 
-    // Verificar se deve mostrar o breadcrumb
-    const shouldShowBreadcrumb = () => {
-      return route.path !== '/' && route.path !== '/home';
+    // Dados para as seleções
+    const options = [
+      'Opção 1',
+      'Opção 2',
+      'Opção 3',
+      // Adicione mais opções conforme necessário
+    ];
+
+    // Dados para rótulos das seleções
+    const labels = {
+      supportLevel: 'Nível de Suporte do TEA',
+      experienceFields: 'Campos de Experiência',
+      ageGroup: 'Faixa Etária',
+      activityLevel: 'Nível da Atividade',
+      multimediaResources: 'Recursos Multimídia',
+      visualInstructions: 'Instruções Visuais',
+    };
+
+    // Modelo para armazenar seleções
+    const model = {
+      supportLevel: null,
+      experienceFields: null,
+      ageGroup: null,
+      activityLevel: null,
+      multimediaResources: null,
+      visualInstructions: null,
     };
 
     return {
       route,
       getBreadcrumbLabel,
       isActiveTab,
-      shouldShowBreadcrumb,
+      options,
+      labels,
+      model,
     };
   },
 });
@@ -191,14 +255,6 @@ export default defineComponent({
   flex-grow: 1;
 }
 
-.row,
-.column,
-.flex {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
 .breadcrumb {
   display: flex;
   align-items: center;
@@ -218,4 +274,41 @@ export default defineComponent({
   text-decoration: underline; /* Adicionar sublinhado quando o mouse estiver sobre o link */
   color: #144ec0; /* Cor azul quando o mouse estiver sobre o link */
 }
+
+.row, .column, .flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.selectActivate {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  height: 3rem; 
+  margin-top: 2%;
+}
+
+.custom-q-select {
+  width: 70%; /* Largura personalizada */
+  height: 1.5rem !important;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-width: 0.09rem; /* Largura da borda */
+  border-color: #144ec0; /* Cor da borda */
+  border-radius: 0.25rem; /* Raio da borda */
+  margin-bottom: 1%;
+}
+
+
+.q-field--auto-height .q-field__control {
+    height: 1.5rem !important;
+    min-height: none;
+}
+
+.q-field--auto-height .q-field__control, 
+.q-field--auto-height .q-field__native {
+    min-height: 0px !important;
+}
+
 </style>
