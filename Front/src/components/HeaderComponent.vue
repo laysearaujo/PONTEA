@@ -66,42 +66,42 @@
       <q-select
         outlined dense
         v-model="model.supportLevel"
-        :options="options"
+        :options="supportLevelOptions"
         label="Nivel de suporte do TEA"
         class="custom-q-select narrower-select"
       />
       <q-select
         outlined dense
         v-model="model.experienceFields"
-        :options="options"
+        :options="experienceFieldsOptions"
         label="Campos de experiência"
         class="custom-q-select narrower-select"
       />
       <q-select
         outlined dense
         v-model="model.ageRange"
-        :options="options"
+        :options="ageRangeOptions"
         label="Faixa etária"
         class="custom-q-select narrower-select"
       />
       <q-select
         outlined dense
         v-model="model.activityLevel"
-        :options="options"
+        :options="activityLevelOptions"
         label="Nível da atividade"
         class="custom-q-select narrower-select"
       />
       <q-select
         outlined dense
         v-model="model.multimediaResources"
-        :options="options"
+        :options="multimediaResourcesOptions"
         label="Recursos multimídia"
         class="custom-q-select narrower-select"
       />
       <q-select
         outlined dense
         v-model="model.visualInstructions"
-        :options="options"
+        :options="visualInstructionsOptions"
         label="Instruções visuais"
         class="custom-q-select narrower-select"
       />
@@ -136,28 +136,29 @@ export default defineComponent({
     };
 
     // Dados para as seleções
-    const options = [
-      'Opção 1',
-      'Opção 2',
-      'Opção 3',
-      // Adicione mais opções conforme necessário
+    const supportLevelOptions = ['Nível 1', 'Nível 2', 'Nível 3'];
+    const experienceFieldsOptions = [
+      'O Eu, o outro e o nós', 
+      'Traços, sons, cores e formas',
+      'Espaços, tempo, quantidades, relações e transformações',
+      'Corpo, gestos e movimento',
+      'Escuta, fala, pensamento e imaginação',
     ];
-
-    // Dados para rótulos das seleções
-    const labels = {
-      supportLevel: 'Nível de Suporte do TEA',
-      experienceFields: 'Campos de Experiência',
-      ageGroup: 'Faixa Etária',
-      activityLevel: 'Nível da Atividade',
-      multimediaResources: 'Recursos Multimídia',
-      visualInstructions: 'Instruções Visuais',
-    };
+    const ageRangeOptions = [
+      '0 a 1 ano e 6 meses', 
+      '1 ano e 7 meses a 3 anos e 11 meses', 
+      '4 anos a 5 anos e 11 meses',
+      '6 anos a 11 anos'
+    ];
+    const activityLevelOptions = ['Fácil', 'Médio', 'Avançado'];
+    const multimediaResourcesOptions = ['Com', 'Sem'];
+    const visualInstructionsOptions = ['Com', 'Sem'];
 
     // Modelo para armazenar seleções
     const model = {
       supportLevel: null,
       experienceFields: null,
-      ageGroup: null,
+      ageRange: null,
       activityLevel: null,
       multimediaResources: null,
       visualInstructions: null,
@@ -167,8 +168,12 @@ export default defineComponent({
       route,
       getBreadcrumbLabel,
       isActiveTab,
-      options,
-      labels,
+      supportLevelOptions,
+      experienceFieldsOptions,
+      ageRangeOptions,
+      activityLevelOptions,
+      multimediaResourcesOptions,
+      visualInstructionsOptions,
       model,
     };
   },

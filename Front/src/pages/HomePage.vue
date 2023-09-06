@@ -41,9 +41,9 @@ export default {
         { title: 'Espaços, tempo, quantidades, relações e transformações', quantity: 3 },
         { title: 'Traços, sons, cores e formas', quantity: 7 },
         { title: 'O Eu, o outro e o nós', quantity: 1 },
-        { title: 'Espaços, tempo, quantidades, relações e transformações', quantity: 3 },
-        { title: 'Traços, sons, cores e formas', quantity: 7 },
-        { title: 'O Eu, o outro e o nós', quantity: 1 },
+        // { title: 'Espaços, tempo, quantidades, relações e transformações', quantity: 3 },
+        // { title: 'Traços, sons, cores e formas', quantity: 7 },
+        // { title: 'O Eu, o outro e o nós', quantity: 1 },
         // ... more items ...
       ],
       teachers:[
