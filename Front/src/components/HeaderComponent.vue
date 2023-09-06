@@ -2,7 +2,7 @@
   <q-header reveal style="background-color: white; color: black;">
     <q-toolbar class="q-space-between" style="background-color: #D9DCF9; padding: 1%;">
       <div>
-        <img src="/../public/images/logo.svg" alt="Logo" class="logo-image" style="max-width: 300px; min-width: 150px;  z-index: 1; "/>
+        <img src="/../public/images/logo.svg" alt="Logo" class="logo-image" style="max-width: 300px; min-width: 150px; z-index: 1;" />
       </div>
       <div class="toolbar-icons">
         <div class="search-input">
@@ -33,11 +33,18 @@
               <img src="/../public/images/profile.jpeg" alt="Foto de Perfil" class="avatar-image" />
             </q-avatar>
           </div>
-
         </div>
       </div>
     </q-toolbar>
-    <div class="toolbar-options" style="margin-top: 2%; margin-left: 15px;">
+
+    <!-- Use v-if para ocultar a div quando a rota estiver na raiz -->
+    <div class="breadcrumb" style="margin-top: 1%; margin-left: 15px;" v-if="route.path !== '/' && route.path !== '/home'">
+      <router-link to="/" class="breadcrumb-link">Home</router-link>
+      <span v-if="route.path !== '/'">|</span>
+      <router-link v-if="route.path !== '/'" :to="route.path" class="breadcrumb-link">{{ getBreadcrumbLabel(route) }}</router-link>
+    </div>
+
+    <div class="toolbar-options" style="margin-top: 1%; margin-left: 15px;">
       <router-link
         to="/atividades"
         class="icon-button-option"
@@ -63,7 +70,6 @@
   </q-header>
 </template>
 
-
 <script>
 import { defineComponent } from 'vue';
 import { useRoute } from 'vue-router';
@@ -74,30 +80,48 @@ export default defineComponent({
   setup() {
     const route = useRoute();
 
+    const getBreadcrumbLabel = (route) => {
+      // Mapeie suas rotas e os rótulos correspondentes aqui
+      const routeLabels = {
+        '/atividades': 'Atividades',
+        '/experiencias': 'Campos de Experiências',
+        '/educadores': 'Educadores',
+        // Adicione mais rotas e rótulos conforme necessário
+      };
+
+      return routeLabels[route.path] || '';
+    };
+
     const isActiveTab = (tabRoute) => {
       return route.path === tabRoute;
     };
 
+    // Verificar se deve mostrar o breadcrumb
+    const shouldShowBreadcrumb = () => {
+      return route.path !== '/' && route.path !== '/home';
+    };
+
     return {
+      route,
+      getBreadcrumbLabel,
       isActiveTab,
+      shouldShowBreadcrumb,
     };
   },
 });
 </script>
-
 
 <style scoped>
 .active-button {
   font-weight: bold;
   color: #144ec0;
 }
-   
+
 .toolbar-icons {
   display: flex;
   align-items: center;
   margin-left: 10px;
   padding-right: 20px;
-  display: flex;
   gap: 1.5rem;
 }
 
@@ -106,10 +130,6 @@ export default defineComponent({
   width: 76rem;
   align-items: center;
   gap: 1rem;
-}
-.icon-button {
-  cursor: pointer;
-  font-size: 16px;
 }
 
 .icon-button-option {
@@ -127,10 +147,6 @@ export default defineComponent({
   color: #144EC0; /* Cor azul para ativo */
   text-decoration-skip-ink: auto; /* Controlar a posição do sublinhado */
   text-underline-offset: 0.5rem; /* Ajustar o deslocamento vertical (aumente conforme necessário) */
-}
-.icon-svg {
-  width: 24px;
-  height: 24px;
 }
 
 .search-input {
@@ -181,5 +197,25 @@ export default defineComponent({
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--textos-cinza, #616167); /* Cor cinza para o breadcrumb */
+}
+
+.breadcrumb-link {
+  text-decoration: none; /* Remover sublinhado dos links do breadcrumb */
+  color: var(--textos-cinza, #616167); /* Cor cinza para os links do breadcrumb */
+  cursor: pointer;
+}
+
+/* Estilo hover para os links do breadcrumb */
+.breadcrumb-link:hover {
+  text-decoration: underline; /* Adicionar sublinhado quando o mouse estiver sobre o link */
+  color: #144ec0; /* Cor azul quando o mouse estiver sobre o link */
 }
 </style>
