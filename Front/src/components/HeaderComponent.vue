@@ -106,6 +106,18 @@
         class="custom-q-select narrower-select"
       />
     </div>
+
+    <div class="experience-buttons">
+      <q-btn 
+        v-for="field in experienceFieldsOptions"
+        :key="field"
+        :class="{ 'active-button': isActiveField(field) }"
+        @click="toggleActiveField(field)"
+        size="sm"
+      >
+        {{ field }}
+      </q-btn>
+    </div>
   </q-header>
 </template>
 
@@ -164,6 +176,22 @@ export default defineComponent({
       visualInstructions: null,
     };
 
+    const activeFields = [];
+
+    const isActiveField = (field) => {
+      return activeFields.includes(field);
+    };
+
+    const toggleActiveField = (field) => {
+      if (isActiveField(field)) {
+        // Remove o campo ativo
+        activeFields.splice(activeFields.indexOf(field), 1);
+      } else {
+        // Adiciona o campo como ativo
+        activeFields.push(field);
+      }
+    };
+
     return {
       route,
       getBreadcrumbLabel,
@@ -175,6 +203,8 @@ export default defineComponent({
       multimediaResourcesOptions,
       visualInstructionsOptions,
       model,
+      isActiveField,
+      toggleActiveField,
     };
   },
 });
@@ -314,6 +344,31 @@ export default defineComponent({
 .q-field--auto-height .q-field__control, 
 .q-field--auto-height .q-field__native {
     min-height: 0px !important;
+}
+
+.experience-buttons {
+  display: flex;
+  gap: 10px; /* Espaço entre os botões */
+  flex-wrap: wrap; /* Quebrar para a próxima linha se não couberem */
+  border-radius: 0.25rem;
+  background: #FFF;
+  justify-content: space-between; /* Alinhar os botões à esquerda */
+  padding-top: 15px; /* Adicionar algum espaçamento ao redor dos botões */
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-right: 15px;
+  color: var(--textos-cinza, #616167); /* Cor cinza para texto */
+  white-space: wrap;
+  cursor: pointer;
+  font-size: 1rem; /* Tamanho da fonte menor */
+  transition: background-color 0.3s, color 0.3s, width 0.3s;
+  width: auto
+}
+
+.experience-buttons .q-btn.active-button {
+  background-color: #144ec0 !important; /* Use !important para garantir que a cor seja aplicada */
+  color: white !important;
+  width: auto !important; /* Largura automática para ocupar o conteúdo */
 }
 
 </style>
