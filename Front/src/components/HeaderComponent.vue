@@ -107,22 +107,23 @@
       />
     </div>
 
-    <div class="experience-buttons">
-      <q-btn 
+    <div class="experience-buttons" v-if="route.path === '/experiencias'">
+      <q-btn
         v-for="field in experienceFieldsOptions"
         :key="field"
-        :class="{ 'active-button': isActiveField(field) }"
+        :class="{ 'active-button': activeField === field }"
         @click="toggleActiveField(field)"
         size="sm"
+        style="color: inherit; background-color: inherit; border: none;"
       >
-        {{ field }}
+        <span :style="{ color: activeField === field ? '#144ec0' : 'inherit' }">{{ field }}</span>
       </q-btn>
     </div>
   </q-header>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
 export default defineComponent({
@@ -176,20 +177,10 @@ export default defineComponent({
       visualInstructions: null,
     };
 
-    const activeFields = [];
-
-    const isActiveField = (field) => {
-      return activeFields.includes(field);
-    };
+    const activeField = ref(null);
 
     const toggleActiveField = (field) => {
-      if (isActiveField(field)) {
-        // Remove o campo ativo
-        activeFields.splice(activeFields.indexOf(field), 1);
-      } else {
-        // Adiciona o campo como ativo
-        activeFields.push(field);
-      }
+      activeField.value = activeField.value === field ? null : field;
     };
 
     return {
@@ -203,7 +194,7 @@ export default defineComponent({
       multimediaResourcesOptions,
       visualInstructionsOptions,
       model,
-      isActiveField,
+      activeField,
       toggleActiveField,
     };
   },
@@ -335,7 +326,6 @@ export default defineComponent({
   margin-bottom: 1%;
 }
 
-
 .q-field--auto-height .q-field__control {
     height: 1.5rem !important;
     min-height: none;
@@ -352,7 +342,7 @@ export default defineComponent({
   flex-wrap: wrap; /* Quebrar para a próxima linha se não couberem */
   border-radius: 0.25rem;
   background: #FFF;
-  justify-content: space-between; /* Alinhar os botões à esquerda */
+  justify-content: space-evenly; /* Alinhar os botões à esquerda */
   padding-top: 15px; /* Adicionar algum espaçamento ao redor dos botões */
   margin-left: 10px;
   margin-top: 10px;
@@ -365,10 +355,9 @@ export default defineComponent({
   width: auto
 }
 
-.experience-buttons .q-btn.active-button {
-  background-color: #144ec0 !important; /* Use !important para garantir que a cor seja aplicada */
-  color: white !important;
-  width: auto !important; /* Largura automática para ocupar o conteúdo */
+.active-button,
+.active-button:hover {
+  font-weight: bold;
+  color: #144ec0; /* Cor azul para o texto */
 }
-
 </style>
