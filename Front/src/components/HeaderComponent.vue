@@ -45,7 +45,7 @@
 
     <!-- Use v-if para ocultar a div quando a rota estiver na raiz -->
     <div class="breadcrumb" style="margin-top: 1%; margin-left: 15px;" v-if="route.path !== '/' && route.path !== '/home'">
-      <router-link to="/" class="breadcrumb-link">Home</router-link>
+      <router-link to="/home" class="breadcrumb-link">Home</router-link>
       <span v-if="route.path !== '/'">|</span>
       <router-link v-if="route.path !== '/'" :to="route.path" class="breadcrumb-link">{{ getBreadcrumbLabel(route) }}</router-link>
     </div>
@@ -62,7 +62,7 @@
       </router-link>
     </div>
 
-    <div class="selectActivate">
+    <div class="selectActivate" v-if="route.path === '/atividades'">
       <q-select
         outlined dense
         v-model="model.supportLevel"
