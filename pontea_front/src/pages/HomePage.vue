@@ -1,9 +1,9 @@
 <template>
-  
+
   <div class="q-pa-md row items-start q-gutter-md">
     <h5 class="sub-title col-12 q-mb-sm">Atividades bem avaliadas</h5>
     <div class="cards-atividades">
-      <ActivityCard  
+      <ActivityCard
         v-for="atividade in atividades"
         :key="atividade.titulo"
         :titulo = "atividade.titulo"
@@ -12,7 +12,7 @@
         :faixaEtaria = "atividade.faixaEtaria"
         :nota = "atividade.nota"
         :preco = "atividade.preco"
-        :CampoDeExperiencia = "atividade.CampoDeExperiencia" 
+        :CampoDeExperiencia = "atividade.CampoDeExperiencia"
         class="card-atividade"
       />
     </div>
@@ -50,7 +50,45 @@ export default {
     KnowledgeCard,
     TeacherCard,
     ActivityCard
-},
+  },
+  async mounted () {
+    const getAreas = () => {
+      const url = new URL("https://pontea.000webhostapp.com/api/area");
+
+      axios.get(url)
+      .then((res) => {
+        console.log(res);
+        return res.data
+      })
+      .catch(err=> console.log(err))
+    }
+
+    const getTeachers = () => {
+      const url = new URL("https://pontea.000webhostapp.com/api/teacher");
+
+      axios.get(url)
+      .then((res) => {
+        console.log(res);
+        return res.data
+      })
+      .catch(err => console.log(err))
+    }
+
+    const getActivitys = () => {
+      const url = new URL("https://pontea.000webhostapp.com/api/activity");
+
+      axios.get(url)
+      .then((res) => {
+        console.log(res);
+        return res.data
+      })
+      .catch(err => console.log(err))
+    }
+
+    let areas = getAreas();
+    let teachers = getTeachers();
+    let activitys = getActivitys();
+  },
   data() {
     return {
       atividades: [
