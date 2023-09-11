@@ -11,7 +11,7 @@
     <q-toolbar class="q-space-between" style="background-color: #D9DCF9; padding: 1%;">
       <div>
         <img
-          src="/../public/images/logo.svg"
+          src="/../images/logo.svg"
           alt="Logo"
           class="logo-image"
           style="max-width: 300px; min-width: 150px; z-index: 1;"
@@ -29,14 +29,14 @@
         </div>
         <div style="display: flex; align-items: stretch; gap: 0.75rem;">
           <div class="icon-button">
-            <img src="/../public/icons/notification.svg" alt="Notifications" class="icon-svg" />
+            <img src="/../icons/notification.svg" alt="Notifications" class="icon-svg" />
           </div>
           <div class="icon-button">
-            <img src="/../public/icons/shoppingCart.svg" alt="Cart" class="icon-svg" />
+            <img src="/../icons/shoppingCart.svg" alt="Cart" class="icon-svg" />
           </div>
           <div class="icon-avatar">
             <q-avatar size="34px" class="custom-avatar">
-              <img src="/../public/images/profile.jpeg" alt="Foto de Perfil" class="avatar-image" />
+              <img src="/../images/profile.jpeg" alt="Foto de Perfil" class="avatar-image" />
             </q-avatar>
           </div>
         </div>
@@ -151,15 +151,15 @@ export default defineComponent({
     // Dados para as seleções
     const supportLevelOptions = ['Nível 1', 'Nível 2', 'Nível 3'];
     const experienceFieldsOptions = [
-      'O Eu, o outro e o nós', 
+      'O Eu, o outro e o nós',
       'Traços, sons, cores e formas',
       'Espaços, tempo, quantidades, relações e transformações',
       'Corpo, gestos e movimento',
       'Escuta, fala, pensamento e imaginação',
     ];
     const ageRangeOptions = [
-      '0 a 1 ano e 6 meses', 
-      '1 ano e 7 meses a 3 anos e 11 meses', 
+      '0 a 1 ano e 6 meses',
+      '1 ano e 7 meses a 3 anos e 11 meses',
       '4 anos a 5 anos e 11 meses',
       '6 anos a 11 anos'
     ];
@@ -311,7 +311,7 @@ export default defineComponent({
   display: flex;
   justify-content: space-evenly;
   align-items: flex-start;
-  height: 3rem; 
+  height: 3rem;
   margin-top: 2%;
 }
 
@@ -331,7 +331,7 @@ export default defineComponent({
     min-height: none;
 }
 
-.q-field--auto-height .q-field__control, 
+.q-field--auto-height .q-field__control,
 .q-field--auto-height .q-field__native {
     min-height: 0px !important;
 }

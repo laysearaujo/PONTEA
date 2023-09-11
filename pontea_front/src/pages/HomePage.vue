@@ -1,5 +1,21 @@
 <template>
+  
   <div class="q-pa-md row items-start q-gutter-md">
+    <h5 class="sub-title col-12 q-mb-sm">Atividades bem avaliadas</h5>
+    <div class="cards-atividades">
+      <ActivityCard  
+        v-for="atividade in atividades"
+        :key="atividade.titulo"
+        :titulo = "atividade.titulo"
+        :nivel = "atividade.nivel"
+        :tipoDeEducacao = "atividade.tipoDeEducacao"
+        :faixaEtaria = "atividade.faixaEtaria"
+        :nota = "atividade.nota"
+        :preco = "atividade.preco"
+        :CampoDeExperiencia = "atividade.CampoDeExperiencia" 
+        class="card-atividade"
+      />
+    </div>
     <h5 class="sub-title col-12 q-mb-sm">Por área do conhecimento</h5>
     <div class="cards-container">
       <KnowledgeCard
@@ -26,15 +42,23 @@
 <script>
 import KnowledgeCard from 'components/KnowledgeCard.vue';
 import TeacherCard from 'src/components/TeacherCard.vue';
+import ActivityCard from 'src/components/ActivityCard.vue';
 
 export default {
   name: 'HomePage',
   components: {
     KnowledgeCard,
-    TeacherCard
+    TeacherCard,
+    ActivityCard
 },
   data() {
     return {
+      atividades: [
+        {titulo: " pintando pontes", nivel: 2, tipoDeEducacao:"Educação Infantil", faixaEtaria: "4 anos a 5 anos", nota: 3, preco: 14, CampoDeExperiencia: "Escuta, fala, pensamento e imaginação"},
+        {titulo: " Construindo Torres", nivel: 3, tipoDeEducacao:"Educação Infantil", faixaEtaria: "4 anos a 5 anos", nota: 3, preco: 14, CampoDeExperiencia: "Corpo, gestos e movimento"},
+        {titulo: " Construindo Torres", nivel: 3, tipoDeEducacao:"Educação Infantil", faixaEtaria: "4 anos a 5 anos", nota: 3, preco: 14, CampoDeExperiencia: "Espaços, tempo e quantidades,..."},
+        {titulo: " Construindo Torres", nivel: 3, tipoDeEducacao:"Educação Infantil", faixaEtaria: "4 anos a 5 anos", nota: 3, preco: 14, CampoDeExperiencia: "Traços, sons, cores e formas"},
+      ],
       items: [
         { title: 'Escuta, fala, pensamento e imaginação', quantity: 5 },
         { title: 'Corpo, gestos e movimento', quantity: 2 },
@@ -79,6 +103,14 @@ export default {
 .teacher-wrapper {
   flex-basis: calc(33.33% - 20px); /* Defina o tamanho base dos cards */
   margin: 0; /* Remova as margens padrão */
+}
+
+.cards-atividades{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card-atividade{
 }
 
 </style>
