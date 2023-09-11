@@ -19,13 +19,15 @@
       </div>
       <div class="toolbar-icons">
         <div class="search-input">
-          <q-input outlined rounded dense class="rounded-input" label="Busca" v-model="searchQuery">
-            <template v-slot:prepend>
-              <div class="search-icon">
-                <q-icon name="search" />
-              </div>
-            </template>
-          </q-input>
+          <q-form @submit="onSubmit">
+            <q-input outlined rounded dense class="rounded-input" label="Busca" v-model="searchQuery">
+              <template v-slot:prepend>
+                <div class="search-icon">
+                  <q-icon name="search" />
+                </div>
+              </template>
+            </q-input>
+        </q-form>
         </div>
         <div style="display: flex; align-items: stretch; gap: 0.75rem;">
           <div class="icon-button">
@@ -124,13 +126,15 @@
 
 <script>
 import { defineComponent, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 export default defineComponent({
   name: 'HeaderComponent',
 
   setup() {
     const route = useRoute();
+    const router = useRouter();
+    const searchQuery = ref(null);
 
     const getBreadcrumbLabel = (route) => {
       // Mapeie suas rotas e os rótulos correspondentes aqui
@@ -196,6 +200,14 @@ export default defineComponent({
       model,
       activeField,
       toggleActiveField,
+      searchQuery,
+
+      onSubmit () {
+        if (searchQuery.value.trim() !== '') {
+          const searchText = encodeURIComponent(searchQuery.value.trim());
+          router.push("/busca?text=" + searchText);
+        }
+      },
     };
   },
 });
