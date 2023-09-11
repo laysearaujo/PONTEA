@@ -59,11 +59,11 @@ export default {
           icon: 'escuta.svg',
           color: '#FF7A92',
         },
-        'Corpo, gestos e movimento': {
+        'Corpo, gestos e movimentos': {
           icon: 'corpo.svg',
           color: '#FF8616',
         },
-        'Espaços, tempo, quantidades, relações e transformações': {
+        'Espaços, tempos, quantidades, relações e transformações': {
           icon: 'espacos.svg',
           color: '#FECE25',
         },
@@ -71,7 +71,7 @@ export default {
           icon: 'tracos.svg',
           color: '#14A5C0',
         },
-        'O Eu, o outro e o nós': {
+        'O eu, o outro e o nós': {
           icon: 'eu.svg',
           color: '#8CC640',
         }

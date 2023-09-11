@@ -2,7 +2,7 @@
 
   <div class="q-pa-md row items-start q-gutter-md">
     <h5 class="sub-title col-12 q-mb-sm">Atividades bem avaliadas</h5>
-    <div class="cards-atividades">
+    <div class="cards-atividades" v-if="activitys.length > 0">
       <ActivityCard
         v-for="activity in activitys"
         :key="activity.title"
@@ -17,7 +17,7 @@
       />
     </div>
     <h5 class="sub-title col-12 q-mb-sm">Por área do conhecimento</h5>
-    <div class="cards-container">
+    <div class="cards-container" v-if="areas.length > 0">
       <KnowledgeCard
         v-for="item in areas"
         :key="item.title"
@@ -27,7 +27,7 @@
       />
     </div>
     <h5 class="sub-title col-12 q-mb-sm"> Educadores Bem Avaliados</h5>
-    <div class="educadores-avaliados">
+    <div class="educadores-avaliados" v-if="teachers.length > 0">
       <TeacherCard  v-for="teacher in teachers"
       :key="teacher.name"
       :name="teacher.name"
@@ -71,8 +71,8 @@ export default {
 
       try {
         const response = await axios.get(url);
-        console.log(response.data);
-        this.areas = response.data; // Armazene os dados em 'areas'
+        console.log('AQUIOHHHHH',response.data);
+        this.areas = response.data.data; // Armazene os dados em 'areas'
       } catch (error) {
         console.error(error);
       }
@@ -83,7 +83,7 @@ export default {
       try {
         const response = await axios.get(url);
         console.log('OIII 2',response.data);
-        this.teachers = response.data; // Armazene os dados em 'teachers'
+        this.teachers = response.data.data; // Armazene os dados em 'teachers'
       } catch (error) {
         console.error(error);
       }
@@ -93,14 +93,13 @@ export default {
 
       try {
         const response = await axios.get(url);
-        console.log(response.data);
-        this.activitys = response.data; // Armazene os dados em 'activitys'
+        console.log("aaaaaaaa",response.data.data);
+        this.activitys = response.data.data; // Armazene os dados em 'activitys'
       } catch (error) {
         console.error(error);
       }
     }
   }
-  // ... outras configurações do componente ...
 }
 </script>
 
