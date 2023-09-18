@@ -13,8 +13,20 @@ const routes = [
       { path: '/experiencias', component: () => import('pages/ExperiencesPage.vue') },
       { path: '/educadores', component: () => import('pages/EducatorsPage.vue') },
       { path: '/busca', component: () => import('pages/SearchPage.vue') },
-      { path: '/login', component: () => import('pages/LoginPage.vue') },
-      { path: '/cadastro', component: () => import('pages/CadastroPage.vue') },
+    ]
+  },
+  {
+    path: '/login',
+    component: () => import('layouts/LandingLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/LoginPage.vue') } // Rota vazia corresponde a /login
+    ]
+  },
+  {
+    path: '/cadastro',
+    component: () => import('layouts/LandingLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/CadastroPage.vue') } // Rota vazia corresponde a /cadastro
     ]
   },
 
