@@ -55,13 +55,19 @@
                   </template>
                 </q-input>
 
-                <q-btn label="Esqueceu a senha?" flat no-caps disable v-show="!cadastro"/>
-
+                <q-btn
+                  label="Esqueceu a senha?"
+                  flat
+                  no-caps
+                  disable
+                  v-show="!cadastro"
+                  style="color: #616167"
+                />
               </q-card-section>
 
               <q-card-section>
                 <q-btn
-                  :label="cadastro? 'Cadastrar':'Entrar'"
+                  :label="cadastro ? 'Cadastrar' : 'Entrar'"
                   type="submit"
                   no-caps
                   class="submit-btn"
@@ -80,7 +86,6 @@
             />
           </q-card-section>
         </q-card-section>
-
 
         <q-card-section class="imagem">
           <q-img
@@ -157,10 +162,12 @@ export default {
 .title {
   color: #144ec0;
   font-size: 20px;
+  font-weight: 500;
 }
 
 p {
   font-size: 12.8px;
+  font-weight: 500;
 }
 
 .fields {
@@ -169,7 +176,7 @@ p {
   justify-items: left;
 }
 
-.q-input{
+.q-input {
   width: 100%;
 }
 
