@@ -14,6 +14,7 @@ const routes = [
       { path: '/educadores', component: () => import('pages/EducatorsPage.vue') },
       { path: '/busca', component: () => import('pages/SearchPage.vue') },
       { path: '/ser-educador', component: () => import('pages/SerEducadorPage.vue') },
+      { path: '/adicionar-atividade', component: () => import('pages/AddAtividadePage.vue') },
     ]
   },
   {
