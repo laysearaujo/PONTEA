@@ -4,7 +4,7 @@
       <q-card-section horizontal>
         <q-card-section class="left-card">
           <q-card-section>
-            <q-form class="form" @submit="submitForm">
+            <q-form class="form" @submit.prevent="submitForm()">
               <q-card-section class="descr">
                 <span class="title">{{ titulo }}</span>
                 <p>{{ descricao }}</p>
@@ -19,6 +19,7 @@
                   v-model="nome"
                   outlined
                   dense
+                  required
                 />
                 <q-input
                   type="text"
@@ -36,6 +37,7 @@
                   v-model="email"
                   outlined
                   dense
+                  required
                 />
                 <q-input
                   :type="senhaOculta ? 'password' : 'text'"
@@ -44,6 +46,7 @@
                   v-model="senha"
                   dense
                   outlined
+                  required
                 >
                   <template v-slot:append>
                     <p
@@ -51,6 +54,26 @@
                       class="cursor-pointer"
                     >
                       {{ senhaOculta ? "Mostrar" : "Ocultar" }}
+                    </p>
+                  </template>
+                </q-input>
+
+                <q-input
+                  :type="confSenhaOculta ? 'password' : 'text'"
+                  placeholder="Cofirmar senha"
+                  name="confirmar-senha"
+                  v-model="confSenha"
+                  dense
+                  outlined
+                  required
+                  v-if="cadastro"
+                >
+                  <template v-slot:append>
+                    <p
+                      @click="confSenhaOculta = !confSenhaOculta"
+                      class="cursor-pointer"
+                    >
+                      {{ confSenhaOculta ? "Mostrar" : "Ocultar" }}
                     </p>
                   </template>
                 </q-input>
@@ -116,13 +139,30 @@ export default {
       email: "",
       senha: "",
       senhaOculta: true,
+      confSenha: "",
+      confSenhaOculta: true,
       url: this.img_src,
     };
   },
   methods: {
     submitForm() {
-      // Lógica para processar o formulário aqui
-      console.log(this.nome, this.profissao, this.email, this.senha);
+      if (this.cadastro) {
+        // Lógica para o formulário de cadastro do usuário
+        let dados = {
+          nome: this.nome,
+          email: this.email,
+          senha: this.senha,
+          confSenha: this.confSenha,
+        };
+        this.$emit("cadastroSubmit", dados);
+      } else {
+        // Lógica para o formulário de login
+        let dados = {
+          email: this.email,
+          senha: this.senha,
+        };
+        this.$emit("loginSubmit", dados);
+      }
     },
   },
 };
