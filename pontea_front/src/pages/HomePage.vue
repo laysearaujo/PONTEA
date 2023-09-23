@@ -132,7 +132,4 @@ export default {
   flex-wrap: wrap;
 }
 
-.card-atividade{
-}
-
 </style>
