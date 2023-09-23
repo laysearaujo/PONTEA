@@ -1,0 +1,53 @@
+<template>
+  <div>
+    <q-header view="lHh Lpr lFf">
+      <q-toolbar style="height: 80px; background-color: #fbfbfb">
+        <q-btn flat to="/home">
+          <img
+            src="/../images/logo.svg"
+            alt="Logo"
+            class="logo-image"
+            style="max-width: 300px; min-width: 150px; z-index: 1"
+          />
+        </q-btn>
+        <q-space />
+
+        <q-tabs v-model="tab">
+          <q-route-tab
+            name="sobre"
+            label="Sobre nós"
+            style="color: #616167"
+            no-caps
+          />
+          <q-route-tab
+            name="entrar"
+            label="Entrar"
+            to="/login"
+            style="color: #144ec0"
+            no-caps
+          />
+          <q-route-tab name="cadastro" to="/cadastro">
+            <q-btn label="Cadastre-se" color="primary" no-caps rounded />
+          </q-route-tab>
+        </q-tabs>
+      </q-toolbar>
+    </q-header>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "LandingHeader",
+  data() {
+    return {
+      tab: "",
+    };
+  },
+};
+</script>
+
+<style scoped>
+* {
+  font-family: "Lexend";
+}
+</style>
