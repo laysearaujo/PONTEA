@@ -234,13 +234,13 @@ export default {
   },
   methods: {
     async onSubmit() {
+      const token = localStorage.getItem('token');
       const url = "/api/activity/store";
 
       const headers = {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization:
-          "Bearer $2y$10$mhuGD2BQ6WZYTZcpPxwTHOIj/aQlmgG9ahXn66BZQ.GBmbGB7gggi",
+        Authorization: `Bearer ${token}`,
       };
 
       let body = {
