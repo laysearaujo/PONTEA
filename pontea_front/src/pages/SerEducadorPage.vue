@@ -52,17 +52,20 @@
 
           <input type="file" name="files" id="files" />
 
-          <div class="field">
+          <div class="field row" style="align-items: center;">
             <q-checkbox
               v-model="termos_aceitos"
               name="termos_aceitos"
               required
             />
             <label for="termos_aceitos" style="padding-left: 0px">
-              <router-link to="/termos-de-adesao" target="_blank" style="text-decoration: none; color:#616167;">
+              <div
+                style="text-decoration: none; color: #404041"
+                @click="is_showing_termos = true"
+                class="cursor-pointer"
+              >
                 Li, e aceito os Termos de adesão da Pontea.
-              </router-link>
-
+              </div>
             </label>
           </div>
         </div>
@@ -88,84 +91,78 @@
         </div>
       </q-form>
     </div>
+    <q-dialog v-model="is_showing_termos" full-width>
+      <termos-adesao-component/>
+    </q-dialog>
+
   </div>
 </template>
 
 <script>
+import TermosAdesaoComponent from 'src/components/TermosAdesaoComponent.vue';
+
 export default {
-  name: "SerEducadorPage",
-
-  data() {
-    return {
-      nome: "",
-      formacao: "",
-      ano_ultima_especializacao: "",
-      certificados: [null, null, null, null],
-      termos_aceitos: false,
-      options_formacao: [
-        "Pós Graduado(a)",
-        " Graduado(a)",
-        "Mestrando(a)",
-        "Mestrado",
-        "Doutorado(a)",
-        "Doutorando(a)",
-        "Pós Doutorando(a)",
-        "Pós Doutorado",
-        "MBA",
-      ],
-      options_ano: [
-        2014,
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-      ],
-    };
-  },
-  methods: {
-    async onSubmit() {
-      const token = localStorage.getItem("token");
-
-      const url = "/api/teacher/turn_user_into_teacher";
-      const headers = {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${token}`,
-      };
-      console.log(headers);
-
-      await fetch(url, {
-        method: "GET",
-        headers,
-      })
-        .then((response) => {
-          let msg = "";
-          if (!response.ok) {
-            console.log(response.json());
-
-            throw new Error("Erro na resposta da API");
-          } else {
-            msg = "Solicitação enviada com sucesso";
-            setTimeout(() => {
-              this.$router.push("/adicionar-atividade");
-            }, 2000);
-          }
-          this.$q.notify(msg);
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((error) => {
-          console.error("Erro na solicitação à API:", error);
-        });
+    name: "SerEducadorPage",
+    data() {
+        return {
+            nome: "",
+            formacao: "",
+            ano_ultima_especializacao: "",
+            certificados: [null, null, null, null],
+            termos_aceitos: false,
+            options_formacao: [
+                "Pós Graduado(a)",
+                " Graduado(a)",
+                "Mestrando(a)",
+                "Mestrado",
+                "Doutorado(a)",
+                "Doutorando(a)",
+                "Pós Doutorando(a)",
+                "Pós Doutorado",
+                "MBA",
+            ],
+            options_ano: [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
+            is_showing_termos: false,
+        };
     },
-  },
+    methods: {
+        async onSubmit() {
+            const token = localStorage.getItem("token");
+            const url = "/api/teacher/turn_user_into_teacher";
+            const headers = {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: `Bearer ${token}`,
+            };
+            console.log(headers);
+            await fetch(url, {
+                method: "GET",
+                headers,
+            })
+                .then((response) => {
+                let msg = "";
+                if (!response.ok) {
+                    console.log(response.json());
+                    throw new Error("Erro na resposta da API");
+                }
+                else {
+                    msg = "Solicitação enviada com sucesso";
+                    setTimeout(() => {
+                        this.$router.push("/adicionar-atividade");
+                    }, 2000);
+                }
+                this.$q.notify(msg);
+                return response.json();
+            })
+                .then((data) => {
+                console.log(data);
+            })
+                .catch((error) => {
+                console.error("Erro na solicitação à API:", error);
+            });
+        },
+    },
+    components: { TermosAdesaoComponent }
 };
 </script>
 

@@ -2,27 +2,10 @@
   <div class="termos-container">
     <h4>Termos de uso Pontea</h4>
     <q-scroll-area style="width: 90vw; height: 453px">
-      <!-- Use v-html para interpretar as tags HTML -->
-      <div class="texto" v-html="termosAdesao"></div>
-    </q-scroll-area>
-  </div>
-</template>
-
-<script>
-export default {
-  name: "TermosAdesaoPage",
-  data() {
-    return {
-      user_name: "",
-      termosAdesao: "",
-    };
-  },
-  created() {
-    this.user_name = this.getUserName()=='[object Promise]'?'':this.getUserName();
-    this.termosAdesao = `
+      <div class="texto" >
         CONTRATO DE DIREITOS DE PRESERVAÇÃO DE IMAGEM<br><br>
 
-        Este Contrato de Direitos de Preservação de Imagem é um acordo entre a PONTEA, uma entidade jurídica devidamente registrada e atuante de acordo com a legislação vigente, e o usuário, doravante denominado ${this.user_name}. O Usuário, ao concordar com os termos deste Contrato, manifesta seu entendimento e concordância com as disposições aqui estabelecidas.<br><br>
+        Este Contrato de Direitos de Preservação de Imagem é um acordo entre a PONTEA, uma entidade jurídica devidamente registrada e atuante de acordo com a legislação vigente, e o usuário, doravante denominado {{this.user_name}}. O Usuário, ao concordar com os termos deste Contrato, manifesta seu entendimento e concordância com as disposições aqui estabelecidas.<br><br>
 
         1. OBJETO<br><br>
 
@@ -79,7 +62,24 @@ export default {
         8. ACEITAÇÃO<br><br>
 
         Ao utilizar a Plataforma e concordar com os termos deste Contrato, o Usuário reconhece ter lido, compreendido e aceito todos os seus termos e condições, comprometendo-se a cumpri-los integralmente.
-      `;
+      </div>
+    </q-scroll-area>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "TermosAdesaoComponent",
+  data() {
+    return {
+      user_name: "",
+      termosAdesao: "",
+    };
+  },
+
+  async created() {
+    this.user_name = await this.getUserName();
+
   },
   methods: {
     async getUserName() {
@@ -91,26 +91,26 @@ export default {
         Authorization: `Bearer ${token}`,
       };
 
-      try {
-        const response = await fetch(url, {
+        let resposta = await fetch(url, {
           method: "GET",
           headers,
+        })
+        .then((response)=> {
+          if (!response.ok) {
+            console.log(response.json());
+            throw new Error("Erro na resposta da API");
+          } else {
+          }
+          return response.json();
+        }).then((data) => {
+          console.log(data);
+          return data
+        })
+        .catch((error) => {
+          console.error("Erro na solicitação à API:", error);
         });
-
-        if (!response.ok) {
-          throw new Error("Erro na resposta da API");
-        }
-
-        const data = response.json();
-        const userName = data.user.name; // Obtém o nome do usuário
-        if (typeof userName === "string") {
-          return userName
-        } else {
-          return ''
-        }
-      } catch (error) {
-        console.error("Erro na solicitação à API:", error);
-      }
+        let userName = resposta.user.name
+        return userName
     },
   },
 };
@@ -124,6 +124,8 @@ export default {
 .termos-container {
   display: grid;
   justify-content: center;
+  background-color: white;
+  border: 1px solid;
 }
 
 h4 {
