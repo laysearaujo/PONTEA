@@ -75,22 +75,22 @@ export default {
       return token;
     },
     async getAreas() {
-      const url = new URL("https://pontea.000webhostapp.com/api/area");
 
-      try {
-        const token = await this.getToken();
-        const headers = {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${token}`,
-        };
+      const headers = {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: "Authorization: Bearer $2y$10$mhuGD2BQ6WZYTZcpPxwTHOIj/aQlmgG9ahXn66BZQ.GBmbGB7gggi"
+      };
 
-        const response = await axios.get(url, { headers });
-        console.log('areas', response.data);
-        this.areas = response.data.data;
-      } catch (error) {
-        console.error(error);
-      }
+      fetch("/api/area", {
+        method: "GET",
+        headers
+      })
+        .then((response) => {
+          console.log(response)
+        })
+
+      
     },
     async getTeachers() {
       const url = new URL("https://pontea.000webhostapp.com/api/teacher");
