@@ -65,13 +65,20 @@ export default {
       // Resto dos seus dados
     };
   },
+  // Declare 'headers' como uma propriedade do objeto Vue
+  headers: {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+    Authorization:
+      "Bearer $2y$10$mhuGD2BQ6WZYTZcpPxwTHOIj/aQlmgG9ahXn66BZQ.GBmbGB7gggi",
+  },
   methods: {
     async getAreas() {
       const url = new URL("https://pontea.000webhostapp.com/api/area");
 
       try {
-        const response = await axios.get(url);
-        console.log('AQUIOHHHHH',response.data);
+        const response = await axios.get(url, { headers: this.headers }); // Use this.headers para acessar os cabeçalhos
+        console.log('areas', response.data);
         this.areas = response.data.data; // Armazene os dados em 'areas'
       } catch (error) {
         console.error(error);
@@ -81,8 +88,8 @@ export default {
       const url = new URL("https://pontea.000webhostapp.com/api/teacher");
 
       try {
-        const response = await axios.get(url);
-        console.log('OIII 2',response.data);
+        const response = await axios.get(url, { headers: this.headers }); // Use this.headers para acessar os cabeçalhos
+        console.log('teachers', response.data);
         this.teachers = response.data.data; // Armazene os dados em 'teachers'
       } catch (error) {
         console.error(error);
@@ -92,8 +99,8 @@ export default {
       const url = new URL("https://pontea.000webhostapp.com/api/activity");
 
       try {
-        const response = await axios.get(url);
-        console.log("aaaaaaaa",response.data.data);
+        const response = await axios.get(url, { headers: this.headers }); // Use this.headers para acessar os cabeçalhos
+        console.log("activitys", response.data.data);
         this.activitys = response.data.data; // Armazene os dados em 'activitys'
       } catch (error) {
         console.error(error);
