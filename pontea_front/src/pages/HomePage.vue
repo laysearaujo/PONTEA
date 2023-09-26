@@ -53,26 +53,41 @@ export default {
     ActivityCard
   },
   async mounted () {
-    await this.getAreas(); // Chame a função getAreas e aguarde sua conclusão
-    await this.getTeachers(); // Chame a função getTeachers e aguarde sua conclusão
-    await this.getActivitys(); // Chame a função getActivitys e aguarde sua conclusão
+    try {
+      await this.getAreas(); // Chame a função getAreas e aguarde sua conclusão
+      await this.getTeachers(); // Chame a função getTeachers e aguarde sua conclusão
+      await this.getActivitys(); // Chame a função getActivitys e aguarde sua conclusão
+    } catch (error) {
+      console.error(error);
+    }
   },
   data() {
     return {
-      areas: [], // Inicialize 'areas' como um array vazio
-      teachers: [], // Inicialize 'teachers' como um array vazio
-      activitys: [], // Inicialize 'activitys' como um array vazio
-      // Resto dos seus dados
+      areas: [],
+      teachers: [],
+      activitys: [],
     };
   },
   methods: {
+    async getToken() {
+      const token = localStorage.getItem("token");
+      console.log('OLHA AQUI PORRA', token)
+      return token;
+    },
     async getAreas() {
       const url = new URL("https://pontea.000webhostapp.com/api/area");
 
       try {
-        const response = await axios.get(url);
-        console.log('AQUIOHHHHH',response.data);
-        this.areas = response.data.data; // Armazene os dados em 'areas'
+        const token = await this.getToken();
+        const headers = {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        };
+
+        const response = await axios.get(url, { headers });
+        console.log('areas', response.data);
+        this.areas = response.data.data;
       } catch (error) {
         console.error(error);
       }
@@ -81,9 +96,16 @@ export default {
       const url = new URL("https://pontea.000webhostapp.com/api/teacher");
 
       try {
-        const response = await axios.get(url);
-        console.log('OIII 2',response.data);
-        this.teachers = response.data.data; // Armazene os dados em 'teachers'
+        const token = await this.getToken();
+        const headers = {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        };
+
+        const response = await axios.get(url, { headers });
+        console.log('teachers', response);
+        this.teachers = response.data.data;
       } catch (error) {
         console.error(error);
       }
@@ -92,9 +114,16 @@ export default {
       const url = new URL("https://pontea.000webhostapp.com/api/activity");
 
       try {
-        const response = await axios.get(url);
-        console.log("aaaaaaaa",response.data.data);
-        this.activitys = response.data.data; // Armazene os dados em 'activitys'
+        const token = await this.getToken();
+        const headers = {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        };
+
+        const response = await axios.get(url, { headers });
+        console.log("activitys", response.data.data);
+        this.activitys = response.data.data;
       } catch (error) {
         console.error(error);
       }
