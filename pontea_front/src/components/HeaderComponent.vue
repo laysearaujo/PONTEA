@@ -14,7 +14,7 @@
           src="/../images/logo.svg"
           alt="Logo"
           class="logo-image"
-          style="max-width: 300px; min-width: 150px; z-index: 1;"
+          style="max-width: 300px; min-width: 150px; z-index: 1; height: 40px;"
         />
       </div>
       <div class="toolbar-icons">
