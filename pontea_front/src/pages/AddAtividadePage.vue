@@ -1,6 +1,6 @@
 <template>
   <div class="page-container row">
-    <div class="col-3">
+    <div class="col-2">
       <!-- Colocar o card do professor aqui -->
     </div>
     <div class="add-atividade col-8">
@@ -339,6 +339,7 @@ export default {
 }
 .field {
   padding: 4px 0px;
+  align-self: flex-end;
 }
 label {
   padding: 0px 16px;
