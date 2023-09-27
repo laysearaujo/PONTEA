@@ -48,8 +48,8 @@ export default {
 <style scoped>
   .my-card {
     display: flex;
-    width: 186px;
-    height: 232px;
+    width: 195px;
+    height: 260px;
     min-width: 186px;
     max-width: 186px;
     flex-direction: column;
