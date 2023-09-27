@@ -15,7 +15,6 @@
 
 <script>
 import TeacherCard from 'src/components/TeacherCard.vue';
-import axios from 'axios';
 
 export default {
   name: 'EducatorsPage',
@@ -78,7 +77,7 @@ export default {
 }
 
 .card-wrapper {
-  flex-basis: calc(33.33% - 20px); /* Defina o tamanho base dos cards */
+  flex-basis: calc(25% - 20px); /* Defina o tamanho base dos cards */
   margin: 0; /* Remova as margens padrão */
 }
 
@@ -88,7 +87,7 @@ export default {
   gap: 20px;
 }
 .teacher-wrapper {
-  flex-basis: calc(33.33% - 20px); /* Defina o tamanho base dos cards */
+  flex-basis: calc(25% - 20px); /* Defina o tamanho base dos cards */
   margin: 0; /* Remova as margens padrão */
 }
 

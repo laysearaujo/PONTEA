@@ -175,10 +175,10 @@ export default {
 .educadores-avaliados{
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 25px;
 }
 .teacher-wrapper {
-  flex-basis: calc(33.33% - 20px); /* Defina o tamanho base dos cards */
+  flex-basis: calc(25% - 20px); /* Defina o tamanho base dos cards */
   margin: 0; /* Remova as margens padrão */
 }
 
