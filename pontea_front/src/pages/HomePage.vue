@@ -70,6 +70,7 @@ export default {
   methods: {
     async getToken() {
       const token = localStorage.getItem("token");
+      console.log('token', token)
       return token;
     },
     async getAreas() {
