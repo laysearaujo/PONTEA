@@ -5,6 +5,7 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '/home', component: () => import('pages/HomePage.vue') },
+      { path: '/carteira', component: () => import('pages/WalletPage.vue') },
       { path: '/atividades', component: () => import('pages/ActivitiesPage.vue'), // Rota pai "atividades"
         children: [
           { path: 'detalhes', component: () => import('pages/DetailsPage.vue') } // Rota filha "detalhes" -> atividades/detalhes
