@@ -142,6 +142,7 @@ export default defineComponent({
         '/atividades': 'Atividades',
         '/experiencias': 'Campos de Experiências',
         '/educadores': 'Educadores',
+        '/ser-educador': 'Ser educador'
         // Adicione mais rotas e rótulos conforme necessário
       };
 
