@@ -21,22 +21,13 @@ const routes = [
     ]
   },
   {
-    path: '/login',
+    path: '/',
     component: () => import('layouts/LandingLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/LoginPage.vue') } // Rota vazia corresponde a /login
+      { path: '/login', component: () => import('pages/LoginPage.vue') }, 
+      { path: '/cadastro', component: () => import('pages/CadastroPage.vue') },
     ]
   },
-  {
-    path: '/cadastro',
-    component: () => import('layouts/LandingLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/CadastroPage.vue') } // Rota vazia corresponde a /cadastro
-    ]
-  },
-
-  // Always leave this as last one,
-  // but you can also remove it
   {
     path: '/:catchAll(.*)*',
     component: () => import('pages/ErrorNotFound.vue')
