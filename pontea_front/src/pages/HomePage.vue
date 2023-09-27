@@ -75,26 +75,6 @@ export default {
       return token;
     },
     async getAreas() {
-
-      const headers = {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: "Authorization: Bearer $2y$10$mhuGD2BQ6WZYTZcpPxwTHOIj/aQlmgG9ahXn66BZQ.GBmbGB7gggi"
-      };
-
-      fetch("/api/area", {
-        method: "GET",
-        headers
-      })
-        .then((response) => {
-          console.log(response)
-        })
-
-      
-    },
-    async getTeachers() {
-      const url = new URL("https://pontea.000webhostapp.com/api/teacher");
-
       try {
         const token = await this.getToken();
         const headers = {
@@ -103,16 +83,52 @@ export default {
           Authorization: `Bearer ${token}`,
         };
 
-        const response = await axios.get(url, { headers });
-        console.log('teachers', response);
-        this.teachers = response.data.data;
+        const response = await fetch("/api/area", {
+          method: "GET",
+          headers,
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const jsonData = await response.json(); // Aguarde a resolução da promessa e obtenha os dados JSON diretamente
+
+        // Agora você tem acesso direto ao objeto JSON
+        console.log('area', jsonData.data);
+        this.areas = jsonData.data
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async getTeachers() {
+      try {
+        const token = await this.getToken();
+        const headers = {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        };
+
+        const response = await fetch("/api/teacher", {
+          method: "GET",
+          headers,
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const jsonData = await response.json(); // Aguarde a resolução da promessa e obtenha os dados JSON diretamente
+
+        // Agora você tem acesso direto ao objeto JSON
+        console.log('teachers', jsonData.data);
+        this.teachers = jsonData.data
       } catch (error) {
         console.error(error);
       }
     },
     async getActivitys() {
-      const url = new URL("https://pontea.000webhostapp.com/api/activity");
-
       try {
         const token = await this.getToken();
         const headers = {
@@ -121,9 +137,20 @@ export default {
           Authorization: `Bearer ${token}`,
         };
 
-        const response = await axios.get(url, { headers });
-        console.log("activitys", response.data.data);
-        this.activitys = response.data.data;
+        const response = await fetch("/api/activity", {
+          method: "GET",
+          headers,
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const jsonData = await response.json(); // Aguarde a resolução da promessa e obtenha os dados JSON diretamente
+
+        // Agora você tem acesso direto ao objeto JSON
+        console.log('activity', jsonData.data);
+        this.activitys = jsonData.data
       } catch (error) {
         console.error(error);
       }
