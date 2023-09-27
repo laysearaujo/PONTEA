@@ -14,7 +14,7 @@
           src="/../images/logo.svg"
           alt="Logo"
           class="logo-image"
-          style="max-width: 300px; min-width: 150px; z-index: 1;"
+          style="max-width: 300px; min-width: 150px; z-index: 1; height: 40px;"
         />
       </div>
       <div class="toolbar-icons">
@@ -115,7 +115,7 @@
         :key="field"
         :class="{ 'active-button': activeField === field }"
         @click="toggleActiveField(field)"
-        size="sm"
+        size=0.8rem
         style="color: inherit; background-color: inherit; border: none;"
       >
         <span :style="{ color: activeField === field ? '#144ec0' : 'inherit' }">{{ field }}</span>
@@ -142,6 +142,7 @@ export default defineComponent({
         '/atividades': 'Atividades',
         '/experiencias': 'Campos de Experiências',
         '/educadores': 'Educadores',
+        '/ser-educador': 'Ser educador'
         // Adicione mais rotas e rótulos conforme necessário
       };
 
@@ -350,11 +351,10 @@ export default defineComponent({
 
 .experience-buttons {
   display: flex;
-  gap: 10px; /* Espaço entre os botões */
   flex-wrap: wrap; /* Quebrar para a próxima linha se não couberem */
   border-radius: 0.25rem;
   background: #FFF;
-  justify-content: space-evenly; /* Alinhar os botões à esquerda */
+  justify-content:  space-between; /* Alinhar os botões à esquerda */
   padding-top: 15px; /* Adicionar algum espaçamento ao redor dos botões */
   margin-left: 10px;
   margin-top: 10px;
@@ -372,4 +372,5 @@ export default defineComponent({
   font-weight: bold;
   color: #144ec0; /* Cor azul para o texto */
 }
+
 </style>

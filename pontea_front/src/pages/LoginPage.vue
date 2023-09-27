@@ -30,6 +30,7 @@
 
 <script>
 import AuthComponent from "src/components/AuthComponent.vue";
+localStorage.clear();
 
 export default {
   name: "LoginPage",

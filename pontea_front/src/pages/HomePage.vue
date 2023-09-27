@@ -43,7 +43,6 @@
 import KnowledgeCard from 'components/KnowledgeCard.vue';
 import TeacherCard from 'src/components/TeacherCard.vue';
 import ActivityCard from 'src/components/ActivityCard.vue';
-import axios from 'axios';
 
 export default {
   name: 'HomePage',
@@ -53,48 +52,104 @@ export default {
     ActivityCard
   },
   async mounted () {
-    await this.getAreas(); // Chame a função getAreas e aguarde sua conclusão
-    await this.getTeachers(); // Chame a função getTeachers e aguarde sua conclusão
-    await this.getActivitys(); // Chame a função getActivitys e aguarde sua conclusão
+    try {
+      await this.getAreas(); // Chame a função getAreas e aguarde sua conclusão
+      await this.getTeachers(); // Chame a função getTeachers e aguarde sua conclusão
+      await this.getActivitys(); // Chame a função getActivitys e aguarde sua conclusão
+    } catch (error) {
+      console.error(error);
+    }
   },
   data() {
     return {
-      areas: [], // Inicialize 'areas' como um array vazio
-      teachers: [], // Inicialize 'teachers' como um array vazio
-      activitys: [], // Inicialize 'activitys' como um array vazio
-      // Resto dos seus dados
+      areas: [],
+      teachers: [],
+      activitys: [],
     };
   },
   methods: {
+    async getToken() {
+      const token = localStorage.getItem("token");
+      console.log('token', token)
+      return token;
+    },
     async getAreas() {
-      const url = new URL("https://pontea.000webhostapp.com/api/area");
-
       try {
-        const response = await axios.get(url);
-        console.log('AQUIOHHHHH',response.data);
-        this.areas = response.data.data; // Armazene os dados em 'areas'
+        const token = await this.getToken();
+        const headers = {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        };
+
+        const response = await fetch("/api/area", {
+          method: "GET",
+          headers,
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const jsonData = await response.json(); // Aguarde a resolução da promessa e obtenha os dados JSON diretamente
+
+        // Agora você tem acesso direto ao objeto JSON
+        console.log('area', jsonData.data);
+        this.areas = jsonData.data
       } catch (error) {
         console.error(error);
       }
     },
     async getTeachers() {
-      const url = new URL("https://pontea.000webhostapp.com/api/teacher");
-
       try {
-        const response = await axios.get(url);
-        console.log('OIII 2',response.data);
-        this.teachers = response.data.data; // Armazene os dados em 'teachers'
+        const token = await this.getToken();
+        const headers = {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        };
+
+        const response = await fetch("/api/teacher", {
+          method: "GET",
+          headers,
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const jsonData = await response.json(); // Aguarde a resolução da promessa e obtenha os dados JSON diretamente
+
+        // Agora você tem acesso direto ao objeto JSON
+        console.log('teachers', jsonData.data);
+        this.teachers = jsonData.data
       } catch (error) {
         console.error(error);
       }
     },
     async getActivitys() {
-      const url = new URL("https://pontea.000webhostapp.com/api/activity");
-
       try {
-        const response = await axios.get(url);
-        console.log("aaaaaaaa",response.data.data);
-        this.activitys = response.data.data; // Armazene os dados em 'activitys'
+        const token = await this.getToken();
+        const headers = {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        };
+
+        const response = await fetch("/api/activity", {
+          method: "GET",
+          headers,
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const jsonData = await response.json(); // Aguarde a resolução da promessa e obtenha os dados JSON diretamente
+
+        // Agora você tem acesso direto ao objeto JSON
+        console.log('activity', jsonData.data);
+        this.activitys = jsonData.data
       } catch (error) {
         console.error(error);
       }
@@ -120,19 +175,16 @@ export default {
 .educadores-avaliados{
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 25px;
 }
 .teacher-wrapper {
-  flex-basis: calc(33.33% - 20px); /* Defina o tamanho base dos cards */
+  flex-basis: calc(25% - 20px); /* Defina o tamanho base dos cards */
   margin: 0; /* Remova as margens padrão */
 }
 
 .cards-atividades{
   display: flex;
   flex-wrap: wrap;
-}
-
-.card-atividade{
 }
 
 </style>
