@@ -43,7 +43,6 @@
 import KnowledgeCard from 'components/KnowledgeCard.vue';
 import TeacherCard from 'src/components/TeacherCard.vue';
 import ActivityCard from 'src/components/ActivityCard.vue';
-import axios from 'axios';
 
 export default {
   name: 'HomePage',
@@ -71,7 +70,6 @@ export default {
   methods: {
     async getToken() {
       const token = localStorage.getItem("token");
-      console.log('OLHA AQUI PORRA', token)
       return token;
     },
     async getAreas() {

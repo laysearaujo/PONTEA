@@ -20,7 +20,6 @@
 
 <script>
 import ActivityCard from 'src/components/ActivityCard.vue';
-import axios from 'axios';
 
 export default {
   name: 'ActivitiesPage',
@@ -32,18 +31,38 @@ export default {
   },
   data() {
     return {
-      activitys: [], // Inicialize 'activitys' como um array vazio
-      // Resto dos seus dados
+      activitys: [],
     };
   },
   methods: {
+    async getToken() {
+      const token = localStorage.getItem("token");
+      console.log('OLHA AQUI PORRA', token)
+      return token;
+    },
     async getActivitys() {
-      const url = new URL("https://pontea.000webhostapp.com/api/activity");
-
       try {
-        const response = await axios.get(url);
-        console.log("aaaaaaaa",response.data.data);
-        this.activitys = response.data.data; // Armazene os dados em 'activitys'
+        const token = await this.getToken();
+        const headers = {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        };
+
+        const response = await fetch("/api/activity", {
+          method: "GET",
+          headers,
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const jsonData = await response.json(); // Aguarde a resolução da promessa e obtenha os dados JSON diretamente
+
+        // Agora você tem acesso direto ao objeto JSON
+        console.log('activity', jsonData.data);
+        this.activitys = jsonData.data
       } catch (error) {
         console.error(error);
       }

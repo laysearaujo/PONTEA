@@ -32,13 +32,34 @@ export default {
     };
   },
   methods: {
+    async getToken() {
+      const token = localStorage.getItem("token");
+      console.log('OLHA AQUI PORRA', token)
+      return token;
+    },
     async getTeachers() {
-      const url = new URL("https://pontea.000webhostapp.com/api/teacher");
-
       try {
-        const response = await axios.get(url);
-        console.log('OIII 2',response.data);
-        this.teachers = response.data.data; // Armazene os dados em 'teachers'
+        const token = await this.getToken();
+        const headers = {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        };
+
+        const response = await fetch("/api/teacher", {
+          method: "GET",
+          headers,
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const jsonData = await response.json(); // Aguarde a resolução da promessa e obtenha os dados JSON diretamente
+
+        // Agora você tem acesso direto ao objeto JSON
+        console.log('teachers', jsonData.data);
+        this.teachers = jsonData.data
       } catch (error) {
         console.error(error);
       }
