@@ -13,6 +13,8 @@ const routes = [
       { path: '/experiencias', component: () => import('pages/ExperiencesPage.vue') },
       { path: '/educadores', component: () => import('pages/EducatorsPage.vue') },
       { path: '/busca', component: () => import('pages/SearchPage.vue') },
+      { path: '/perfilEducador', component: () => import('pages/PerfilEducador.vue') },
+      { path: '/perfilCliente', component: () => import('pages/PerfilCliente.vue') },
     ]
   },
   {
