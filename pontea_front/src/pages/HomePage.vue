@@ -159,32 +159,31 @@ export default {
 </script>
 
 <style scoped>
-
 .cards-container {
   display: flex;
   width: 100%;
   flex-wrap: wrap;
-  gap: 20px; /* Espaçamento entre os cards */
+  gap: 20px;
+  justify-content: space-between;
 }
 
 .card-wrapper {
-  flex-basis: calc(33.33% - 20px); /* Defina o tamanho base dos cards */
-  margin: 0; /* Remova as margens padrão */
+  flex-basis: calc(33.33% - 20px);
+  margin: 0;
 }
 
-.educadores-avaliados{
+.educadores-avaliados {
   display: flex;
   flex-wrap: wrap;
   gap: 25px;
 }
 .teacher-wrapper {
-  flex-basis: calc(25% - 20px); /* Defina o tamanho base dos cards */
-  margin: 0; /* Remova as margens padrão */
+  flex-basis: calc(25% - 20px);
+  margin: 0;
 }
 
-.cards-atividades{
+.cards-atividades {
   display: flex;
   flex-wrap: wrap;
 }
-
 </style>
