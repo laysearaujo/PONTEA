@@ -1,20 +1,35 @@
 <template>
-
   <div class="q-pa-md row items-start q-gutter-md">
     <h5 class="sub-title col-12 q-mb-sm">Atividades bem avaliadas</h5>
     <div class="cards-atividades" v-if="activitys.length > 0">
-      <ActivityCard
-        v-for="activity in activitys"
-        :key="activity.title"
-        :titulo = "activity.title"
-        :nivel = "activity.level.id"
-        :tipoDeEducacao = "activity.age_group.id"
-        :faixaEtaria = "activity.age_group.title"
-        :nota = "activity.note"
-        :preco = "activity.price"
-        :CampoDeExperiencia = "activity.area.title"
-        class="card-atividade"
-      />
+      <q-carousel
+        v-model="slide"
+        transition-prev="scale"
+        transition-next="scale"
+        swipeable
+        animated
+        control-color="white"
+        navigation="false"
+        arrows="false"
+        padding
+        height="300px"
+        class="text-white shadow-1 rounded-borders full-width-carousel"
+      >
+        <q-carousel-slide name="style" class="row no-wrap flex-center">
+        <ActivityCard
+          v-for="activity in activitys"
+          :key="activity.title"
+          :titulo = "activity.title"
+          :nivel = "activity.level.id"
+          :tipoDeEducacao = "activity.age_group.id"
+          :faixaEtaria = "activity.age_group.title"
+          :nota = "activity.note"
+          :preco = "activity.price"
+          :CampoDeExperiencia = "activity.area.title"
+          class="card-atividade"
+        />
+      </q-carousel-slide>
+    </q-carousel>    
     </div>
     <h5 class="sub-title col-12 q-mb-sm">Por área do conhecimento</h5>
     <div class="cards-container" v-if="areas.length > 0">
@@ -40,6 +55,7 @@
 </template>
 
 <script>
+import { ref } from 'vue'
 import KnowledgeCard from 'components/KnowledgeCard.vue';
 import TeacherCard from 'src/components/TeacherCard.vue';
 import ActivityCard from 'src/components/ActivityCard.vue';
@@ -50,6 +66,11 @@ export default {
     KnowledgeCard,
     TeacherCard,
     ActivityCard
+  },
+  setup () {
+    return {
+      slide: ref('style'),
+    }
   },
   async mounted () {
     try {
@@ -159,17 +180,28 @@ export default {
 </script>
 
 <style scoped>
+
+.carousel-margin {
+  width: 60px;
+}
+
+.q-panel > div {
+  height: 100%;
+  width: 100%;
+  margin-left: 490px;
+}
+
 .cards-container {
   display: flex;
   width: 100%;
-  flex-wrap: wrap;
   gap: 20px;
   justify-content: space-between;
 }
 
 .card-wrapper {
   flex-basis: calc(33.33% - 20px);
-  margin: 0;
+  margin: 10px;
+  box-sizing: border-box;
 }
 
 .educadores-avaliados {
@@ -177,6 +209,7 @@ export default {
   flex-wrap: wrap;
   gap: 25px;
 }
+
 .teacher-wrapper {
   flex-basis: calc(25% - 20px);
   margin: 0;
@@ -185,5 +218,27 @@ export default {
 .cards-atividades {
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  margin-top: 0px;
 }
+
+.full-width-carousel {
+  width: 100%; 
+  overflow: hidden;
+}
+
+.q-carousel .q-carousel-slide.row.no-wrap.flex-center {
+  display: flex;
+  flex-direction: row; 
+  justify-content: flex-start; 
+  align-items: center; 
+}
+
+.q-carousel {
+  display: inline-block;
+  max-width: 100%; 
+}
+
 </style>
