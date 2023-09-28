@@ -49,7 +49,7 @@
       :rating="teacher.note"
       :quantity="teacher.credit"
       :img_src="teacher.photo_path"
-      class="teacher-wrapper"/>
+      class="teacher-wrapper col-3"/>
     </div>
   </div>
 </template>
@@ -143,7 +143,9 @@ export default {
 
         // Agora você tem acesso direto ao objeto JSON
         console.log('teachers', jsonData.data);
-        this.teachers = jsonData.data
+        var teachers = jsonData.data.sort((a, b) => b.note - a.note);
+        const arrayLimitado = teachers.slice(0, 4);
+        this.teachers = arrayLimitado
       } catch (error) {
         console.error(error);
       }
@@ -204,10 +206,15 @@ export default {
   box-sizing: border-box;
 }
 
+.teacher-wrapper.col-3 {
+  flex-basis: calc(25% - 20px); /* Largura de 25% para ocupar 4 colunas */
+  margin: 10px; /* Espaçamento entre os cards */
+  box-sizing: border-box;
+}
+
 .educadores-avaliados {
   display: flex;
-  flex-wrap: wrap;
-  gap: 25px;
+  gap: 20px;
 }
 
 .teacher-wrapper {
