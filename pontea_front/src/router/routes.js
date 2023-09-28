@@ -29,6 +29,13 @@ const routes = [
     ]
   },
   {
+    path:'/landing',
+    component: () => import('layouts/LandingLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/LandingPage.vue') }
+    ]
+  },
+  {
     path: '/login',
     beforeEnter: (to, from, next) => {
       const token = localStorage.getItem("token");
