@@ -4,7 +4,8 @@
             <q-card-section horizontal>
                 <q-card-section>
                     <q-avatar class="avatar" size="52px">
-                        <img :src="img_src">
+                        <img v-if="img_src" :src="img_src">
+                        <img v-else src="/images/user-icon.jpg">
                     </q-avatar>
                 </q-card-section>
                 <q-card-section class="teacher-name">
@@ -106,7 +107,7 @@ export default {
 .info{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 5px;
     margin-top: 2px;
 }
