@@ -59,6 +59,47 @@ export default {
     ProfileComponent,
     ActivityCard,
   },
+  async mounted() {
+    try {
+      await this.getPerfilCliente();
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  data() {
+    return {
+      perfil: null,
+    };
+  },
+  methods: {
+    async getToken() {
+      const token = localStorage.getItem("token");
+      return token;
+    },
+    async getPerfilCliente() {
+      try {
+        const token = await this.getToken();
+        const headers = {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        };
+        const response = await fetch("/api/profile", {
+          method: "GET",
+          headers,
+        });
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const jsonData = await response.json(); // Aguarde a resolução da promessa e obtenha os dados JSON diretamente
+        // Agora você tem acesso direto ao objeto JSON
+        console.log("perfil", jsonData);
+        this.perfil = jsonData;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  },
   data() {},
 };
 </script>
