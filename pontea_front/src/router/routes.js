@@ -1,15 +1,7 @@
 const routes = [
   {
     path: '/',
-    beforeEnter: (to, from, next) => {
-      const token = localStorage.getItem("token");
-      if (token) {
-        next();
-      } else {
-        next('/login');
-      }
-    },
-    redirect: '/home',
+    redirect: '/landing',
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: 'home', component: () => import('pages/HomePage.vue') },
