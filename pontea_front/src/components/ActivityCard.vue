@@ -2,7 +2,7 @@
   <div class="q-pa-md row items-start q-gutter-md">
     <q-card class="my-card">
       <q-card-section class = "imagem-fundo">
-        <img class = "ic1" src="/../public/icons/price&avaliation.svg">
+        <img class = "ic1" src="/icons/price&avaliation.svg">
         <img class="ic2" :src="defIcon" alt="Ícone de Experiência">
       </q-card-section>
       <q-card-section class = "textos">
@@ -30,15 +30,15 @@ export default {
     defIcon() {
       // Use um condicional para determinar o caminho do ícone com base em CampoDeExperiencia
       if (this.CampoDeExperiencia === 'Escuta, fala, pensamento e imaginação') {
-        return '/../public/icons/area5.svg';
+        return '/icons/area5.svg';
       }else if(this.CampoDeExperiencia === 'Corpo, gestos e movimento'){
-        return '/../public/icons/area4.svg';
+        return '/icons/area4.svg';
       }else if(this.CampoDeExperiencia === 'Espaços, tempo e quantidades,...'){
-        return '/../public/icons/area3.svg';
+        return '/icons/area3.svg';
       }else if(this.CampoDeExperiencia === 'Traços, sons, cores e formas'){
-        return '/../public/icons/area2.svg';
+        return '/icons/area2.svg';
       }else{
-        return '/../public/icons/area1.svg';
+        return '/icons/area1.svg';
       }
     }
   }
@@ -68,7 +68,7 @@ export default {
   flex-direction: row-reverse;
   align-items: end;
   flex-shrink: 0;
-  background-image: url('/../public/images/presente.jpeg'); /* Substitua pelo caminho da sua imagem */
+  background-image: url('/images/presente.jpeg'); /* Substitua pelo caminho da sua imagem */
   background-size: cover; /* Ajusta o tamanho da imagem para cobrir a div */
   background-position: center; /* Centraliza a imagem na div */
   background-repeat: no-repeat; /* Evita repetição da imagem */

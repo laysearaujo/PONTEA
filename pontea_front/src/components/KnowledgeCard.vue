@@ -5,14 +5,14 @@
       <div class="text-card" :style="{ background: titleIconMap[title]?.color || '#FF7A92' }">
         <div class="icon">
           <img
-            :src="`/../public/icons/${titleIconMap[title]?.icon}`"
+            :src="`icons/${titleIconMap[title]?.icon}`"
             alt="image"
             class="logo-image"
           />
         </div>
         <div class="bottom-content">
           <div class="icon-bottom">
-            <img src="/../public/icons/quantify.svg" alt="New Icon" class="new-icon" />
+            <img src="icons/quantify.svg" alt="New Icon" class="new-icon" />
             <div class="number">{{ quantity }}</div>
           </div>
         </div>

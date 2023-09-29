@@ -47,7 +47,7 @@
       :key="teacher.name"
       :name="teacher.name"
       :rating="teacher.note"
-      :quantity="teacher.credit"
+      :quantity="teacher.countActivities"
       :img_src="teacher.photo_path"
       class="teacher-wrapper col-3"/>
     </div>
