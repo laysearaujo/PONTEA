@@ -6,11 +6,8 @@ const routes = [
     children: [
       { path: 'home', component: () => import('pages/HomePage.vue') },
       { path: 'carteira', component: () => import('pages/WalletPage.vue') },
-      { path: 'atividades', component: () => import('pages/ActivitiesPage.vue'),
-        children: [
-          { path: 'detalhes', component: () => import('pages/DetailsPage.vue') } 
-        ]
-      },
+      { path: 'atividades', component: () => import('pages/ActivitiesPage.vue') },
+      { path: 'detalhes/:id', component: () => import('pages/DetailsPage.vue') },
       { path: 'experiencias', component: () => import('pages/ExperiencesPage.vue') },
       { path: 'educadores', component: () => import('pages/EducatorsPage.vue') },
       { path: 'busca', component: () => import('pages/SearchPage.vue') },

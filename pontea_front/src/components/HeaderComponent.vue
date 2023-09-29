@@ -137,14 +137,16 @@ export default defineComponent({
     const searchQuery = ref(null);
 
     const getBreadcrumbLabel = (route) => {
-      // Mapeie suas rotas e os rótulos correspondentes aqui
       const routeLabels = {
         '/atividades': 'Atividades',
         '/experiencias': 'Campos de Experiências',
         '/educadores': 'Educadores',
-        '/ser-educador': 'Ser educador'
-        // Adicione mais rotas e rótulos conforme necessário
+        '/ser-educador': 'Ser educador',
       };
+
+      if (route.path.startsWith('/detalhes/')) {
+        return 'Detalhes';
+      }
 
       return routeLabels[route.path] || '';
     };

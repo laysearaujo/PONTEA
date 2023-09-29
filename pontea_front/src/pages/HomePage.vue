@@ -17,7 +17,9 @@
       >
         <q-carousel-slide name="style" class="row no-wrap flex-center">
         <ActivityCard
+          style="cursor: pointer;"
           v-for="activity in activitys"
+          :id = "activity.id"
           :key="activity.title"
           :titulo = "activity.title"
           :nivel = "activity.level.id"
@@ -27,6 +29,7 @@
           :preco = "activity.price"
           :CampoDeExperiencia = "activity.area.title"
           class="card-atividade"
+          @click="redirectToDetails(activity.id)"
         />
       </q-carousel-slide>
     </q-carousel>    
@@ -176,7 +179,10 @@ export default {
       } catch (error) {
         console.error(error);
       }
-    }
+    },
+    redirectToDetails(id) {
+      this.$router.push('/detalhes/'+id);
+    },
   }
 }
 </script>

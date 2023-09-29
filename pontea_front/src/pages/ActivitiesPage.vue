@@ -3,7 +3,9 @@
   <div class="q-pa-md row items-start q-gutter-md">
     <div class="cards-atividades" v-if="activitys.length > 0">
       <ActivityCard
+        style="cursor: pointer;"
         v-for="activity in activitys"
+        :id = "activity.id"
         :key="activity.title"
         :titulo = "activity.title"
         :nivel = "activity.level.id"
@@ -13,6 +15,7 @@
         :preco = "activity.price"
         :CampoDeExperiencia = "activity.area.title"
         class="card-atividade"
+        @click="redirectToDetails(activity.id)"
       />
     </div>
   </div>
@@ -37,7 +40,6 @@ export default {
   methods: {
     async getToken() {
       const token = localStorage.getItem("token");
-      console.log('OLHA AQUI PORRA', token)
       return token;
     },
     async getActivitys() {
@@ -66,7 +68,10 @@ export default {
       } catch (error) {
         console.error(error);
       }
-    }
+    },
+    redirectToDetails(id) {
+      this.$router.push('/detalhes/'+id);
+    },
   }
 }
 </script>
