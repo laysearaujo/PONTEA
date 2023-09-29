@@ -38,7 +38,6 @@
       class="q-px-xl q-py-sm rounded"
       label="Ser educador"
       color="primary"
-      @click="changePage(showHistory)"
       v-if="showBtn"
     />
   </div>

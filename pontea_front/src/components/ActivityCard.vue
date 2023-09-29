@@ -1,9 +1,17 @@
 <template>
-  <div class="q-pa-md row items-start q-gutter-md">
+  <div class="q-pa-xs row items-start q-gutter-md">
     <q-card class="my-card">
       <q-card-section class="imagem-fundo">
-        <img class="ic1" src="/icons/price&avaliation.svg" />
-        <img class="ic2" :src="defIcon" alt="Ícone de Experiência" />
+        <div class="icons">
+          <img class="ic2" :src="defIcon" alt="Ícone de Experiência" />
+          <section class="price-rating">
+            <div class="price">R$ {{ preco }}</div>
+            <div class="rating">
+              <img src="/icons/half-star2.svg" alt="icon" />
+              {{ nota }}
+            </div>
+          </section>
+        </div>
       </q-card-section>
       <q-card-section class="textos">
         <div class="titulo">{{ titulo }}</div>
@@ -22,8 +30,8 @@ export default {
     nivel: Number,
     tipoDeEducacao: String,
     faixaEtaria: String,
-    // nota: Number,
-    // preco: Number,
+    nota: Number,
+    preco: Number,
     CampoDeExperiencia: String,
   },
   computed: {
@@ -32,7 +40,7 @@ export default {
       if (this.CampoDeExperiencia === "Escuta, fala, pensamento e imaginação") {
         return "/icons/area5.svg";
       } else if (this.CampoDeExperiencia === "Corpo, gestos e movimento") {
-        return "/icons/area4.svg";
+        return "/../public/icons/area4.svg";
       } else if (
         this.CampoDeExperiencia === "Espaços, tempo e quantidades,..."
       ) {
@@ -50,13 +58,12 @@ export default {
 <style scoped>
 .my-card {
   display: flex;
-  width: 195px;
-  height: 260px;
+  width: 186px;
+  height: 232px;
   min-width: 186px;
   max-width: 186px;
   flex-direction: column;
   align-items: flex-start;
-  gap: -232px;
   border-radius: 8px;
   box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.15);
 }
@@ -67,23 +74,14 @@ export default {
   height: 152px;
   min-width: 186px;
   max-width: 186px;
-  flex-direction: row-reverse;
   align-items: flex-end;
   flex-shrink: 0;
   background-image: url("/images/presente.jpeg"); /* Substitua pelo caminho da sua imagem */
   background-size: cover; /* Ajusta o tamanho da imagem para cobrir a div */
   background-position: center; /* Centraliza a imagem na div */
   background-repeat: no-repeat; /* Evita repetição da imagem */
-  margin-bottom: -5%;
-}
-
-.ic1 {
-  margin-left: 18%;
-  margin-right: -5%;
-  margin-bottom: -5%;
-}
-.ic2 {
-  margin-right: 14%;
+  padding: 0;
+  margin: 0;
   margin-bottom: -5%;
 }
 
@@ -115,5 +113,44 @@ export default {
   height: 64px;
   justify-content: space-between;
   text-align: left;
+}
+
+.icons {
+  padding: 8px;
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price-rating {
+  background-color: #fbfdff;
+  border-radius: 6px;
+  display: flex;
+  gap: 4px;
+  font-family: Lexend;
+  font-size: 12px;
+}
+
+.price {
+  background-color: #65a115;
+  border-radius: 6px;
+  padding: 3px 10px;
+  white-space: nowrap;
+  color: #fbfdff;
+}
+
+.rating {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 3px 0px;
+  padding-right: 10px;
+  color: #616167;
+  font-weight: 400;
+}
+
+.rating img {
+  margin-top: -1px;
 }
 </style>
