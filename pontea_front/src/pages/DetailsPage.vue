@@ -30,7 +30,28 @@
         </q-dialog>
         <div class="col">
           <div class="duvidas">
-            <h6 style="margin: 0px; font-size: 1rem;">Duvidas da atividade</h6>
+            <h6 style="margin: 0px; font-size: 1rem;">Duvidas da atividade ({{ activity.questions.length }})</h6>
+            <div class="duvida row" v-for="act in activity.questions" :key="act.created_at"> 
+              <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding-bottom: 0px;">
+                <div>
+                  <q-avatar class="avatar" size="25px">
+                    <img v-if="img_src" :src="img_src">
+                    <img v-else src="/images/user-icon.jpg">
+                  </q-avatar>
+                  <text-subtitle2 class="text-weight-medium" style="margin-left: 0.8rem;">{{ act.user.name }}</text-subtitle2>
+                </div>
+                <text-subtitle1 style="display: flex; text-align: right; color: gray;">em {{ formatDate(act.created_at) }}</text-subtitle1>
+              </div>
+              <text-subtitle1 class="flex" style="margin-top: -30px; margin-bottom: 10px; margin: 3px; width: 100%; justify-content: center; padding-right: 1rem; white-space: pre-wrap;">{{ act.question }}</text-subtitle1>
+              <div class="column">
+                <div class="col-4">
+                  <img src="/../icons/mesage.svg" alt="mensagem" class="icon-svg"/>
+                </div>
+                <div class="col-10 q-ml-sm" style="color: var(--Azul, #144EC0);">
+                  {{ act.response }}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -91,15 +112,38 @@ export default {
   async mounted () {
     await this.getActivitys(); 
   },
+  methods: {
+    formatDate(date) {
+      console.log('aquiiii', date)
+      const formattedDate = new Date(date).toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+      });
+      return formattedDate;
+    },
+  },
 };
 </script>
 
   
 <style scoped>
+.duvida {
+  display: flex;
+  min-height: 5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  flex: 1 0 0;
+  align-self: stretch;
+  border-radius: 0.5rem;
+  background: var(--white, #fbfdff);
+}
 .duvidas {
   display: flex;
   padding: 1rem;
   height: 100%;
+  min-height: 250px;
   flex-direction: column;
   align-items: flex-start;
   gap: 0.5rem;
