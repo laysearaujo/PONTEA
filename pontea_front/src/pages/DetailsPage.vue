@@ -67,6 +67,7 @@
               type="submit"
               no-caps
               class="submit-btn"
+              @submit="onSubmit()"
             />
           </div>
         </div>
@@ -110,6 +111,7 @@
 </template>
   
 <script>
+import { useQuasar } from "quasar";
 import { ref } from 'vue'
 import ActivityExtra from 'src/components/ActivityExtra.vue';
 
@@ -147,6 +149,51 @@ export default {
         year: 'numeric',
       });
       return formattedDate;
+    },
+    async getToken() {
+      const token = localStorage.getItem("token");
+      return token;
+    },
+    async onSubmit() {
+      
+      const token = this.getToken()
+      const url = "api/shopping_carts/store";
+
+      const headers = {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      };
+
+      let body = {
+        activity_id: this.activity.id
+      };
+
+      let resposta = await fetch(url, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(body),
+      }).then((response) => {
+        console.log('compra', response)
+        let msg = "";
+        if (!response.ok) {
+          msg = "Não foi possível comprar a atividade";
+          console.log(response.json());
+
+          throw new Error("Erro na resposta da API");
+        } else {
+          msg = "Atividade comprada com sucesso!";
+        }
+        this.$q.notify(msg);
+        return response.json();
+      }).then((data) => {
+        console.log(data);
+      }).catch((error) => {
+        console.error("Erro na solicitação à API:", error);
+      });
+
+      console.log(body);
+      console.log(resposta);
     },
   },
 };
