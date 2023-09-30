@@ -4,10 +4,10 @@ const routes = [
     redirect: '/landing',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: 'home', component: () => import('pages/HomePage.vue') },
+      { path: 'home', name: 'HomePage', component: () => import('pages/HomePage.vue'), props: true },
       { path: 'carteira', component: () => import('pages/WalletPage.vue') },
       { path: 'atividades', component: () => import('pages/ActivitiesPage.vue') },
-      { path: 'detalhes/:id', component: () => import('pages/DetailsPage.vue') },
+      { path: 'detalhes/:dados', name: 'DetailsPage', component: () => import('pages/DetailsPage.vue'), props: true },
       { path: 'experiencias', component: () => import('pages/ExperiencesPage.vue') },
       { path: 'educadores', component: () => import('pages/EducatorsPage.vue') },
       { path: 'busca', component: () => import('pages/SearchPage.vue') },

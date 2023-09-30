@@ -29,7 +29,7 @@
           :preco = "activity.price"
           :CampoDeExperiencia = "activity.area.title"
           class="card-atividade"
-          @click="redirectToDetails(activity.id)"
+          @click="redirectToDetails(activity)"
         />
       </q-carousel-slide>
     </q-carousel>    
@@ -180,8 +180,9 @@ export default {
         console.error(error);
       }
     },
-    redirectToDetails(id) {
-      this.$router.push('/detalhes/'+id);
+    redirectToDetails(obj) {
+      const objetoString = JSON.stringify(obj);
+      this.$router.push({ name: 'DetailsPage', params: { dados: objetoString } });
     },
   }
 }

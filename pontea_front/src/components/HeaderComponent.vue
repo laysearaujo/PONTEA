@@ -145,7 +145,7 @@ export default defineComponent({
       };
 
       if (route.path.startsWith('/detalhes/')) {
-        return 'Detalhes';
+        return 'Detalhes da atividade';
       }
 
       return routeLabels[route.path] || '';
