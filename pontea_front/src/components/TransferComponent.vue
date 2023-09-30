@@ -42,7 +42,7 @@
       </div>
 
       <q-btn
-        class="q-px-xl q-py-sm rounded"
+        class="q-px-xl q-py-sm transfer-btn"
         label="Transferir"
         type="submit"
         color="primary"
@@ -63,6 +63,7 @@ import StepComponent from "src/components/StepComponent.vue";
 
 export default {
   name: "TransferComponent",
+
   data() {
     return {
       currentStep: 1,
@@ -75,8 +76,43 @@ export default {
     StepComponent,
   },
   methods: {
-    submitForm() {
-      this.currentStep++;
+    async submitForm() {
+      const url = "api/removeCredit";
+      const token = localStorage.getItem("token");
+      const headers = {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      };
+
+      await fetch(url, {
+        method: "GET",
+        headers,
+      })
+        .then((response) => {
+          if (!response.ok) {
+            console.log(response.json());
+            throw new Error("Erro na resposta da API");
+          } else {
+          }
+          return response.json();
+        })
+        .then(() => {
+          this.currentStep++;
+
+          this.code = "";
+          this.agency = "";
+          this.account = "";
+
+          setTimeout(() => {
+            this.$router.push({
+              name: "HomePage",
+            });
+          }, 1000);
+        })
+        .catch((error) => {
+          console.error("Erro na solicitação à API:", error);
+        });
     },
   },
   props: {},
@@ -155,5 +191,9 @@ export default {
   line-height: 16px;
   font-size: 14px;
   text-align: center;
+}
+
+.transfer-btn {
+  border-radius: 20px;
 }
 </style>
