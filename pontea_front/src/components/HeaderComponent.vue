@@ -213,6 +213,8 @@ export default defineComponent({
         "/experiencias": "Campos de Experiências",
         "/educadores": "Educadores",
         "/ser-educador": "Ser educador",
+        "/perfilCliente": "Perfil",
+        "/carteira": "Carteira",
       };
 
       if (route.path.startsWith("/detalhes/")) {
