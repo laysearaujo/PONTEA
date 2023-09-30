@@ -16,6 +16,18 @@
             class="card-atividade"
           />
         </div>
+        <div class="col flex q-ma-md" style="justify-content: center; cursor: pointer;" @click="dialog = true">
+          <img src="/../icons/share.svg" alt="Compartilhar" class="icon-svg" />
+          <text-caption>Compartilhar atividade</text-caption>
+        </div>
+        <q-dialog v-model="dialog">
+          <q-card>
+            <q-card-section class="items-center">
+              <h5 style="margin: 10px;">Compartilhe a atividade.</h5>
+              <span class="flex" style="justify-content: center">Copie o link da atividade</span>
+            </q-card-section>
+          </q-card>
+        </q-dialog>
         <div class="col">
           <div class="duvidas">
             <h6 style="margin: 0px; font-size: 1rem;">Duvidas da atividade</h6>
@@ -51,6 +63,7 @@
 </template>
   
 <script>
+import { ref } from 'vue'
 import ActivityExtra from 'src/components/ActivityExtra.vue';
 
 export default {
@@ -62,6 +75,12 @@ export default {
     return {
       activity: null,
     };
+  },
+  setup () {
+    return {
+      dialog: ref(false),
+      cancelEnabled: ref(false)
+    }
   },
   created() {
     const dadosString = this.$route.params.dados;

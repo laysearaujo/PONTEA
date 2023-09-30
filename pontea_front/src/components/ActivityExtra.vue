@@ -1,19 +1,27 @@
 <template>
-    <div class="q-pa-md row items-start q-gutter-md" style="padding: 10px 0;">
-      <q-card class="my-card">
-        <q-card-section class="imagem-fundo">
-          <img class = "ic1" src="/icons/price&avaliation.svg">
-          <img class="ic2" :src="defIcon" alt="Ícone de Experiência">
-        </q-card-section>
-        <q-card-section class = "textos">
-          <div class="titulo">{{titulo}}</div>
-          <div class="conteudo"> Nível: {{nivel}}</div>
-          <div class="conteudo">{{tipoDeEducacao}}</div>
-          <div class="conteudo">{{ faixaEtaria }}</div>
-        </q-card-section>
-      </q-card>
-    </div>
-  </template>
+  <div class="q-pa-xs row items-start q-gutter-md">
+    <q-card class="my-card">
+      <q-card-section class="imagem-fundo">
+        <div class="icons">
+          <img class="ic2" :src="defIcon" alt="Ícone de Experiência" />
+          <section class="price-rating">
+            <div class="price">R$ {{ preco }}</div>
+            <div class="rating">
+              <img src="/icons/half-star2.svg" alt="icon" />
+              {{ nota }}
+            </div>
+          </section>
+        </div>
+      </q-card-section>
+      <q-card-section class="textos">
+        <div class="titulo">{{ titulo }}</div>
+        <div class="conteudo">Nível: {{ nivel }}</div>
+        <div class="conteudo">{{ tipoDeEducacao }}</div>
+        <div class="conteudo">{{ faixaEtaria }}</div>
+      </q-card-section>
+    </q-card>
+  </div>
+</template>
   <script>
   export default {
     name: 'ActivityExtra',
@@ -22,8 +30,8 @@
       nivel: Number,
       tipoDeEducacao: String,
       faixaEtaria: String,
-      // nota: Number,
-      // preco: Number,
+      nota: Number,
+      preco: Number,
       CampoDeExperiencia: String
     },
     computed: {
@@ -74,30 +82,19 @@
     margin-bottom: -5%;
   }
   
-  .ic1{
-    margin-left: 18%;
-    margin-right: -5%;
-    margin-bottom: -5%;
-  }
-  .ic2{
-    margin-right: 45%;
-    margin-bottom: -5%;
-  }
-  
-  .titulo{
+  .titulo {
     font-family: Lexend;
     font-size: 13px;
     font-weight: 500;
     line-height: 16px;
     letter-spacing: 0em;
     text-align: left;
-    font-variation-settings: 'slnt' 0;
-    color: #3C3C3F;
+    font-variation-settings: "slnt" 0;
+    color: #3c3c3f;
     margin-left: -4%;
-  
   }
-  
-  .conteudo{
+
+  .conteudo {
     margin-left: -4%;
     font-family: Lexend;
     font-size: 10px;
@@ -107,10 +104,50 @@
     text-align: left;
     color: #616167;
   }
-  
-  .textos {
+
+  .texto {
+    width: 170px;
+    height: 64px;
     justify-content: space-between;
     text-align: left;
-    margin-top: 10px;
   }
-  </style>
+
+  .icons {
+    padding: 0px;
+    min-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .price-rating {
+    background-color: #fbfdff;
+    border-radius: 6px;
+    display: flex;
+    gap: 4px;
+    font-family: Lexend;
+    font-size: 12px;
+  }
+
+  .price {
+    background-color: #65a115;
+    border-radius: 6px;
+    padding: 3px 10px;
+    white-space: nowrap;
+    color: #fbfdff;
+  }
+
+  .rating {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    padding: 3px 0px;
+    padding-right: 10px;
+    color: #616167;
+    font-weight: 400;
+  }
+
+  .rating img {
+    margin-top: -1px;
+  }
+</style>
