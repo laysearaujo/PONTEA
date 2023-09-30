@@ -8,100 +8,168 @@
       padding-bottom: 1%;
     "
   >
-    <q-toolbar class="q-space-between" style="background-color: #D9DCF9; padding: 1%;">
+    <q-toolbar
+      class="q-space-between"
+      style="background-color: #d9dcf9; padding: 1%"
+    >
       <div>
         <img
           src="/../images/logo.svg"
           alt="Logo"
           class="logo-image"
-          style="max-width: 300px; min-width: 150px; z-index: 1; height: 40px;"
+          style="max-width: 300px; min-width: 150px; z-index: 1; height: 40px"
         />
       </div>
       <div class="toolbar-icons">
         <div class="search-input">
           <q-form @submit="onSubmit">
-            <q-input outlined rounded dense class="rounded-input" label="Busca" v-model="searchQuery">
+            <q-input
+              outlined
+              rounded
+              dense
+              class="rounded-input"
+              label="Busca"
+              v-model="searchQuery"
+            >
               <template v-slot:prepend>
                 <div class="search-icon">
                   <q-icon name="search" />
                 </div>
               </template>
             </q-input>
-        </q-form>
+          </q-form>
         </div>
-        <div style="display: flex; align-items: stretch; gap: 0.75rem;">
+        <div style="display: flex; align-items: stretch; gap: 0.75rem">
           <div class="icon-button">
-            <img src="/../icons/notification.svg" alt="Notifications" class="icon-svg" />
+            <img
+              src="/../icons/notification.svg"
+              alt="Notifications"
+              class="icon-svg"
+            />
           </div>
           <div class="icon-button">
             <img src="/../icons/shoppingCart.svg" alt="Cart" class="icon-svg" />
           </div>
           <div class="icon-avatar">
-            <q-avatar size="34px" class="custom-avatar">
-              <img src="/../images/profile.jpeg" alt="Foto de Perfil" class="avatar-image" />
+            <q-avatar
+              size="34px"
+              class="custom-avatar"
+              @click="toggleModal(this.isModalOpen)"
+            >
+              <img
+                src="/../images/profile.jpeg"
+                alt="Foto de Perfil"
+                class="avatar-image"
+              />
             </q-avatar>
+
+            <div class="menu" v-if="isModalOpen">
+              <ul>
+                <li>
+                  <router-link
+                    to="/perfilCliente"
+                    class="links"
+                    @click="toggleModal(this.isModalOpen)"
+                  >
+                    Meu Perfil
+                  </router-link>
+                </li>
+                <li>
+                  <router-link class="links" @click="logout()" to="/landing">
+                    Sair
+                  </router-link>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </q-toolbar>
 
     <!-- Use v-if para ocultar a div quando a rota estiver na raiz -->
-    <div class="breadcrumb" style="margin-top: 1%; margin-left: 15px;" v-if="route.path !== '/' && route.path !== '/home'">
+    <div
+      class="breadcrumb"
+      style="margin-top: 1%; margin-left: 15px"
+      v-if="route.path !== '/' && route.path !== '/home'"
+    >
       <router-link to="/home" class="breadcrumb-link">Home</router-link>
       <span v-if="route.path !== '/'">|</span>
-      <router-link v-if="route.path !== '/'" :to="route.path" class="breadcrumb-link">{{ getBreadcrumbLabel(route) }}</router-link>
+      <router-link
+        v-if="route.path !== '/'"
+        :to="route.path"
+        class="breadcrumb-link"
+        >{{ getBreadcrumbLabel(route) }}</router-link
+      >
     </div>
 
-    <div class="toolbar-options" style="margin-top: 1%; margin-left: 15px;">
-      <router-link to="/atividades" class="icon-button-option" :class="{ 'active-button': isActiveTab('/atividades') }">
+    <div class="toolbar-options" style="margin-top: 1%; margin-left: 15px">
+      <router-link
+        to="/atividades"
+        class="icon-button-option"
+        :class="{ 'active-button': isActiveTab('/atividades') }"
+      >
         Atividades
       </router-link>
-      <router-link to="/experiencias" class="icon-button-option" :class="{ 'active-button': isActiveTab('/experiencias') }">
+      <router-link
+        to="/experiencias"
+        class="icon-button-option"
+        :class="{ 'active-button': isActiveTab('/experiencias') }"
+      >
         Campos de experiências
       </router-link>
-      <router-link to="/educadores" class="icon-button-option" :class="{ 'active-button': isActiveTab('/educadores') }">
+      <router-link
+        to="/educadores"
+        class="icon-button-option"
+        :class="{ 'active-button': isActiveTab('/educadores') }"
+      >
         Educadores
       </router-link>
     </div>
 
     <div class="selectActivate" v-if="route.path === '/atividades'">
       <q-select
-        outlined dense
+        outlined
+        dense
         v-model="model.supportLevel"
         :options="supportLevelOptions"
         label="Nivel de suporte do TEA"
         class="custom-q-select narrower-select"
       />
       <q-select
-        outlined dense
+        outlined
+        dense
         v-model="model.experienceFields"
         :options="experienceFieldsOptions"
         label="Campos de experiência"
         class="custom-q-select narrower-select"
       />
       <q-select
-        outlined dense
+        outlined
+        dense
         v-model="model.ageRange"
         :options="ageRangeOptions"
         label="Faixa etária"
         class="custom-q-select narrower-select"
       />
       <q-select
-        outlined dense
+        outlined
+        dense
         v-model="model.activityLevel"
         :options="activityLevelOptions"
         label="Nível da atividade"
         class="custom-q-select narrower-select"
       />
       <q-select
-        outlined dense
+        outlined
+        dense
         v-model="model.multimediaResources"
         :options="multimediaResourcesOptions"
         label="Recursos multimídia"
         class="custom-q-select narrower-select"
       />
       <q-select
-        outlined dense
+        outlined
+        dense
         v-model="model.visualInstructions"
         :options="visualInstructionsOptions"
         label="Instruções visuais"
@@ -115,21 +183,24 @@
         :key="field"
         :class="{ 'active-button': activeField === field }"
         @click="toggleActiveField(field)"
-        size=0.8rem
-        style="color: inherit; background-color: inherit; border: none;"
+        size="0.8rem"
+        style="color: inherit; background-color: inherit; border: none"
       >
-        <span :style="{ color: activeField === field ? '#144ec0' : 'inherit' }">{{ field }}</span>
+        <span
+          :style="{ color: activeField === field ? '#144ec0' : 'inherit' }"
+          >{{ field }}</span
+        >
       </q-btn>
     </div>
   </q-header>
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { defineComponent, ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
 export default defineComponent({
-  name: 'HeaderComponent',
+  name: "HeaderComponent",
 
   setup() {
     const route = useRoute();
@@ -138,17 +209,17 @@ export default defineComponent({
 
     const getBreadcrumbLabel = (route) => {
       const routeLabels = {
-        '/atividades': 'Atividades',
-        '/experiencias': 'Campos de Experiências',
-        '/educadores': 'Educadores',
-        '/ser-educador': 'Ser educador',
+        "/atividades": "Atividades",
+        "/experiencias": "Campos de Experiências",
+        "/educadores": "Educadores",
+        "/ser-educador": "Ser educador",
       };
 
-      if (route.path.startsWith('/detalhes/')) {
-        return 'Detalhes da atividade';
+      if (route.path.startsWith("/detalhes/")) {
+        return "Detalhes da atividade";
       }
 
-      return routeLabels[route.path] || '';
+      return routeLabels[route.path] || "";
     };
 
     const isActiveTab = (tabRoute) => {
@@ -156,23 +227,23 @@ export default defineComponent({
     };
 
     // Dados para as seleções
-    const supportLevelOptions = ['Nível 1', 'Nível 2', 'Nível 3'];
+    const supportLevelOptions = ["Nível 1", "Nível 2", "Nível 3"];
     const experienceFieldsOptions = [
-      'O Eu, o outro e o nós',
-      'Traços, sons, cores e formas',
-      'Espaços, tempo, quantidades, relações e transformações',
-      'Corpo, gestos e movimento',
-      'Escuta, fala, pensamento e imaginação',
+      "O Eu, o outro e o nós",
+      "Traços, sons, cores e formas",
+      "Espaços, tempo, quantidades, relações e transformações",
+      "Corpo, gestos e movimento",
+      "Escuta, fala, pensamento e imaginação",
     ];
     const ageRangeOptions = [
-      '0 a 1 ano e 6 meses',
-      '1 ano e 7 meses a 3 anos e 11 meses',
-      '4 anos a 5 anos e 11 meses',
-      '6 anos a 11 anos'
+      "0 a 1 ano e 6 meses",
+      "1 ano e 7 meses a 3 anos e 11 meses",
+      "4 anos a 5 anos e 11 meses",
+      "6 anos a 11 anos",
     ];
-    const activityLevelOptions = ['Fácil', 'Médio', 'Avançado'];
-    const multimediaResourcesOptions = ['Com', 'Sem'];
-    const visualInstructionsOptions = ['Com', 'Sem'];
+    const activityLevelOptions = ["Fácil", "Médio", "Avançado"];
+    const multimediaResourcesOptions = ["Com", "Sem"];
+    const visualInstructionsOptions = ["Com", "Sem"];
 
     // Modelo para armazenar seleções
     const model = {
@@ -205,13 +276,27 @@ export default defineComponent({
       toggleActiveField,
       searchQuery,
 
-      onSubmit () {
-        if (searchQuery.value.trim() !== '') {
+      onSubmit() {
+        if (searchQuery.value.trim() !== "") {
           const searchText = encodeURIComponent(searchQuery.value.trim());
           router.push("/busca?text=" + searchText);
         }
       },
     };
+  },
+  data() {
+    return {
+      isModalOpen: false,
+    };
+  },
+  methods: {
+    toggleModal(isModalOpen) {
+      this.isModalOpen = !isModalOpen;
+    },
+    logout() {
+      localStorage.clear();
+      this.isModalOpen = !isModalOpen;
+    },
   },
 });
 </script>
@@ -241,7 +326,7 @@ export default defineComponent({
   color: var(--textos-cinza, #616167);
   text-decoration: none;
   cursor: pointer;
-  font-size: 0.90rem;
+  font-size: 0.9rem;
   font-style: normal;
   font-weight: 500;
   line-height: 1rem; /* 125% */
@@ -249,9 +334,51 @@ export default defineComponent({
 
 .icon-button-option.active-button {
   text-decoration: underline; /* Adiciona um sublinhado quando ativo */
-  color: #144EC0; /* Cor azul para ativo */
+  color: #144ec0; /* Cor azul para ativo */
   text-decoration-skip-ink: auto; /* Controlar a posição do sublinhado */
   text-underline-offset: 0.5rem; /* Ajustar o deslocamento vertical (aumente conforme necessário) */
+}
+
+.icon-avatar {
+  position: relative;
+  cursor: pointer;
+}
+
+.menu {
+  position: absolute;
+  top: 30px;
+  right: -10px;
+  background-color: #fbfdff;
+  box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  white-space: nowrap;
+  font-family: Lexend;
+  overflow: hidden;
+}
+
+ul {
+  margin: 10px 0;
+}
+.links {
+  color: black;
+  text-decoration: none;
+}
+
+.menu ul {
+  padding: 0px;
+}
+
+.menu ul li {
+  list-style: none;
+  padding: 0.5rem 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.menu ul li:hover {
+  background-color: rgba(20, 77, 192, 0.171);
+  transition: 0.5s;
+  cursor: pointer;
 }
 
 .search-input {
@@ -265,7 +392,7 @@ export default defineComponent({
   min-width: 5rem;
   border-radius: 30px;
   overflow: hidden;
-  background-color: #FBFDFF;
+  background-color: #fbfdff;
   border: 0.09rem solid #144ec0;
 }
 
@@ -275,12 +402,12 @@ export default defineComponent({
   justify-content: center;
   width: 2rem;
   height: 100%;
-  background-color: #FBFDFF;
+  background-color: #fbfdff;
   border-radius: 30px 0 0 30px;
 }
 
 .icon-avatar {
-  margin-left: 0.20rem;
+  margin-left: 0.2rem;
   display: flex;
   width: 1.5rem;
   height: 1.5rem;
@@ -306,7 +433,10 @@ export default defineComponent({
 
 .breadcrumb-link {
   text-decoration: none; /* Remover sublinhado dos links do breadcrumb */
-  color: var(--textos-cinza, #616167); /* Cor cinza para os links do breadcrumb */
+  color: var(
+    --textos-cinza,
+    #616167
+  ); /* Cor cinza para os links do breadcrumb */
   cursor: pointer;
 }
 
@@ -316,10 +446,12 @@ export default defineComponent({
   color: #144ec0; /* Cor azul quando o mouse estiver sobre o link */
 }
 
-.row, .column, .flex {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+.row,
+.column,
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .selectActivate {
@@ -342,21 +474,21 @@ export default defineComponent({
 }
 
 .q-field--auto-height .q-field__control {
-    height: 1.5rem !important;
-    min-height: none;
+  height: 1.5rem !important;
+  min-height: none;
 }
 
 .q-field--auto-height .q-field__control,
 .q-field--auto-height .q-field__native {
-    min-height: 0px !important;
+  min-height: 0px !important;
 }
 
 .experience-buttons {
   display: flex;
   flex-wrap: wrap; /* Quebrar para a próxima linha se não couberem */
   border-radius: 0.25rem;
-  background: #FFF;
-  justify-content:  space-between; /* Alinhar os botões à esquerda */
+  background: #fff;
+  justify-content: space-between; /* Alinhar os botões à esquerda */
   padding-top: 15px; /* Adicionar algum espaçamento ao redor dos botões */
   margin-left: 10px;
   margin-top: 10px;
@@ -366,7 +498,7 @@ export default defineComponent({
   cursor: pointer;
   font-size: 1rem; /* Tamanho da fonte menor */
   transition: background-color 0.3s, color 0.3s, width 0.3s;
-  width: auto
+  width: auto;
 }
 
 .active-button,
@@ -374,5 +506,4 @@ export default defineComponent({
   font-weight: bold;
   color: #144ec0; /* Cor azul para o texto */
 }
-
 </style>
