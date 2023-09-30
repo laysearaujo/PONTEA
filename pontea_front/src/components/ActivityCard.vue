@@ -27,10 +27,10 @@ export default {
   name: "ActivityCard",
   props: {
     titulo: String,
-    nivel: Number,
+    nivel: String,
     tipoDeEducacao: String,
     faixaEtaria: String,
-    nota: Number,
+    nota: String,
     preco: Number,
     CampoDeExperiencia: String,
   },

@@ -1,19 +1,18 @@
 <template>
-
   <div class="q-pa-md row items-start q-gutter-md">
     <div class="cards-atividades" v-if="activitys.length > 0">
       <ActivityCard
-        style="cursor: pointer;"
+        style="cursor: pointer"
         v-for="activity in activitys"
-        :id = "activity.id"
+        :id="activity.id"
         :key="activity.title"
-        :titulo = "activity.title"
-        :nivel = "activity.level.id"
-        :tipoDeEducacao = "activity.age_group.id"
-        :faixaEtaria = "activity.age_group.title"
-        :nota = "activity.note"
-        :preco = "activity.price"
-        :CampoDeExperiencia = "activity.area.title"
+        :titulo="activity.title"
+        :nivel="activity.level.id"
+        :tipoDeEducacao="activity.age_group.id"
+        :faixaEtaria="activity.age_group.title"
+        :nota="activity.note"
+        :preco="activity.price"
+        :CampoDeExperiencia="activity.area.title"
         class="card-atividade"
         @click="redirectToDetails(activity)"
       />
@@ -22,14 +21,14 @@
 </template>
 
 <script>
-import ActivityCard from 'src/components/ActivityCard.vue';
+import ActivityCard from "src/components/ActivityCard.vue";
 
 export default {
-  name: 'ActivitiesPage',
+  name: "ActivitiesPage",
   components: {
-    ActivityCard
+    ActivityCard,
   },
-  async mounted () {
+  async mounted() {
     await this.getActivitys(); // Chame a função getActivitys e aguarde sua conclusão
   },
   data() {
@@ -63,22 +62,24 @@ export default {
         const jsonData = await response.json(); // Aguarde a resolução da promessa e obtenha os dados JSON diretamente
 
         // Agora você tem acesso direto ao objeto JSON
-        console.log('activity', jsonData.data);
-        this.activitys = jsonData.data
+        console.log("activity", jsonData.data);
+        this.activitys = jsonData.data;
       } catch (error) {
         console.error(error);
       }
     },
     redirectToDetails(obj) {
       const objetoString = JSON.stringify(obj);
-      this.$router.push({ name: 'DetailsPage', params: { dados: objetoString } });
+      this.$router.push({
+        name: "DetailsPage",
+        params: { dados: objetoString },
+      });
     },
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
-
 .cards-container {
   display: flex;
   width: 100%;
@@ -91,7 +92,7 @@ export default {
   margin: 0; /* Remova as margens padrão */
 }
 
-.educadores-avaliados{
+.educadores-avaliados {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -101,8 +102,9 @@ export default {
   margin: 0; /* Remova as margens padrão */
 }
 
-.cards-atividades{
+.cards-atividades {
   display: flex;
   flex-wrap: wrap;
+  gap: 20px;
 }
 </style>

@@ -1,13 +1,17 @@
 <template>
   <div class="profile">
     <img
-      src="https://i.imgur.com/wJN5wJx.png"
+      :src="
+        user.photo_path
+          ? user.photo_path
+          : 'https://cdn-icons-png.flaticon.com/512/3135/3135768.png'
+      "
       alt="Imagem"
       class="rounded-image"
     />
 
     <div class="name flex">
-      <h2 class="title">Amanda Borba</h2>
+      <h2 class="title">{{ user.name }}</h2>
       <a href="#" class="icon-button">
         <img src="/../icons/edit.svg" alt="Edit Profile" />
       </a>
@@ -24,7 +28,7 @@
 
     <div class="wallet flex">
       <img src="/../icons/wallet.svg" alt="Edit Profile" />
-      <p>R$ 62,16</p>
+      <p>R$ {{ user.credit }}</p>
     </div>
 
     <div class="description">
@@ -48,6 +52,19 @@ export default {
   name: "ProfileComponent",
   props: {
     showBtn: Boolean,
+    user: {
+      id: Number,
+      name: String,
+      email: String,
+      email_verified_at: Date,
+      photo_path: String,
+      profession: String,
+      is_teacher: Boolean,
+      rating: Number,
+      wallet: Number,
+      created_at: Date,
+      updated_at: Date,
+    },
   },
   components: {},
   data() {
