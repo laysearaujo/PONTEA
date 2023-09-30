@@ -183,9 +183,10 @@ export default {
       }
     },
     redirectToDetails(obj) {
+      const objetoString = JSON.stringify(obj);
       this.$router.push({
         name: "DetailsPage",
-        params: { dados: obj.title },
+        params: { dados: objetoString },
       });
     },
   },
