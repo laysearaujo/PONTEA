@@ -1,48 +1,26 @@
 <template>
   <div class="container">
     <div>
-      <ProfileComponent :showBtn="true" />
+      <ProfileComponent :showBtn="true" v-if="perfil" :user="perfil" />
     </div>
 
-    <div class="available-activities">
+    <div class="available-activities" v-if="purchased_activities">
       <h2 class="title">Atividades disponíveis</h2>
 
-      <div class="flex">
+      <div class="flex" v-if="purchased_activities.length > 0">
         <ActivityCard
-          titulo="Dominó de Sílabas"
-          nivel="2"
-          tipoDeEducacao="Educação Infantil"
-          faixaEtaria="4 anos a 5 anos"
+          style="cursor: pointer"
+          v-for="purchased_activity in purchased_activities"
+          :id="purchased_activity.id"
+          :key="purchased_activity.title"
+          :titulo="purchased_activity.title"
+          :nivel="purchased_activity.level_id"
+          :tipoDeEducacao="purchased_activity.age_group_id"
+          faixaEtaria="0 a 1 ano e 6 meses"
+          :nota="purchased_activity.level_id"
+          :preco="purchased_activity.price"
+          @click="redirectToDetails(purchased_activity)"
           class="card-atividade"
-          nota="2,2"
-          preco="25,00"
-        />
-        <ActivityCard
-          titulo="Dominó de Sílabas"
-          nivel="2"
-          tipoDeEducacao="Educação Infantil"
-          faixaEtaria="4 anos a 5 anos"
-          class="card-atividade"
-          nota="3,0"
-          preco="32,00"
-        />
-        <ActivityCard
-          titulo="Dominó de Sílabas"
-          nivel="2"
-          tipoDeEducacao="Educação Infantil"
-          faixaEtaria="4 anos a 5 anos"
-          class="card-atividade"
-          nota="1,0"
-          preco="10,00"
-        />
-        <ActivityCard
-          titulo="Dominó de Sílabas"
-          nivel="2"
-          tipoDeEducacao="Educação Infantil"
-          faixaEtaria="4 anos a 5 anos"
-          class="card-atividade"
-          nota="5,0"
-          preco="55,00"
         />
       </div>
     </div>
@@ -69,6 +47,7 @@ export default {
   data() {
     return {
       perfil: null,
+      purchased_activities: null,
     };
   },
   methods: {
@@ -94,13 +73,15 @@ export default {
         const jsonData = await response.json(); // Aguarde a resolução da promessa e obtenha os dados JSON diretamente
         // Agora você tem acesso direto ao objeto JSON
         console.log("perfil", jsonData);
-        this.perfil = jsonData;
+        this.perfil = jsonData.user;
+        this.purchased_activities = jsonData.purchased_activities;
+
+        console.log(this.purchased_activities);
       } catch (error) {
         console.error(error);
       }
     },
   },
-  data() {},
 };
 </script>
 
