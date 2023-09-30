@@ -57,6 +57,7 @@ export default {
 
 <style scoped>
 .my-card {
+  cursor: pointer;
   display: flex;
   width: 186px;
   height: 260px;

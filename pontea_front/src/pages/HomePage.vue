@@ -15,7 +15,7 @@
         class="text-white shadow-1 rounded-borders full-width-carousel"
         height="310px"
       >
-        <q-carousel-slide name="style" class="row no-wrap slide">
+        <q-carousel-slide name="style" class="row no-wrap slide scroll">
           <ActivityCard
             v-for="activity in activitys"
             :key="activity.title"
@@ -26,12 +26,13 @@
             :nota="activity.note"
             :preco="activity.price"
             :CampoDeExperiencia="activity.area.title"
+            @click="redirectToDetails(activity)"
           />
         </q-carousel-slide>
       </q-carousel>
     </div>
     <h5 class="sub-title col-12 q-mb-sm">Por área do conhecimento</h5>
-    <div class="cards-container" v-if="areas.length > 0">
+    <div class="cards-container scroll" v-if="areas.length > 0">
       <KnowledgeCard
         v-for="item in areas"
         :key="item.title"
@@ -41,7 +42,7 @@
       />
     </div>
     <h5 class="sub-title col-12 q-mb-sm">Educadores Bem Avaliados</h5>
-    <div class="educadores-avaliados" v-if="teachers.length > 0">
+    <div class="educadores-avaliados scroll" v-if="teachers.length > 0">
       <TeacherCard
         v-for="teacher in teachers"
         :key="teacher.name"
@@ -144,9 +145,12 @@ export default {
 
         // Agora você tem acesso direto ao objeto JSON
         console.log("teachers", jsonData.data);
-        var teachers = jsonData.data.sort((a, b) => b.note - a.note);
-        const arrayLimitado = teachers.slice(0, 4);
-        this.teachers = arrayLimitado;
+
+        // Puxar teachers de acordo com a nota
+        // var teachers = jsonData.data.sort((a, b) => b.note - a.note);
+        // const arrayLimitado = teachers.slice(0, 4);
+
+        this.teachers = jsonData.data;
       } catch (error) {
         console.error(error);
       }
@@ -179,10 +183,9 @@ export default {
       }
     },
     redirectToDetails(obj) {
-      const objetoString = JSON.stringify(obj);
       this.$router.push({
         name: "DetailsPage",
-        params: { dados: objetoString },
+        params: { dados: obj.title },
       });
     },
   },
@@ -201,9 +204,9 @@ export default {
 
 .cards-container {
   display: flex;
-  flex-wrap: wrap;
   width: 100%;
   gap: 10px;
+  overflow-y: auto;
 }
 
 .card-wrapper {
@@ -220,7 +223,7 @@ export default {
 
 .educadores-avaliados {
   display: flex;
-  flex-wrap: wrap;
+  overflow-y: auto;
   gap: 10px;
 }
 
@@ -257,5 +260,24 @@ export default {
 .q-carousel {
   display: inline-block;
   max-width: 100%;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 10px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 6px;
+}
+
+.scroll::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+.scroll::-webkit-scrollbar-track {
+  background-color: #f0f0f0;
+  border-radius: 6px;
 }
 </style>

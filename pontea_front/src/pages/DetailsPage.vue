@@ -1,100 +1,142 @@
 <template>
-  <div class="q-pa-md example-row-all-breakpoints">
+  <div class="q-pa-md example-row-all-breakpoints" v-if="activity">
     <div class="row">
-      <div class="col-3 column" style="height: 100%;">
-        <div class="flex col" style="width: 100%; justify-content: center; margin: 0;">
+      <div class="col-3 column" style="height: 100%">
+        <div
+          class="flex col"
+          style="width: 100%; justify-content: center; margin: 0"
+        >
           <ActivityExtra
-            :id = "activity.id"
+            :id="activity.id"
             :key="activity.title"
-            :titulo = "activity.title"
-            :nivel = "activity.level.id"
-            :tipoDeEducacao = "activity.age_group.id"
-            :faixaEtaria = "activity.age_group.title"
-            :nota = "activity.note"
-            :preco = "activity.price"
-            :CampoDeExperiencia = "activity.area.title"
+            :titulo="activity.title"
+            :nivel="activity.level.id"
+            :tipoDeEducacao="activity.age_group.id"
+            :faixaEtaria="activity.age_group.title"
+            :nota="activity.note"
+            :preco="activity.price"
+            :CampoDeExperiencia="activity.area.title"
             class="card-atividade"
           />
         </div>
-        <div class="col flex q-ma-md" style="justify-content: center; cursor: pointer;" @click="dialog = true">
+        <div
+          class="col flex q-ma-md"
+          style="justify-content: center; cursor: pointer"
+          @click="dialog = true"
+        >
           <img src="/../icons/share.svg" alt="Compartilhar" class="icon-svg" />
           <text-caption>Compartilhar atividade</text-caption>
         </div>
         <q-dialog v-model="dialog">
           <q-card>
             <q-card-section class="items-center">
-              <h5 style="margin: 10px;">Compartilhe a atividade.</h5>
-              <span class="flex" style="justify-content: center">Copie o link da atividade</span>
+              <h5 style="margin: 10px">Compartilhe a atividade.</h5>
+              <span class="flex" style="justify-content: center"
+                >Copie o link da atividade</span
+              >
             </q-card-section>
           </q-card>
         </q-dialog>
         <div class="col">
           <div class="duvidas">
-            <h6 style="margin: 0px; font-size: 1rem;">Duvidas da atividade</h6>
+            <h6 style="margin: 0px; font-size: 1rem">Duvidas da atividade</h6>
           </div>
         </div>
       </div>
       <div class="col-9">
         <div class="row">
           <div class="col-10">
-            <h4 style="margin-top: 0px; margin-bottom: 0px;">{{ activity.title }}</h4>
-            <text-subtitle1 class="text-weight-bold">{{ activity.area.title }}</text-subtitle1>
+            <h4 style="margin-top: 0px; margin-bottom: 0px">
+              {{ activity.title }}
+            </h4>
+            <text-subtitle1 class="text-weight-bold">{{
+              activity.area.title
+            }}</text-subtitle1>
           </div>
           <div class="col-2">
-            <q-btn
-              label="Comprar"
-              type="submit"
-              no-caps
-              class="submit-btn"
-            />
+            <q-btn label="Comprar" type="submit" no-caps class="submit-btn" />
           </div>
         </div>
-        <div class="row" style="padding: 10px 15px; margin-top: 0px;">
+        <div class="row" style="padding: 10px 15px; margin-top: 0px">
           <text-caption>Por {{ activity.created_by_user.name }}</text-caption>
         </div>
-        <div class="row" style="padding: 10px 15px; margin-top: 0px;">
-          <text-body1 style="font-size: 1rem;">Por {{ activity.description }}</text-body1>
+        <div class="row" style="padding: 10px 15px; margin-top: 0px">
+          <text-body1 style="font-size: 1rem"
+            >Por {{ activity.description }}</text-body1
+          >
         </div>
-        <h6 style="padding: 10px 15px; margin: 0px;">Comentários sobre a atividade</h6>
-        <h6 style="padding: 10px 15px; margin: 0px;">Atividades semelhantes</h6>
+        <h6 style="padding: 10px 15px; margin: 0px">
+          Comentários sobre a atividade
+        </h6>
+        <h6 style="padding: 10px 15px; margin: 0px">Atividades semelhantes</h6>
       </div>
     </div>
   </div>
 </template>
-  
+
 <script>
-import { ref } from 'vue'
-import ActivityExtra from 'src/components/ActivityExtra.vue';
+import { ref } from "vue";
+import ActivityExtra from "src/components/ActivityExtra.vue";
 
 export default {
-  name: 'DetailsPage',
+  name: "DetailsPage",
   components: {
-    ActivityExtra
+    ActivityExtra,
   },
   data() {
     return {
       activity: null,
     };
   },
-  setup () {
+  setup() {
     return {
       dialog: ref(false),
-      cancelEnabled: ref(false)
+      cancelEnabled: ref(false),
+    };
+  },
+  async mounted() {
+    try {
+      await this.getDetails();
+    } catch (error) {
+      console.error(error);
     }
   },
-  created() {
-    const dadosString = this.$route.params.dados;
-    const objeto = JSON.parse(dadosString);
-    console.log(objeto)
-    this.activity = objeto
-  },
-  async mounted () {
-    await this.getActivitys(); 
+  methods: {
+    async getToken() {
+      const token = localStorage.getItem("token");
+      return token;
+    },
+    async getDetails() {
+      try {
+        const token = await this.getToken();
+        const headers = {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        };
+
+        console.log(this.$route.params.dados);
+        const response = await fetch(
+          `/api/activity/filter?text=${this.$route.params.dados}`,
+          {
+            method: "GET",
+            headers,
+          }
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const jsonData = await response.json();
+
+        this.activity = jsonData.data[0];
+      } catch (error) {
+        console.error(error);
+      }
+    },
   },
 };
 </script>
 
-  
 <style scoped>
 .duvidas {
   display: flex;
@@ -106,13 +148,13 @@ export default {
   flex: 1 0 0;
   align-self: stretch;
   border-radius: 0.5rem;
-  background: var(--Lils, #C2C6EC);
+  background: var(--Lils, #c2c6ec);
 }
 .example-row-all-breakpoints {
   .row > div {
     padding: 10px 15px;
-    background: rgba(#999, .15);
-    border: 1px solid rgba(#999, .2);
+    background: rgba(#999, 0.15);
+    border: 1px solid rgba(#999, 0.2);
   }
   .row + .row {
     margin-top: 1rem;
@@ -134,4 +176,3 @@ export default {
   padding: 10px 0px;
 }
 </style>
-
