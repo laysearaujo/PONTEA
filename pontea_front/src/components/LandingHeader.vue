@@ -16,18 +16,26 @@
           <q-route-tab
             name="sobre"
             label="Sobre nós"
+            to="/landing"
             style="color: #616167"
             no-caps
           />
-          <q-route-tab
+          <q-route-tab v-show="token == null"
             name="entrar"
             label="Entrar"
             to="/login"
             style="color: #144ec0"
             no-caps
           />
-          <q-route-tab name="cadastro" to="/cadastro">
-            <q-btn label="Cadastre-se" color="primary" no-caps rounded />
+          <q-route-tab v-show="token != null"
+            name="home"
+            label="Home"
+            to="/home"
+            style="color: #144ec0"
+            no-caps
+          />
+          <q-route-tab v-show="token == null" name="cadastro" to="/cadastro">
+            <q-btn  label="Cadastre-se" color="primary" no-caps rounded />
           </q-route-tab>
         </q-tabs>
       </q-toolbar>
@@ -41,6 +49,7 @@ export default {
   data() {
     return {
       tab: "",
+      token: localStorage.getItem("token")
     };
   },
 };
