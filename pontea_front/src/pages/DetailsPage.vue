@@ -37,31 +37,70 @@
             </q-card-section>
           </q-card>
         </q-dialog>
+        <!-- Propriedade não existe -->
         <div class="col">
-          <div class="duvidas">
-            <h6 style="margin: 0px; font-size: 1rem;">Duvidas da atividade ({{ activity.questions.length }})</h6>
-            <div class="duvida row" v-for="act in activity.questions" :key="act.created_at"> 
-              <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding-bottom: 0px;">
+          <!-- <div class="duvidas">
+            <h6 style="margin: 0px; font-size: 1rem">
+           
+               Duvidas da atividade ({{ activity.questions.length }}) 
+            </h6>
+            <div
+              class="duvida row"
+              v-for="act in activity.questions"
+              :key="act.created_at"
+            >
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  width: 100%;
+                  padding-bottom: 0px;
+                "
+              >
                 <div>
                   <q-avatar class="avatar" size="25px">
-                    <img v-if="img_src" :src="img_src">
-                    <img v-else src="/images/user-icon.jpg">
+                    <img v-if="img_src" :src="img_src" />
+                    <img v-else src="/images/user-icon.jpg" />
                   </q-avatar>
-                  <text-subtitle2 class="text-weight-medium" style="margin-left: 0.8rem;">{{ act.user.name }}</text-subtitle2>
+                  <text-subtitle2
+                    class="text-weight-medium"
+                    style="margin-left: 0.8rem"
+                    >{{ act.user.name }}</text-subtitle2
+                  >
                 </div>
-                <text-subtitle1 style="display: flex; text-align: right; color: gray;">em {{ formatDate(act.created_at) }}</text-subtitle1>
+                <text-subtitle1
+                  style="display: flex; text-align: right; color: gray"
+                  >em {{ formatDate(act.created_at) }}</text-subtitle1
+                >
               </div>
-              <text-subtitle1 class="flex" style="margin-top: -30px; margin-bottom: 10px; margin: 3px; width: 100%; justify-content: center; padding-right: 1rem; white-space: pre-wrap;">{{ act.question }}</text-subtitle1>
+              <text-subtitle1
+                class="flex"
+                style="
+                  margin-top: -30px;
+                  margin-bottom: 10px;
+                  margin: 3px;
+                  width: 100%;
+                  justify-content: center;
+                  padding-right: 1rem;
+                  white-space: pre-wrap;
+                "
+                >{{ act.question }}</text-subtitle1
+              >
               <div class="column">
                 <div class="col-4">
-                  <img src="/../icons/mesage.svg" alt="mensagem" class="icon-svg"/>
+                  <img
+                    src="/../icons/mesage.svg"
+                    alt="mensagem"
+                    class="icon-svg"
+                  />
                 </div>
-                <div class="col-10 q-ml-sm" style="color: var(--Azul, #144EC0);">
+                <div class="col-10 q-ml-sm" style="color: var(--Azul, #144ec0)">
                   {{ act.response }}
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="col-9">
@@ -87,39 +126,90 @@
         <div class="row" style="padding: 10px 15px; margin-top: 0px">
           <text-caption>Por {{ activity.created_by_user.name }}</text-caption>
         </div>
+
         <div class="row" style="padding: 10px 15px; margin-top: 0px">
           <text-body1 style="font-size: 1rem"
             >Por {{ activity.description }}</text-body1
           >
         </div>
-        <h6 style="padding: 10px 15px; margin: 0px;">Comentários sobre a atividade</h6>
+
+        <h6 style="padding: 10px 15px; margin: 0px">
+          Comentários sobre a atividade
+        </h6>
         <div>
-          <div class="row" v-for="(act, index) in activity.comments" :key="index">
-            <q-card style="width: 30%;">
-              <div class="duvida row"> 
+          <div
+            class="row"
+            v-for="(act, index) in activity.comments"
+            :key="index"
+          >
+            <q-card style="width: 30%">
+              <div class="duvida row">
                 <div>
-                  <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding-bottom: 0px;">
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                      width: 100%;
+                      padding-bottom: 0px;
+                    "
+                  >
                     <div>
                       <q-avatar class="avatar" size="25px">
-                        <img v-if="img_src" :src="img_src">
-                        <img v-else src="/images/user-icon.jpg">
+                        <img v-if="img_src" :src="img_src" />
+                        <img v-else src="/images/user-icon.jpg" />
                       </q-avatar>
-                      <text-subtitle2 class="text-weight-medium" style="margin-left: 0.8rem;">{{ act.user.name }}</text-subtitle2>
+                      <!-- Propriedade não existe -->
+                      <!-- <text-subtitle2
+                        class="text-weight-medium"
+                        style="margin-left: 0.8rem"
+                        >{{ act.user.name }}</text-subtitle2
+                      > -->
                     </div>
-                    <text-subtitle1 style="display: flex; text-align: right; color: gray;">em {{ formatDate(act.created_at) }}</text-subtitle1>
+                    <text-subtitle1
+                      style="display: flex; text-align: right; color: gray"
+                      >em {{ formatDate(act.created_at) }}</text-subtitle1
+                    >
                   </div>
-                  <div class="info row rating flex" style="justify-content: flex-start; align-items: center; margin-left: 2rem; padding-top: 0;">
+                  <div
+                    class="info row rating flex"
+                    style="
+                      justify-content: flex-start;
+                      align-items: center;
+                      margin-left: 2rem;
+                      padding-top: 0;
+                    "
+                  >
                     <span>{{ act.note }}</span>
-                    <img src="/icons/half-star.svg" alt="icon" class="icon" style="width: 15px; height: 15px; margin-left: 5px;">
-                    <span style="margin-left: 10px; margin-right: 0;">Recomendo</span>
+                    <img
+                      src="/icons/half-star.svg"
+                      alt="icon"
+                      class="icon"
+                      style="width: 15px; height: 15px; margin-left: 5px"
+                    />
+                    <span style="margin-left: 10px; margin-right: 0"
+                      >Recomendo</span
+                    >
                   </div>
                 </div>
-                <text-subtitle1 class="flex" style="margin-top: -30px; margin-bottom: 10px; margin: 3px; width: 100%; justify-content: center; padding-right: 1rem; white-space: pre-wrap;">{{ act.text }}</text-subtitle1>
+                <text-subtitle1
+                  class="flex"
+                  style="
+                    margin-top: -30px;
+                    margin-bottom: 10px;
+                    margin: 3px;
+                    width: 100%;
+                    justify-content: center;
+                    padding-right: 1rem;
+                    white-space: pre-wrap;
+                  "
+                  >{{ act.text }}</text-subtitle1
+                >
               </div>
             </q-card>
           </div>
         </div>
-        <h6 style="padding: 10px 15px; margin: 0px;">Atividades semelhantes</h6>
+        <h6 style="padding: 10px 15px; margin: 0px">Atividades semelhantes</h6>
       </div>
     </div>
   </div>
@@ -127,8 +217,8 @@
 
 <script>
 import { useQuasar } from "quasar";
-import { ref } from 'vue'
-import ActivityExtra from 'src/components/ActivityExtra.vue';
+import { ref } from "vue";
+import ActivityExtra from "src/components/ActivityExtra.vue";
 
 export default {
   name: "DetailsPage",
@@ -181,21 +271,21 @@ export default {
         const jsonData = await response.json();
 
         this.activity = jsonData.data[0];
+        console.log(this.activity);
       } catch (error) {
         console.error(error);
       }
     },
     formatDate(date) {
-      const formattedDate = new Date(date).toLocaleDateString('pt-BR', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
+      const formattedDate = new Date(date).toLocaleDateString("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
       });
       return formattedDate;
     },
     async onSubmit() {
-      
-      const token = this.getToken()
+      const token = this.getToken();
       const url = "api/shopping_carts/store";
 
       const headers = {
@@ -205,31 +295,34 @@ export default {
       };
 
       let body = {
-        activity_id: this.activity.id
+        activity_id: this.activity.id,
       };
 
       let resposta = await fetch(url, {
         method: "POST",
         headers,
         body: JSON.stringify(body),
-      }).then((response) => {
-        console.log('compra', response)
-        let msg = "";
-        if (!response.ok) {
-          msg = "Não foi possível comprar a atividade";
-          console.log(response.json());
+      })
+        .then((response) => {
+          console.log("compra", response);
+          let msg = "";
+          if (!response.ok) {
+            msg = "Não foi possível comprar a atividade";
+            console.log(response.json());
 
-          throw new Error("Erro na resposta da API");
-        } else {
-          msg = "Atividade comprada com sucesso!";
-        }
-        this.$q.notify(msg);
-        return response.json();
-      }).then((data) => {
-        console.log(data);
-      }).catch((error) => {
-        console.error("Erro na solicitação à API:", error);
-      });
+            throw new Error("Erro na resposta da API");
+          } else {
+            msg = "Atividade comprada com sucesso!";
+          }
+          this.$q.notify(msg);
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error("Erro na solicitação à API:", error);
+        });
 
       console.log(body);
       console.log(resposta);
