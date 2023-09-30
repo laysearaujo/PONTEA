@@ -11,6 +11,9 @@
               </q-card-section>
 
               <q-card-section class="fields">
+                <slot>
+                  <!-- slot para mostrar a mensagem de erro -->
+                </slot>
                 <q-input
                   type="text"
                   v-if="cadastro"
