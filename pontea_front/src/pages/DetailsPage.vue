@@ -139,8 +139,8 @@
         <div>
           <div
             class="row"
-            v-for="act in activity.comments"
-            :key="act.created_at"
+            v-for="(act, index) in activity.comments"
+            :key="index"
           >
             <q-card style="width: 30%">
               <div class="duvida row">
@@ -276,9 +276,7 @@ export default {
         console.error(error);
       }
     },
-
     formatDate(date) {
-      console.log("aquiiii", date);
       const formattedDate = new Date(date).toLocaleDateString("pt-BR", {
         day: "2-digit",
         month: "2-digit",
@@ -286,7 +284,6 @@ export default {
       });
       return formattedDate;
     },
-
     async onSubmit() {
       const token = this.getToken();
       const url = "api/shopping_carts/store";
