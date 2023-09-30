@@ -4,26 +4,52 @@
       <ProfileComponent :showBtn="true" v-if="perfil" :user="perfil" />
     </div>
 
-    <div class="available-activities" v-if="purchased_activities">
-      <h2 class="title">Atividades disponíveis</h2>
-
-      <div class="flex" v-if="purchased_activities.length > 0">
-        <ActivityCard
-          style="cursor: pointer"
-          v-for="purchased_activity in purchased_activities"
-          :id="purchased_activity.id"
-          :key="purchased_activity.title"
-          :titulo="purchased_activity.title"
-          :nivel="purchased_activity.level_id"
-          :tipoDeEducacao="purchased_activity.age_group_id"
-          faixaEtaria="0 a 1 ano e 6 meses"
-          :nota="purchased_activity.level_id"
-          :preco="purchased_activity.price"
-          @click="redirectToDetails(purchased_activity)"
-          class="card-atividade"
-        />
+    <section class="activities">
+      <div class="available-activities" v-if="purchased_activities">
+        <h2 class="title">Atividades disponíveis</h2>
+        <div class="flex" v-if="purchased_activities.length > 0">
+          <ActivityCard
+            style="cursor: pointer"
+            v-for="purchased_activity in purchased_activities"
+            :id="purchased_activity.id"
+            :key="purchased_activity.title"
+            :titulo="purchased_activity.title"
+            :nivel="purchased_activity.level_id"
+            :tipoDeEducacao="purchased_activity.age_group_id"
+            faixaEtaria="0 a 1 ano e 6 meses"
+            :nota="purchased_activity.level_id"
+            :preco="purchased_activity.price"
+            @click="redirectToDetails(purchased_activity)"
+            class="card-atividade"
+          />
+        </div>
       </div>
-    </div>
+      <div class="purchased-activities" v-if="created_activities">
+        <h2 class="title" v-if="created_activities.length > 0">
+          Minhas atividades disponibilizadas
+        </h2>
+        <div class="flex" v-if="created_activities.length > 0">
+          <ActivityCard
+            style="cursor: pointer"
+            v-for="created_activity in created_activities"
+            :id="created_activity.id"
+            :key="created_activity.title"
+            :titulo="created_activity.title"
+            :nivel="created_activity.level_id"
+            :tipoDeEducacao="created_activity.age_group_id"
+            faixaEtaria="0 a 1 ano e 6 meses"
+            :nota="created_activity.level_id"
+            :preco="created_activity.price"
+            @click="redirectToDetails(created_activity)"
+            class="card-atividade"
+          />
+
+          <div class="add-activity">
+            <img src="/icons/add.svg" alt="icon" />
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -48,6 +74,7 @@ export default {
     return {
       perfil: null,
       purchased_activities: null,
+      created_activities: null,
     };
   },
   methods: {
@@ -75,11 +102,16 @@ export default {
         console.log("perfil", jsonData);
         this.perfil = jsonData.user;
         this.purchased_activities = jsonData.purchased_activities;
-
-        console.log(this.purchased_activities);
+        this.created_activities = jsonData.created_activities;
       } catch (error) {
         console.error(error);
       }
+    },
+    redirectToDetails(obj) {
+      this.$router.push({
+        name: "DetailsPage",
+        params: { dados: obj.title },
+      });
     },
   },
 };
@@ -104,12 +136,27 @@ h2 {
   flex-direction: row;
 }
 
-.available-activities {
+.available-activities,
+.purchased-activities {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
   padding: 30px;
+}
+
+.activities {
   margin-left: 320px;
+}
+
+.add-activity {
+  width: 186px;
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed #144ec0;
+  border-radius: 8px;
+  cursor: pointer;
 }
 </style>
