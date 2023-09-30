@@ -1,9 +1,9 @@
 <template>
-  <div class="page-container row">
-    <div class="col-2">
-      <!-- Colocar o card do professor aqui -->
+  <div class="page-container row" >
+    <div class="col-3">
+        <ProfileComponent :showBtn="false" v-if="perfil" :user="perfil" style="max-width: 15vw;"/>
     </div>
-    <div class="add-atividade col-8">
+    <div class="add-atividade col-9">
       <h5 style="margin-bottom: 16px">Adicionando atividade</h5>
       <div class="form" style="padding: 16px 0px">
         <q-form class="fields" @submit="onSubmit()">
@@ -179,6 +179,7 @@
 
 <script>
 import { useQuasar } from "quasar";
+import ProfileComponent from "src/components/ProfileComponent.vue";
 
 export default {
   name: "AddAtividadePage",
@@ -230,11 +231,24 @@ export default {
         { id: true, desc: "Com" },
         { id: false, desc: "Sem" },
       ],
+      perfil: null,
+      purchased_activities: null,
     };
   },
+  async mounted() {
+    try {
+      await this.getPerfilCliente();
+    } catch (error) {
+      console.error(error);
+    }
+  },
   methods: {
+    async getToken() {
+      const token = localStorage.getItem("token");
+      return token;
+    },
     async onSubmit() {
-      const token = localStorage.getItem('token');
+      const token = this.getToken()
       const url = "/api/activity/store";
 
       const headers = {
@@ -316,7 +330,36 @@ export default {
         fileInput.click();
       }
     },
+    async getPerfilCliente() {
+      try {
+        const token = await this.getToken();
+        const headers = {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        };
+        const response = await fetch("/api/profile", {
+          method: "GET",
+          headers,
+        });
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const jsonData = await response.json(); // Aguarde a resolução da promessa e obtenha os dados JSON diretamente
+        // Agora você tem acesso direto ao objeto JSON
+        console.log("perfil", jsonData);
+        this.perfil = jsonData.user;
+        this.purchased_activities = jsonData.purchased_activities;
+
+        console.log(this.purchased_activities);
+      } catch (error) {
+        console.error(error);
+      }
+    },
   },
+  components: {
+    ProfileComponent
+  }
 };
 </script>
 
@@ -327,7 +370,7 @@ export default {
   margin: 0px;
 }
 .page-container {
-  padding-top: 30px;
+  padding: 10vh 10vw 0vh 10vw;
 }
 .fields {
   display: grid;
