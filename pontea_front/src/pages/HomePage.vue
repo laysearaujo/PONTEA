@@ -197,7 +197,7 @@ export default {
 .q-panel > div {
   height: 100%;
   width: 100%;
-  margin-left: 490px;
+  margin-left: 23rem;
 }
 
 .cards-container {
