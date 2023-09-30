@@ -560,6 +560,9 @@ export default {
   justify-content: center;
   padding-bottom: 64px;
 }
+#forma_comentario4 img{
+    width: 30%;
+}
 #text_coment {
   padding-top: 24px;
   width: 832px;
