@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md row items-start q-gutter-md">
+  <div class="q-pa-md row items-start q-gutter-md container">
     <h5 class="sub-title col-12 q-mb-sm">Atividades bem avaliadas</h5>
     <div class="cards-atividades" v-if="activitys.length > 0">
       <q-carousel
@@ -12,27 +12,23 @@
         navigation="false"
         arrows="false"
         padding
-        height="300px"
         class="text-white shadow-1 rounded-borders full-width-carousel"
+        height="310px"
       >
-        <q-carousel-slide name="style" class="row no-wrap flex-center">
-        <ActivityCard
-          style="cursor: pointer;"
-          v-for="activity in activitys"
-          :id = "activity.id"
-          :key="activity.title"
-          :titulo = "activity.title"
-          :nivel = "activity.level.id"
-          :tipoDeEducacao = "activity.age_group.id"
-          :faixaEtaria = "activity.age_group.title"
-          :nota = "activity.note"
-          :preco = "activity.price"
-          :CampoDeExperiencia = "activity.area.title"
-          class="card-atividade"
-          @click="redirectToDetails(activity)"
-        />
-      </q-carousel-slide>
-    </q-carousel>    
+        <q-carousel-slide name="style" class="row no-wrap slide">
+          <ActivityCard
+            v-for="activity in activitys"
+            :key="activity.title"
+            :titulo="activity.title"
+            :nivel="activity.level.id"
+            :tipoDeEducacao="activity.age_group.id"
+            :faixaEtaria="activity.age_group.title"
+            :nota="activity.note"
+            :preco="activity.price"
+            :CampoDeExperiencia="activity.area.title"
+          />
+        </q-carousel-slide>
+      </q-carousel>
     </div>
     <h5 class="sub-title col-12 q-mb-sm">Por área do conhecimento</h5>
     <div class="cards-container" v-if="areas.length > 0">
@@ -44,38 +40,40 @@
         class="card-wrapper"
       />
     </div>
-    <h5 class="sub-title col-12 q-mb-sm"> Educadores Bem Avaliados</h5>
+    <h5 class="sub-title col-12 q-mb-sm">Educadores Bem Avaliados</h5>
     <div class="educadores-avaliados" v-if="teachers.length > 0">
-      <TeacherCard  v-for="teacher in teachers"
-      :key="teacher.name"
-      :name="teacher.name"
-      :rating="teacher.note"
-      :quantity="teacher.countActivities"
-      :img_src="teacher.photo_path"
-      class="teacher-wrapper col-3"/>
+      <TeacherCard
+        v-for="teacher in teachers"
+        :key="teacher.name"
+        :name="teacher.name"
+        :rating="teacher.note"
+        :quantity="teacher.countActivities"
+        :img_src="teacher.photo_path"
+        class="teacher-wrapper col-3"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
-import KnowledgeCard from 'components/KnowledgeCard.vue';
-import TeacherCard from 'src/components/TeacherCard.vue';
-import ActivityCard from 'src/components/ActivityCard.vue';
+import { ref } from "vue";
+import KnowledgeCard from "components/KnowledgeCard.vue";
+import TeacherCard from "src/components/TeacherCard.vue";
+import ActivityCard from "src/components/ActivityCard.vue";
 
 export default {
-  name: 'HomePage',
+  name: "HomePage",
   components: {
     KnowledgeCard,
     TeacherCard,
-    ActivityCard
+    ActivityCard,
   },
-  setup () {
+  setup() {
     return {
-      slide: ref('style'),
-    }
+      slide: ref("style"),
+    };
   },
-  async mounted () {
+  async mounted() {
     try {
       await this.getAreas(); // Chame a função getAreas e aguarde sua conclusão
       await this.getTeachers(); // Chame a função getTeachers e aguarde sua conclusão
@@ -94,7 +92,7 @@ export default {
   methods: {
     async getToken() {
       const token = localStorage.getItem("token");
-      console.log('token', token)
+      console.log("token", token);
       return token;
     },
     async getAreas() {
@@ -118,8 +116,8 @@ export default {
         const jsonData = await response.json(); // Aguarde a resolução da promessa e obtenha os dados JSON diretamente
 
         // Agora você tem acesso direto ao objeto JSON
-        console.log('area', jsonData.data);
-        this.areas = jsonData.data
+        console.log("area", jsonData.data);
+        this.areas = jsonData.data;
       } catch (error) {
         console.error(error);
       }
@@ -145,10 +143,10 @@ export default {
         const jsonData = await response.json(); // Aguarde a resolução da promessa e obtenha os dados JSON diretamente
 
         // Agora você tem acesso direto ao objeto JSON
-        console.log('teachers', jsonData.data);
+        console.log("teachers", jsonData.data);
         var teachers = jsonData.data.sort((a, b) => b.note - a.note);
         const arrayLimitado = teachers.slice(0, 4);
-        this.teachers = arrayLimitado
+        this.teachers = arrayLimitado;
       } catch (error) {
         console.error(error);
       }
@@ -174,22 +172,24 @@ export default {
         const jsonData = await response.json(); // Aguarde a resolução da promessa e obtenha os dados JSON diretamente
 
         // Agora você tem acesso direto ao objeto JSON
-        console.log('activity', jsonData.data);
-        this.activitys = jsonData.data
+        console.log("activity", jsonData.data);
+        this.activitys = jsonData.data;
       } catch (error) {
         console.error(error);
       }
     },
     redirectToDetails(obj) {
       const objetoString = JSON.stringify(obj);
-      this.$router.push({ name: 'DetailsPage', params: { dados: objetoString } });
+      this.$router.push({
+        name: "DetailsPage",
+        params: { dados: objetoString },
+      });
     },
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
-
 .carousel-margin {
   width: 60px;
 }
@@ -197,14 +197,13 @@ export default {
 .q-panel > div {
   height: 100%;
   width: 100%;
-  margin-left: 23rem;
 }
 
 .cards-container {
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
-  gap: 20px;
-  justify-content: space-between;
+  gap: 10px;
 }
 
 .card-wrapper {
@@ -221,12 +220,17 @@ export default {
 
 .educadores-avaliados {
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .teacher-wrapper {
   flex-basis: calc(25% - 20px);
   margin: 0;
+}
+
+.slide {
+  gap: 15px;
 }
 
 .cards-atividades {
@@ -239,20 +243,19 @@ export default {
 }
 
 .full-width-carousel {
-  width: 100%; 
+  width: 100%;
   overflow: hidden;
 }
 
 .q-carousel .q-carousel-slide.row.no-wrap.flex-center {
   display: flex;
-  flex-direction: row; 
-  justify-content: flex-start; 
-  align-items: center; 
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .q-carousel {
   display: inline-block;
-  max-width: 100%; 
+  max-width: 100%;
 }
-
 </style>
