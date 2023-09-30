@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-xs row items-start q-gutter-md">
+  <div class="row items-start q-gutter-md wrap">
     <q-card class="my-card">
       <q-card-section class="imagem-fundo">
         <div class="icons">
@@ -16,7 +16,7 @@
       <q-card-section class="textos">
         <div class="titulo">{{ titulo }}</div>
         <div class="conteudo">Nível: {{ nivel }}</div>
-        <div class="conteudo">{{ tipoDeEducacao }}</div>
+        <div class="conteudo">Educação: {{ tipoDeEducacao }}</div>
         <div class="conteudo">{{ faixaEtaria }}</div>
       </q-card-section>
     </q-card>
@@ -59,7 +59,7 @@ export default {
 .my-card {
   display: flex;
   width: 186px;
-  height: 232px;
+  height: 260px;
   min-width: 186px;
   max-width: 186px;
   flex-direction: column;
@@ -95,6 +95,7 @@ export default {
   font-variation-settings: "slnt" 0;
   color: #3c3c3f;
   margin-left: -4%;
+  white-space: wrap;
 }
 
 .conteudo {
@@ -106,6 +107,13 @@ export default {
   letter-spacing: 0em;
   text-align: left;
   color: #616167;
+}
+
+.textos {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
 }
 
 .texto {
