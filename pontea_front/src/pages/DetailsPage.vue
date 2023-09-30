@@ -77,6 +77,32 @@
           <text-body1 style="font-size: 1rem;">Por {{ activity.description }}</text-body1>
         </div>
         <h6 style="padding: 10px 15px; margin: 0px;">Comentários sobre a atividade</h6>
+        <div>
+          <div class="row" v-for="act in activity.comments" :key="act.created_at">
+            <q-card style="width: 30%;">
+              <div class="duvida row"> 
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding-bottom: 0px;">
+                    <div>
+                      <q-avatar class="avatar" size="25px">
+                        <img v-if="img_src" :src="img_src">
+                        <img v-else src="/images/user-icon.jpg">
+                      </q-avatar>
+                      <text-subtitle2 class="text-weight-medium" style="margin-left: 0.8rem;">{{ act.user.name }}</text-subtitle2>
+                    </div>
+                    <text-subtitle1 style="display: flex; text-align: right; color: gray;">em {{ formatDate(act.created_at) }}</text-subtitle1>
+                  </div>
+                  <div class="info row rating flex" style="justify-content: flex-start; align-items: center; margin-left: 2rem; padding-top: 0;">
+                    <span>{{ act.note }}</span>
+                    <img src="/icons/half-star.svg" alt="icon" class="icon" style="width: 15px; height: 15px; margin-left: 5px;">
+                    <span style="margin-left: 10px; margin-right: 0;">Recomendo</span>
+                  </div>
+                </div>
+                <text-subtitle1 class="flex" style="margin-top: -30px; margin-bottom: 10px; margin: 3px; width: 100%; justify-content: center; padding-right: 1rem; white-space: pre-wrap;">{{ act.text }}</text-subtitle1>
+              </div>
+            </q-card>
+          </div>
+        </div>
         <h6 style="padding: 10px 15px; margin: 0px;">Atividades semelhantes</h6>
       </div>
     </div>
