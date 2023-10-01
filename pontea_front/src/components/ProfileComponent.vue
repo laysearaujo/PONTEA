@@ -12,9 +12,9 @@
 
     <div class="flex-name">
       <h2 class="name">{{ user.name }}</h2>
-      <a href="/" class="icon-button" v-if="showEditBtn">
+      <router-link to="/perfilCliente" class="icon-button" v-if="showEditBtn">
         <img src="/../icons/edit.svg" alt="Edit Profile" />
-      </a>
+      </router-link>
     </div>
 
     <div class="rating flex">
