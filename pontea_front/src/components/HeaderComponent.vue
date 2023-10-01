@@ -247,6 +247,10 @@ export default defineComponent({
         return "Detalhes da atividade";
       }
 
+      if (route.path.startsWith("/carrinho/")) {
+        return "Carrinho";
+      }
+
       return routeLabels[route.path] || "";
     };
 
