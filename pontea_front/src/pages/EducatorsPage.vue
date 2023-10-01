@@ -11,6 +11,7 @@
         :img_src="teacher.photo_path"
         @click="redirectToEducator(teacher)"
         class="teacher-wrapper"
+        style="cursor: pointer"
       />
     </div>
   </div>
@@ -67,7 +68,6 @@ export default {
       }
     },
     redirectToEducator(obj) {
-      const objetoString = JSON.stringify(obj);
       this.$router.push({
         name: "PerfilEducador",
         params: { id: obj.id },

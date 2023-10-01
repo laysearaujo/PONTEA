@@ -71,17 +71,17 @@
             />
           </div>
         </div>
-        <div class="row" style="padding: 10px 15px; margin-top: 0px;">
+        <div class="row" style="padding: 10px 15px; margin-top: 0px; cursor: pointer;" @click="redirectToEducator(activity.created_by_user)">
           <text-caption>Por {{ activity.created_by_user.name }}</text-caption>
         </div>
         <div class="row" style="padding: 10px 15px; margin-top: 0px;">
           <text-body1 style="font-size: 1rem;">Por {{ activity.description }}</text-body1>
         </div>
         <h6 style="padding: 10px 15px; margin: 0px;">Comentários sobre a atividade</h6>
-        <div>
-          <div class="row" v-for="act in activity.comments" :key="act.created_at">
-            <q-card style="width: 30%;">
-              <div class="duvida row" style="width: 100%;">
+        <div class="row" style="flex-wrap: nowrap;">
+          <div v-for="act in activity.comments" :key="act.created_at" style="width: 30%;">
+            <q-card>
+              <div class="duvida row" style="width: 100%;"> 
                 <div style="width: 100%;">
                   <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding-bottom: 0px;">
                     <div style="width: 100%;">
@@ -141,7 +141,6 @@ export default {
   },
   methods: {
     formatDate(date) {
-      console.log('aquiiii', date)
       const formattedDate = new Date(date).toLocaleDateString('pt-BR', {
         day: '2-digit',
         month: '2-digit',
@@ -193,6 +192,12 @@ export default {
 
       console.log(body);
       console.log(resposta);
+    },
+    redirectToEducator(obj) {
+      this.$router.push({
+        name: "PerfilEducador",
+        params: { id: obj.id },
+      });
     },
   },
 };

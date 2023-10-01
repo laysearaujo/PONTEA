@@ -44,6 +44,7 @@
     <h5 class="sub-title col-12 q-mb-sm">Educadores Bem Avaliados</h5>
     <div class="educadores-avaliados scroll" v-if="teachers.length > 0">
       <TeacherCard
+        style="cursor: pointer"
         v-for="teacher in teachers"
         :key="teacher.name"
         :name="teacher.name"

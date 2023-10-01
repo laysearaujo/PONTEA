@@ -57,23 +57,23 @@ export default {
       return {
         'Escuta, fala, pensamento e imaginação': {
           icon: 'escuta.svg',
-          color: '#FF7A92',
+          color: '#144EC0',
         },
         'Corpo, gestos e movimentos': {
           icon: 'corpo.svg',
-          color: '#FF8616',
+          color: '#144EC0',
         },
         'Espaços, tempos, quantidades, relações e transformações': {
           icon: 'espacos.svg',
-          color: '#FECE25',
+          color: '#144EC0',
         },
         'Traços, sons, cores e formas': {
           icon: 'tracos.svg',
-          color: '#14A5C0',
+          color: '#144EC0',
         },
         'O eu, o outro e o nós': {
           icon: 'eu.svg',
-          color: '#8CC640',
+          color: '#144EC0',
         }
       };
     },
