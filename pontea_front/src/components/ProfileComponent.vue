@@ -12,7 +12,7 @@
 
     <div class="flex-name">
       <h2 class="name">{{ user.name }}</h2>
-      <a href="#" class="icon-button" v-if="showEditBtn">
+      <a href="/" class="icon-button" v-if="showEditBtn">
         <img src="/../icons/edit.svg" alt="Edit Profile" />
       </a>
     </div>
@@ -40,12 +40,13 @@
         }}
       </p>
     </div>
-    <q-btn
-      class="q-px-xl q-py-sm rounded"
-      label="Ser educador"
-      color="primary"
-      v-if="showBtn"
-    />
+
+    <router-link
+      to="/ser-educador"
+      class="q-px-xl q-py-sm rounded educator-button"
+    >
+      Ser educador
+    </router-link>
   </div>
 </template>
 
@@ -209,5 +210,15 @@ h2 {
   font-weight: 500;
   line-height: 16px !important;
   font-family: Lexend;
+}
+
+.educator-button {
+  border-radius: 20px;
+  background: #144ec0;
+  color: #fbfdff;
+  font-family: Lexend;
+  font-weight: 500;
+  padding: 8px 40px;
+  text-decoration: none;
 }
 </style>
