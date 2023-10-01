@@ -48,8 +48,10 @@ const routes = [
         component: () => import("pages/AddAtividadePage.vue"),
       },
       {
-        path: "carrinho",
+        path: "carrinho/:dados",
+        name: "CartPage",
         component: () => import("pages/ShoppingCartPage.vue"),
+        props: true,
       },
     ],
   },

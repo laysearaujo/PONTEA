@@ -64,10 +64,10 @@
           <div class="col-2">
             <q-btn
               label="Comprar"
-              type="submit"
+              type="button"
               no-caps
               class="submit-btn"
-              @submit="onSubmit()"
+              @click="redirectToCart(activity)"
             />
           </div>
         </div>
@@ -152,46 +152,12 @@ export default {
       const token_front = localStorage.getItem("token_front");
       return token_front;
     },
-    async onSubmit() {
-
-      const token_front = this.gettoken_front()
-      const url = "api/shopping_carts/store";
-
-      const headers = {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${token_front}`,
-      };
-
-      let body = {
-        activity_id: this.activity.id
-      };
-
-      let resposta = await fetch(url, {
-        method: "POST",
-        headers,
-        body: JSON.stringify(body),
-      }).then((response) => {
-        console.log('compra', response)
-        let msg = "";
-        if (!response.ok) {
-          msg = "Não foi possível comprar a atividade";
-          console.log(response.json());
-
-          throw new Error("Erro na resposta da API");
-        } else {
-          msg = "Atividade comprada com sucesso!";
-        }
-        this.$q.notify(msg);
-        return response.json();
-      }).then((data) => {
-        console.log(data);
-      }).catch((error) => {
-        console.error("Erro na solicitação à API:", error);
+    redirectToCart(obj) {
+      const objetoString = JSON.stringify(obj);
+      this.$router.push({
+        name: "CartPage",
+        params: { dados: objetoString } 
       });
-
-      console.log(body);
-      console.log(resposta);
     },
     redirectToEducator(obj) {
       this.$router.push({
