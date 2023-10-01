@@ -33,9 +33,11 @@
 
     <div class="description">
       <p>
-        Professora na Universidade Federal de Pernambuco, pós-graduada em
-        educação inclusiva para crianças neuroatípicas pela UNINASSAU e
-        licenciada em Pedagogia pela Universidade do Minho.
+        {{
+          user.description
+            ? user.description
+            : "Este usuário ainda não possui uma descrição. Gostaríamos de saber mais sobre eles, mas por enquanto, sua personalidade é um mistério! 🌟"
+        }}
       </p>
     </div>
     <q-btn

@@ -5,40 +5,50 @@
     <div class="historic">
       <h3 class="title">{{ title }}</h3>
 
-      <section class="flex wallet-info">
+      <section class="flex wallet-info" v-if="perfil">
         <div class="flex">
           <p class="label">Saldo disponível:</p>
-          <span class="available-balance info">R$ 62,16</span>
+          <span class="available-balance info"
+            >R$ {{ formatPrice(perfil.credit) }}</span
+          >
         </div>
         <div class="flex">
           <p class="label">Valor pago a Pontea:</p>
-          <span class="amount-paid info">R$ 26,64</span>
+          <span class="amount-paid info"
+            >R$ {{ calculatePercentage(perfil.credit) }}</span
+          >
         </div>
         <div class="flex">
           <p class="label">Conta do Educador:</p>
-          <span class="educator-account info">Verificada</span>
+          <span class="educator-account info">
+            {{
+              perfil.email_verified_at ? "Verificada" : "Não Verificada"
+            }}</span
+          >
         </div>
       </section>
 
       <h3 class="title" v-if="showHistory">Histórico de vendas</h3>
-      <div class="scrollable-div" v-if="showHistory">
-        <BalanceComponent />
-        <TransactionCard />
-        <TransactionCard />
-        <BalanceComponent />
-        <TransactionCard />
-        <TransactionCard />
-        <TransactionCard />
-        <TransactionCard />
-        <TransactionCard />
-        <TransactionCard />
-        <TransactionCard />
-        <TransactionCard />
-        <TransactionCard />
-        <TransactionCard />
-        <TransactionCard />
-      </div>
-      <div v-else>
+      <section v-if="showHistory && sales_history && sales_history.length > 0">
+        <div
+          class="scrollable-div margin"
+          v-for="(transactions, date) in groupedSales(sales_history)"
+          :key="date"
+        >
+          <BalanceComponent
+            :date="date"
+            :totalPrice="calculateTotalPrice(transactions)"
+          />
+          <div v-for="sale in transactions" :key="sale.id">
+            <TransactionCard
+              :title="sale.activity.title"
+              :price="sale.activity.price"
+              :customer="sale.user.name"
+            />
+          </div>
+        </div>
+      </section>
+      <div v-if="!showHistory">
         <TransferComponent />
       </div>
     </div>
@@ -74,6 +84,7 @@ export default {
       showHistory: true,
       title: "Minha carteira",
       perfil: null,
+      sales_history: null,
     };
   },
   async mounted() {
@@ -113,11 +124,41 @@ export default {
         }
         const jsonData = await response.json(); // Aguarde a resolução da promessa e obtenha os dados JSON diretamente
         // Agora você tem acesso direto ao objeto JSON
-        console.log("perfil", jsonData);
         this.perfil = jsonData.user;
+        this.sales_history = jsonData.sales_history;
       } catch (error) {
         console.error(error);
       }
+    },
+    formatPrice(value) {
+      return value.toLocaleString("pt-BR", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      });
+    },
+    groupedSales(sales_history) {
+      const grouped = {};
+      sales_history.forEach((sale) => {
+        const date = new Date(sale.created_at).toLocaleDateString();
+        if (!grouped[date]) {
+          grouped[date] = [];
+        }
+        grouped[date].push(sale);
+      });
+
+      return grouped;
+    },
+    calculateTotalPrice(transactions) {
+      return transactions
+        .reduce((total, sale) => total + parseFloat(sale.bought_by), 0)
+        .toFixed(2);
+    },
+    calculatePercentage(value) {
+      const percentage = value * 0.3;
+      return percentage.toLocaleString("pt-BR", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      });
     },
   },
 };
@@ -146,6 +187,10 @@ h2 {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.margin {
+  padding-bottom: 10px;
 }
 
 .historic {

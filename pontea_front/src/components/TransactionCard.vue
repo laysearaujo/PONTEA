@@ -4,10 +4,12 @@
       <img src="/../icons/money.svg" alt="Money Icon" />
 
       <section class="transaction">
-        <p class="transaction-name">Que horas tens?</p>
-        <p class="transaction-value">R$ 14,80</p>
-        <p class="platform-value">-R$ 4,44 <span>Plataforma Pontea</span></p>
-        <p class="transaction-receiver">Laura Araújo</p>
+        <p class="transaction-name">{{ title }}</p>
+        <p class="transaction-value">R$ {{ formatPrice }}</p>
+        <p class="platform-value">
+          -R$ {{ calculatePercentage }} <span>Plataforma Pontea</span>
+        </p>
+        <p class="transaction-receiver">{{ customer }}</p>
       </section>
     </div>
   </div>
@@ -16,7 +18,26 @@
 <script>
 export default {
   name: "TransactionCard",
-  props: {},
+  props: {
+    title: String,
+    price: Number,
+    customer: String,
+  },
+  computed: {
+    formatPrice() {
+      return this.price.toLocaleString("pt-BR", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      });
+    },
+    calculatePercentage() {
+      const percentage = this.price * 0.3;
+      return percentage.toLocaleString("pt-BR", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      });
+    },
+  },
 };
 </script>
 

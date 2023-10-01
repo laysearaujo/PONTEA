@@ -68,14 +68,18 @@
                 <li>
                   <router-link
                     to="/perfilCliente"
-                    class="links"
+                    class="menu-item"
                     @click="toggleModal(this.isModalOpen)"
                   >
                     Meu Perfil
                   </router-link>
                 </li>
                 <li>
-                  <router-link class="links" @click="logout()" to="/landing">
+                  <router-link
+                    class="menu-item"
+                    @click="logout()"
+                    to="/landing"
+                  >
                     Sair
                   </router-link>
                 </li>
@@ -446,9 +450,10 @@ export default defineComponent({
 ul {
   margin: 10px 0;
 }
-.links {
+.menu-item {
   color: black;
   text-decoration: none;
+  padding: 0.5rem 1.5rem;
 }
 
 .menu ul {
@@ -457,7 +462,7 @@ ul {
 
 .menu ul li {
   list-style: none;
-  padding: 0.5rem 1.5rem;
+
   display: flex;
   align-items: center;
 }
