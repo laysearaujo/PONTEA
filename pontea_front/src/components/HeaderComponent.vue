@@ -79,6 +79,14 @@
                 <li>
                   <router-link
                     class="menu-item"
+                    to="/carteira"
+                  >
+                  Minha Carteira
+                  </router-link>
+                </li>
+                <li>
+                  <router-link
+                    class="menu-item"
                     @click="logout()"
                     to="/landing"
                   >
