@@ -42,16 +42,16 @@
           </q-form>
         </div>
         <div style="display: flex; align-items: stretch; gap: 0.75rem">
-          <div class="icon-button">
+          <!-- <div class="icon-button">
             <img
               src="/spa/icons/notification.svg"
               alt="Notifications"
               class="icon-svg"
             />
-          </div>
-          <div class="icon-button">
+          </div> -->
+          <!-- <div class="icon-button">
             <img src="/spa/icons/shoppingCart.svg" alt="Cart" class="icon-svg" />
-          </div>
+          </div> -->
           <div class="icon-avatar">
             <q-avatar
               size="34px"
@@ -59,7 +59,7 @@
               @click="toggleModal(this.isModalOpen)"
             >
               <img
-                src="/spa/images/profile.jpeg"
+                src="/spa/images/user-icon.jpg"
                 alt="Foto de Perfil"
                 class="avatar-image"
               />
