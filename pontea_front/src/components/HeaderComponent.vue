@@ -196,13 +196,33 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import { onBeforeMount } from 'vue'
 
 export default defineComponent({
   name: "HeaderComponent",
-
   setup() {
+
+    const hash = window.location.hash;
+
+    let queryParams = []
+
+    if(hash.includes('#/atividades?')){
+
+      const cleanedHash = hash.replace('#/atividades?', '');
+      const splitHash = cleanedHash.split("&");
+
+      splitHash.forEach(hash => {
+        let param = hash.split("=");
+
+        queryParams[decodeURIComponent(param[0])] = decodeURIComponent(param[1])
+      });
+
+      console.log(queryParams)
+    }
+
+
     const route = useRoute();
     const router = useRouter();
     const searchQuery = ref(null);
@@ -248,20 +268,86 @@ export default defineComponent({
     const visualInstructionsOptions = ["Com", "Sem"];
 
     // Modelo para armazenar seleções
-    const model = {
+    let model = ref({
       supportLevel: null,
       experienceFields: null,
       ageRange: null,
       activityLevel: null,
       multimediaResources: null,
       visualInstructions: null,
-    };
+    })
+
+    let paramskey = {
+      supportLevel: 'suporte',
+      experienceFields: 'experiencia',
+      ageRange: 'faixa',
+      activityLevel: 'nivel',
+      multimediaResources: 'multimidia',
+      visualInstructions: 'instrucoes',
+    }
+
+    if(queryParams[paramskey.supportLevel] != null) {
+      model.value.supportLevel = queryParams[paramskey.supportLevel]
+    }
+    if(queryParams[paramskey.experienceFields] != null) {
+      model.value.experienceFields = queryParams[paramskey.experienceFields]
+    }
+    if(queryParams[paramskey.ageRange] != null) {
+      model.value.ageRange = queryParams[paramskey.ageRange]
+    }
+    if(queryParams[paramskey.activityLevel] != null) {
+      model.value.activityLevel = queryParams[paramskey.activityLevel]
+    }
+    if(queryParams[paramskey.multimediaResources] != null) {
+      model.value.multimediaResources = queryParams[paramskey.multimediaResources]
+    }
+    if(queryParams[paramskey.visualInstructions] != null) {
+      model.value.visualInstructions = queryParams[paramskey.visualInstructions]
+    }
 
     const activeField = ref(null);
 
     const toggleActiveField = (field) => {
       activeField.value = activeField.value === field ? null : field;
     };
+
+
+    watch(model, (newValue, oldValue) => {
+
+      let query = '';
+
+      if(model.value.supportLevel != null) {
+
+        query += "&" + paramskey.supportLevel + "=" + model.value.supportLevel
+      }
+      if(model.value.experienceFields != null) {
+
+        query += "&" + paramskey.experienceFields + "=" + model.value.experienceFields
+      }
+      if(model.value.ageRange != null) {
+
+        query += "&" + paramskey.ageRange + "=" + model.value.ageRange
+      }
+      if(model.value.activityLevel != null) {
+
+        query += "&" + paramskey.activityLevel + "=" + model.value.activityLevel
+      }
+      if(model.value.multimediaResources != null) {
+
+        query += "&" + paramskey.multimediaResources + "=" + model.value.multimediaResources
+      }
+      if(model.value.visualInstructions != null) {
+
+        query += "&" + paramskey.visualInstructions + "=" + model.value.visualInstructions
+      }
+
+      query = query.replace(/^&/, '');
+
+      window.location.href = "/#/atividades?" + query;
+
+      window.location.reload(true);
+
+    }, { deep: true });
 
     return {
       route,
@@ -277,7 +363,6 @@ export default defineComponent({
       activeField,
       toggleActiveField,
       searchQuery,
-
       onSubmit() {
         if (searchQuery.value.trim() !== "") {
           const searchText = encodeURIComponent(searchQuery.value.trim());
