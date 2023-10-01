@@ -51,6 +51,7 @@
         :quantity="teacher.countActivities"
         :img_src="teacher.photo_path"
         class="teacher-wrapper col-3"
+        @click="redirectToEducator(teacher)"
       />
     </div>
   </div>
@@ -187,6 +188,13 @@ export default {
       this.$router.push({
         name: "DetailsPage",
         params: { dados: objetoString },
+      });
+    },
+    redirectToEducator(obj) {
+      const objetoString = JSON.stringify(obj);
+      this.$router.push({
+        name: "PerfilEducador",
+        params: { id: obj.id },
       });
     },
   },

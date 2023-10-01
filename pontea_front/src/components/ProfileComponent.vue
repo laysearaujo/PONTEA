@@ -19,16 +19,16 @@
 
     <div class="rating flex">
       <div class="stars">
-        <span>4,1</span>
+        <span> {{ user.note != null ? user.note : 0 }}</span>
         <img src="/../icons/star.svg" alt="Star" />
       </div>
 
       <span>552 avaliações</span>
     </div>
 
-    <div class="wallet flex">
+    <div class="wallet flex" v-if="user.credit != null">
       <img src="/../icons/wallet.svg" alt="Edit Profile" />
-      <p>R$ {{ user.credit }}</p>
+      <p>R$ {{ user.credit != null ? user.credit : 0 }}</p>
     </div>
 
     <div class="description">
@@ -59,6 +59,8 @@ export default {
       name: String,
       email: String,
       email_verified_at: Date,
+      note: Number,
+      credi: Number,
       photo_path: String,
       profession: String,
       is_teacher: Boolean,

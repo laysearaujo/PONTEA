@@ -5,7 +5,10 @@
     </div>
 
     <section class="activities">
-      <div class="available-activities" v-if="purchased_activities">
+      <div
+        class="available-activities"
+        v-if="purchased_activities && purchased_activities.length > 0"
+      >
         <h2 class="title">Atividades disponíveis</h2>
         <div class="flex" v-if="purchased_activities.length > 0">
           <ActivityCard
@@ -24,10 +27,11 @@
           />
         </div>
       </div>
-      <div class="purchased-activities" v-if="created_activities">
-        <h2 class="title" v-if="created_activities.length > 0">
-          Minhas atividades disponibilizadas
-        </h2>
+      <div
+        class="purchased-activities"
+        v-if="created_activities && created_activities.length > 0"
+      >
+        <h2 class="title">Minhas atividades disponibilizadas</h2>
         <div class="flex" v-if="created_activities.length > 0">
           <ActivityCard
             style="cursor: pointer"
@@ -44,7 +48,7 @@
             class="card-atividade"
           />
 
-          <div class="add-activity">
+          <div class="new-activity">
             <img src="/icons/add.svg" alt="icon" />
           </div>
         </div>
@@ -101,16 +105,19 @@ export default {
         // Agora você tem acesso direto ao objeto JSON
         console.log("perfil", jsonData);
         this.perfil = jsonData.user;
-        this.purchased_activities = jsonData.purchased_activities;
-        this.created_activities = jsonData.created_activities;
+        this.purchased_activities = jsonData.user.purchasedActivities;
+        this.created_activities = jsonData.user.createdActivities;
+
+        console.log(jsonData);
       } catch (error) {
         console.error(error);
       }
     },
     redirectToDetails(obj) {
+      const objetoString = JSON.stringify(obj);
       this.$router.push({
         name: "DetailsPage",
-        params: { dados: obj.title },
+        params: { dados: objetoString },
       });
     },
   },
@@ -149,7 +156,7 @@ h2 {
   margin-left: 320px;
 }
 
-.add-activity {
+.new-activity {
   width: 186px;
   height: 260px;
   display: flex;
