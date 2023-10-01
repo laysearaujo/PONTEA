@@ -39,6 +39,8 @@
         :title="item.title"
         :quantity="item.activities_count"
         class="card-wrapper"
+        @click="this.$router.push('/experiencias');"
+        style="cursor: pointer"
       />
     </div>
     <h5 class="sub-title col-12 q-mb-sm">Educadores Bem Avaliados</h5>
