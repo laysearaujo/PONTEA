@@ -2,7 +2,7 @@
   <div>
     <q-header view="lHh Lpr lFf">
       <q-toolbar style="height: 80px; background-color: #fbfbfb">
-        <q-btn flat to="/home">
+        <q-btn flat to="/landing">
           <img
             src="/spa/images/logo.svg"
             alt="Logo"

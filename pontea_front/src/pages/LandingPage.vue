@@ -14,7 +14,7 @@
               <h1>Seja</h1>
             </div>
             <div id="dir1">
-              <img src="/spa/images/landing/pontea_logo.svg" alt="pontea_logo" />
+              <a href="#cadastro"><img src="/spa/images/landing/pontea_logo.svg" alt="pontea_logo" /></a>
             </div>
           </div>
         </div>
@@ -36,7 +36,10 @@
             <div id="text_conheca1">
               <h3>Conheça a plataforma</h3>
             </div>
-            <div id="vazio"></div>
+            <div id="vazio">
+              <p>A Pontea é uma plataforma educacional que busca derrubar as barreiras entre professores e crianças autistas através da construção de uma ponte entre todos os educadores do Brasil.<br/>
+Através dela, é possível disponibilizar e adquirir atividades preparadas especialmente para crianças no espectro, tudo isso com a rapidez que só o sistema de categorização de conteúdo da Pontea oferece. Aqui, você encontra atividades categorizadas por nível de suporte, nível de dificuldade, campo de experiência, entre outros filtros que auxiliam você a encontrar com precisão uma atividade adequada para as necessidades do seu estudante.</p>
+            </div>
           </div>
           <img src="/spa/images/landing/bee.svg" alt="abelha" id="bee" />
           <div id="caixa">
@@ -277,7 +280,7 @@ export default {
 #dir1 img {
   width: 118px;
   height: 48px;
-  margin-top: 16px;
+  margin-top: 19.5px;
   margin-left: 8px;
 }
 #body {
@@ -326,6 +329,14 @@ export default {
 #vazio {
   width: 803px;
   height: 24px;
+}
+#vazio p{
+  color: #3c3c3f;
+  text-align: justify;
+  font-family: lexend;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 24px;
 }
 #bee {
   display: flex;
