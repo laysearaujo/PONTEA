@@ -72,7 +72,7 @@ export default {
           Accept: "application/json",
           Authorization: `Bearer ${token_front}`,
         };
-        const response = await fetch(`api/teacher/${this.$route.params.id}`, {
+        const response = await fetch(`/api/teacher/${this.$route.params.id}`, {
           method: "GET",
           headers,
         });
