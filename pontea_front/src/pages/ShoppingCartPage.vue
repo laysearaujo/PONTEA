@@ -1,8 +1,8 @@
 <template>
-  <div class="q-pa-md row items-start q-gutter-md">
-    <div class="cards-atividades" v-if="activity.length > 0">
+  <div class="q-pa-md items-center q-gutter-md">
+    <h6 class="flex" style="margin: 2rem;">Atividade no carrinho</h6>
+    <div class="cards-atividades">
       <ActivityCard
-        style="cursor: pointer"
         :id="activity.id"
         :key="activity.title"
         :titulo="activity.title"
@@ -15,11 +15,15 @@
         class="card-atividade"
       />
     </div>
-    <div v-else class="no-results-container full-width">
-      <div class="no-results-container-inner">
-        <h5 class="text-h5">Infelizmente não encontramos nenhuma atividade =(</h5>
-        <img src="/spa/images/layer1.png" alt="Edit Profile" />
-      </div>
+    <text-body2 class="flex q-mb-lg" style="margin: 1rem;">Total: R${{ activity.price }}</text-body2>
+    <div class="flex row q-mt-lg">
+      <q-btn
+        label="Comprar"
+        type="button"
+        no-caps
+        class="submit-btn"
+        @click="redirectToBuy(activity.id)"
+      />
     </div>
   </div>
 </template>
@@ -53,6 +57,10 @@ export default {
     async gettoken_front() {
       const token_front = localStorage.getItem("token_front");
       return token_front;
+    },
+    redirectToBuy() {
+      // colocar aqui pra comprar e colocar uma notificção com notify que comprou e rediricionar pra home
+      // pegar exemplo de notify com o addAtividade
     },
   },
 };
@@ -93,14 +101,24 @@ export default {
   flex-wrap: wrap;
   gap: 20px;
 }
-.teacher-wrapper {
-  flex-basis: calc(33.33% - 20px); /* Defina o tamanho base dos cards */
-  margin: 0; /* Remova as margens padrão */
-}
 
 .cards-atividades {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  justify-content: center
+}
+
+.row, .column, .flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.submit-btn {
+  width: 15%;
+  background-color: #144ec0;
+  color: #fbfdff;
+  border-radius: 30px;
 }
 </style>
