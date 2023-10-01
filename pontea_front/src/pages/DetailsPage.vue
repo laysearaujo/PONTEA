@@ -63,6 +63,7 @@
           </div>
           <div class="col-2">
             <q-btn
+              v-if="!activity.hasOwnProperty('isPurchased')"
               label="Comprar"
               type="button"
               no-caps
@@ -77,11 +78,79 @@
         <div class="row" style="padding: 10px 15px; margin-top: 0px;">
           <text-body1 style="font-size: 1rem;">Por {{ activity.description }}</text-body1>
         </div>
+
+        <div v-if="activity.hasOwnProperty('isPurchased')">
+          <h6 style="padding: 10px 15px; margin: 0px;">Anexos</h6>
+          <div v-if="activity.media_path_1" class="q-pa-md row items-start q-gutter-md">
+
+              <q-card class="my-card">
+
+                <q-card-section class="bg-white text-gray">
+                  <div class="text-h6">Anexo 1</div>
+                </q-card-section>
+
+                <q-separator />
+
+                <q-card-actions align="right">
+                  <q-btn :href="activity.media_path_1" flat>Visualizar Anexo</q-btn>
+                </q-card-actions>
+              </q-card>
+          </div>
+
+          <div v-if="activity.media_path_2" class="q-pa-md row items-start q-gutter-md">
+
+          <q-card class="my-card">
+
+            <q-card-section class="bg-white text-gray">
+              <div class="text-h6">Anexo 1</div>
+            </q-card-section>
+
+            <q-separator />
+
+            <q-card-actions align="right">
+              <q-btn :href="activity.media_path_2" flat>Visualizar Anexo</q-btn>
+            </q-card-actions>
+          </q-card>
+          </div>
+
+          <div v-if="activity.media_path_3" class="q-pa-md row items-start q-gutter-md">
+
+          <q-card class="my-card">
+
+            <q-card-section class="bg-white text-gray">
+              <div class="text-h6">Anexo 1</div>
+            </q-card-section>
+
+            <q-separator />
+
+            <q-card-actions align="right">
+              <q-btn :href="activity.media_path_3" flat>Visualizar Anexo</q-btn>
+            </q-card-actions>
+          </q-card>
+          </div>
+
+          <div v-if="activity.media_path_4" class="q-pa-md row items-start q-gutter-md">
+
+          <q-card class="my-card">
+
+            <q-card-section class="bg-white text-gray">
+              <div class="text-h6">Anexo 1</div>
+            </q-card-section>
+
+            <q-separator />
+
+            <q-card-actions align="right">
+              <q-btn :href="activity.media_path_4" flat>Visualizar Anexo</q-btn>
+            </q-card-actions>
+          </q-card>
+          </div>
+        </div>
+
         <h6 style="padding: 10px 15px; margin: 0px;">Comentários sobre a atividade</h6>
         <div class="row" style="flex-wrap: nowrap;">
           <div v-for="act in activity.comments" :key="act.created_at" style="width: 30%;">
             <q-card>
-              <div class="duvida row" style="width: 100%;"> 
+              <div class="duvida row" style="width: 100%;">
                 <div style="width: 100%;">
                   <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding-bottom: 0px;">
                     <div style="width: 100%;">
@@ -156,7 +225,7 @@ export default {
       const objetoString = JSON.stringify(obj);
       this.$router.push({
         name: "CartPage",
-        params: { dados: objetoString } 
+        params: { dados: objetoString }
       });
     },
     redirectToEducator(obj) {

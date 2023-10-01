@@ -58,9 +58,40 @@ export default {
       const token_front = localStorage.getItem("token_front");
       return token_front;
     },
-    redirectToBuy() {
-      // colocar aqui pra comprar e colocar uma notificção com notify que comprou e rediricionar pra home
-      // pegar exemplo de notify com o addAtividade
+    async redirectToBuy() {
+
+      const token_front = await this.gettoken_front();
+
+      const headers = {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${token_front}`,
+      };
+
+      let body = {
+        activity_id: this.activity.id,
+        pontea_credit_payment: false
+      };
+
+      fetch("/api/purchase", {
+        method: "POST",
+        headers,
+        body: JSON.stringify(body),
+      })
+      .then((response) => {
+        let msg = ''
+        if (!response.ok) {
+            msg = "Não foi possível comprar a atividade";
+            console.log(response.json());
+
+        } else {
+            msg = "Atividade Comprada com sucesso!";
+        }
+
+          this.$q.notify(msg);
+          this.$router.push('/perfilCliente')
+        })
+
     },
   },
 };

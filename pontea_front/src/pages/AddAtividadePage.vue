@@ -248,7 +248,7 @@ export default {
       return token_front;
     },
     async onSubmit() {
-      const token_front = this.gettoken_front()
+      const token_front = await this.gettoken_front()
       const url = "/api/activity/store";
 
       const headers = {
@@ -301,6 +301,7 @@ export default {
             msg = "Atividade anexada com sucesso!";
           }
           this.$q.notify(msg);
+          this.$router.push('/perfilCliente')
           return response.json();
         })
         .then((data) => {
