@@ -26,6 +26,7 @@
           :preco="activity.price"
           :CampoDeExperiencia="activity.area.title"
           class="card-atividade"
+          @click="redirectToDetails(activity)"
         />
       </div>
     </div>
@@ -102,6 +103,13 @@ export default {
       return this.activitys.filter(
         (activity) => activity.area.id === areaTitle
       );
+    },
+    redirectToDetails(obj) {
+      const objetoString = JSON.stringify(obj);
+      this.$router.push({
+        name: "DetailsPage",
+        params: { dados: objetoString },
+      });
     },
   },
 };
