@@ -13,21 +13,21 @@
     <div class="name flex">
       <h2 class="title">{{ user.name }}</h2>
       <a href="#" class="icon-button">
-        <img src="/../icons/edit.svg" alt="Edit Profile" />
+        <img src="/spa/icons/edit.svg" alt="Edit Profile" />
       </a>
     </div>
 
     <div class="rating flex">
       <div class="stars">
         <span> {{ user.note != null ? user.note : 0 }}</span>
-        <img src="/../icons/star.svg" alt="Star" />
+        <img src="/spa/icons/star.svg" alt="Star" />
       </div>
 
       <span>552 avaliações</span>
     </div>
 
     <div class="wallet flex" v-if="user.credit != null">
-      <img src="/../icons/wallet.svg" alt="Edit Profile" />
+      <img src="/spa/icons/wallet.svg" alt="Edit Profile" />
       <p>R$ {{ user.credit != null ? user.credit : 0 }}</p>
     </div>
 

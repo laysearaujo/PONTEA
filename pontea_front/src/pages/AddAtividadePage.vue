@@ -147,7 +147,7 @@
                 <q-img
                   :src="medias_paths[i]"
                   ratio="1"
-                  placeholder-src="/icons/add-circle-outline.svg"
+                  placeholder-src="/spa/icons/add-circle-outline.svg"
                   @click="this.$refs.qfile[i].pickFiles()"
                 />
               </div>
@@ -243,18 +243,18 @@ export default {
     }
   },
   methods: {
-    async getToken() {
-      const token = localStorage.getItem("token");
-      return token;
+    async gettoken_front() {
+      const token_front = localStorage.getItem("token_front");
+      return token_front;
     },
     async onSubmit() {
-      const token = this.getToken()
+      const token_front = this.gettoken_front()
       const url = "/api/activity/store";
 
       const headers = {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token_front}`,
       };
 
       let body = {
@@ -332,11 +332,11 @@ export default {
     },
     async getPerfilCliente() {
       try {
-        const token = await this.getToken();
+        const token_front = await this.gettoken_front();
         const headers = {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token_front}`,
         };
         const response = await fetch("/api/profile", {
           method: "GET",

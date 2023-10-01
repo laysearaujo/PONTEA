@@ -127,12 +127,12 @@ export default {
     },
     methods: {
         async onSubmit() {
-            const token = localStorage.getItem("token");
+            const token_front = localStorage.getItem("token_front");
             const url = "/api/teacher/turn_user_into_teacher";
             const headers = {
                 "Content-Type": "application/json",
                 Accept: "application/json",
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${token_front}`,
             };
             console.log(headers);
             await fetch(url, {

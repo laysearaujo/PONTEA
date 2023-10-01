@@ -89,7 +89,7 @@
         <div v-else class="no-results-container full-width">
           <div class="no-results-container-inner">
             <h5 class="text-h5">Infelizmente não encontramos nenhuma atividade =(</h5>
-            <img src="/images/layer1.png" alt="Edit Profile" />
+            <img src="/spa/images/layer1.png" alt="Edit Profile" />
           </div>
         </div>
     </div>
@@ -119,17 +119,17 @@ export default {
 
   },
   methods: {
-    async getToken() {
-      const token = localStorage.getItem("token");
-      return token;
+    async gettoken_front() {
+      const token_front = localStorage.getItem("token_front");
+      return token_front;
     },
     async getActivitys(query) {
       try {
-        const token = await this.getToken();
+        const token_front = await this.gettoken_front();
         const headers = {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token_front}`,
         };
 
         const response = await fetch("/api/activity/filter?" + query, {

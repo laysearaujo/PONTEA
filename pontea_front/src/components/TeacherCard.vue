@@ -5,25 +5,25 @@
                 <q-card-section>
                     <q-avatar class="avatar" size="52px">
                         <img v-if="img_src" :src="img_src">
-                        <img v-else src="/images/user-icon.jpg">
+                        <img v-else src="/spa/images/user-icon.jpg">
                     </q-avatar>
                 </q-card-section>
                 <q-card-section class="teacher-name">
                     <span class="text">
                         {{ name }}
                     </span>
-                    
+
                 </q-card-section>
                 <q-card-section class="side-info">
                     <div class="info rating">
                         {{ rating }}
-                        <img src="/icons/half-star.svg" alt="icon" class="icon">
+                        <img src="/spa/icons/half-star.svg" alt="icon" class="icon">
                     </div>
                     <div class="info document">
                         {{ quantity }}
-                        <img src="/icons/document.svg" alt="icon" class="icon">
+                        <img src="/spa/icons/document.svg" alt="icon" class="icon">
                     </div>
-                    
+
                 </q-card-section>
             </q-card-section>
         </q-card>
@@ -39,7 +39,7 @@ export default {
         quantity: Number,
         img_src: String,
     }
-    
+
 }
 
 </script>
@@ -59,7 +59,7 @@ export default {
     border-radius: 4px 100px 4px 4px;
     height: 56px;
     font-family: 'Lexend';
-    
+
 }
 .avatar{
     margin-top: -15px;
@@ -97,7 +97,7 @@ export default {
     border-radius: 0px 0px 100px 100px;
     border-left: #144ec0 1px solid;
     z-index: -1;
-    
+
 }
 
 .icon{

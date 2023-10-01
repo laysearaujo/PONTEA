@@ -49,7 +49,7 @@
           />
 
           <div class="new-activity">
-            <img src="/icons/add.svg" alt="icon" />
+            <img src="/spa/icons/add.svg" alt="icon" />
           </div>
         </div>
       </div>
@@ -82,17 +82,17 @@ export default {
     };
   },
   methods: {
-    async getToken() {
-      const token = localStorage.getItem("token");
-      return token;
+    async gettoken_front() {
+      const token_front = localStorage.getItem("token_front");
+      return token_front;
     },
     async getPerfilCliente() {
       try {
-        const token = await this.getToken();
+        const token_front = await this.gettoken_front();
         const headers = {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token_front}`,
         };
         const response = await fetch("/api/profile", {
           method: "GET",

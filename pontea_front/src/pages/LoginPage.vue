@@ -22,7 +22,7 @@
       :cadastro="false"
       titulo="Boas-Vindas!"
       descricao="Entre na sua conta e acesse a nossa biblioteca de atividades completa."
-      img_src="/images/loginpage-image.jpg"
+      img_src="/spa/images/loginpage-image.jpg"
       @loginSubmit="onSubmit"
     />
   </div>
@@ -76,8 +76,8 @@ export default {
             this.erroEmail = true;
           }
           if (data.token) {
-            // Armazene o token no localStorage
-            localStorage.setItem("token", data.token);
+            // Armazene o token_front no localStorage
+            localStorage.setItem("token_front", data.token);
             this.$router.push("/home");
           }
         })
@@ -96,6 +96,6 @@ export default {
   justify-content: center;
   align-items: center;
   background-size: contain;
-  background-image: url("/images/bg-pattern.png");
+  background-image: url("/spa/images/bg-pattern.png");
 }
 </style>

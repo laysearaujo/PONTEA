@@ -78,11 +78,11 @@ export default {
   methods: {
     async submitForm() {
       const url = "api/removeCredit";
-      const token = localStorage.getItem("token");
+      const token_front = localStorage.getItem("token_front");
       const headers = {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token_front}`,
       };
 
       await fetch(url, {

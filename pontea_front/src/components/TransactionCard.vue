@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="transaction-infos flex">
-      <img src="/../icons/money.svg" alt="Money Icon" />
+      <img src="/spa/icons/money.svg" alt="Money Icon" />
 
       <section class="transaction">
         <p class="transaction-name">{{ title }}</p>
