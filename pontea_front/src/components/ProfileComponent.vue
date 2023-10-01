@@ -43,7 +43,7 @@
 
     <router-link
       to="/ser-educador"
-      class="q-px-xl q-py-sm rounded educator-button"
+      class="q-px-xl q-py-sm educator-button"
       v-if="showBtn && !user.is_teacher"
     >
       Ser educador
@@ -221,5 +221,14 @@ h2 {
   font-weight: 500;
   padding: 8px 40px;
   text-decoration: none;
+
+  position: fixed;
+  bottom: 50px;
+}
+
+@media screen and (max-height: 600px) {
+  .educator-button {
+    position: static;
+  }
 }
 </style>
