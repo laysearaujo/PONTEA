@@ -1,5 +1,5 @@
 <template>
-  <div class="row items-start q-gutter-md wrap">
+  <div class="row items-start q-gutter-md">
     <q-card class="my-card">
       <q-card-section class="imagem-fundo">
         <div class="icons">
@@ -15,8 +15,8 @@
       </q-card-section>
       <q-card-section class="textos">
         <div class="titulo">{{ titulo }}</div>
-        <div class="conteudo">Nível: {{ nivel }}</div>
-        <div class="conteudo">Educação: {{ tipoDeEducacao }}</div>
+        <div class="conteudo">Nível {{ nivel }}</div>
+        <div class="conteudo">{{ getEducationType(tipoDeEducacao) }}</div>
         <div class="conteudo">{{ faixaEtaria }}</div>
       </q-card-section>
     </q-card>
@@ -49,6 +49,15 @@ export default {
         return "/spa/icons/area2.svg";
       } else {
         return "/spa/icons/area1.svg";
+      }
+    },
+  },
+  methods: {
+    getEducationType(typeOfEducation) {
+      if (typeOfEducation >= 1 && typeOfEducation <= 3) {
+        return "Educação Infantil";
+      } else {
+        return "Educação Fundamental";
       }
     },
   },
