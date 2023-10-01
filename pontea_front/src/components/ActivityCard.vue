@@ -40,7 +40,7 @@ export default {
       if (this.CampoDeExperiencia === "Escuta, fala, pensamento e imaginação") {
         return "/icons/area5.svg";
       } else if (this.CampoDeExperiencia === "Corpo, gestos e movimento") {
-        return "/../public/icons/area4.svg";
+        return "/icons/area4.svg";
       } else if (
         this.CampoDeExperiencia === "Espaços, tempo e quantidades,..."
       ) {

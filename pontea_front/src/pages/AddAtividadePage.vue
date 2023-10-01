@@ -147,7 +147,7 @@
                 <q-img
                   :src="medias_paths[i]"
                   ratio="1"
-                  placeholder-src="public/icons/add-circle-outline.svg"
+                  placeholder-src="/icons/add-circle-outline.svg"
                   @click="this.$refs.qfile[i].pickFiles()"
                 />
               </div>

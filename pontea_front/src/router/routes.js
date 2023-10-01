@@ -47,10 +47,10 @@ const routes = [
         path: "adicionar-atividade",
         component: () => import("pages/AddAtividadePage.vue"),
       },
-      {
+      /* {
         path: "carrinho",
         component: () => import("pages/ShoppingCartPage.vue"),
-      },
+      }, */
     ],
   },
   {
