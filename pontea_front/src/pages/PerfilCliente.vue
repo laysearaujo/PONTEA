@@ -32,30 +32,31 @@
           />
         </div>
       </div>
-      <div
-        class="purchased-activities"
-        v-if="created_activities && created_activities.length > 0"
-      >
+      <div class="purchased-activities" v-if="perfil && perfil.is_teacher">
         <h2 class="title">Minhas atividades disponibilizadas</h2>
-        <div class="flex" v-if="created_activities.length > 0">
-          <ActivityCard
-            style="cursor: pointer"
-            v-for="created_activity in created_activities"
-            :id="created_activity.id"
-            :key="created_activity.title"
-            :titulo="created_activity.title"
-            :nivel="created_activity.level_id"
-            :tipoDeEducacao="created_activity.age_group_id"
-            faixaEtaria="0 a 1 ano e 6 meses"
-            :nota="created_activity.level_id"
-            :preco="created_activity.price"
-            @click="redirectToDetails(created_activity)"
-            class="card-atividade"
-          />
-
-          <div class="new-activity">
-            <img src="/spa/icons/add.svg" alt="icon" />
+        <div class="flex">
+          <div
+            v-if="created_activities && created_activities.length > 0"
+            class="flex"
+          >
+            <ActivityCard
+              style="cursor: pointer"
+              v-for="created_activity in created_activities"
+              :id="created_activity.id"
+              :key="created_activity.title"
+              :titulo="created_activity.title"
+              :nivel="created_activity.level_id"
+              :tipoDeEducacao="created_activity.age_group_id"
+              faixaEtaria="0 a 1 ano e 6 meses"
+              :nota="created_activity.level_id"
+              :preco="created_activity.price"
+              @click="redirectToDetails(created_activity)"
+              class="card-atividade"
+            />
           </div>
+          <router-link to="/adicionar-atividade" class="new-activity">
+            <img src="/spa/icons/add.svg" alt="icon" />
+          </router-link>
         </div>
       </div>
     </section>
