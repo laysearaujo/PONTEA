@@ -44,6 +44,7 @@
     <router-link
       to="/ser-educador"
       class="q-px-xl q-py-sm rounded educator-button"
+      v-if="showBtn && !user.is_teacher"
     >
       Ser educador
     </router-link>
