@@ -10,11 +10,11 @@
       class="rounded-image"
     />
 
-    <div class="name flex">
-      <h2 class="title">{{ user.name }}</h2>
-      <a href="#" class="icon-button">
+    <div class="flex-name">
+      <h2 class="name">{{ user.name }}</h2>
+      <router-link to="/perfilCliente" class="icon-button" v-if="showEditBtn">
         <img src="/spa/icons/edit.svg" alt="Edit Profile" />
-      </a>
+      </router-link>
     </div>
 
     <div class="rating flex">
@@ -40,12 +40,14 @@
         }}
       </p>
     </div>
-    <q-btn
-      class="q-px-xl q-py-sm rounded"
-      label="Ser educador"
-      color="primary"
-      v-if="showBtn"
-    />
+
+    <router-link
+      to="/ser-educador"
+      class="q-px-xl q-py-sm rounded educator-button"
+      v-if="showBtn && !user.is_teacher"
+    >
+      Ser educador
+    </router-link>
   </div>
 </template>
 
@@ -54,6 +56,7 @@ export default {
   name: "ProfileComponent",
   props: {
     showBtn: Boolean,
+    showEditBtn: Boolean,
     user: {
       id: Number,
       name: String,
@@ -192,5 +195,31 @@ h2 {
 .description {
   font-family: Lexend;
   font-weight: 300;
+}
+
+.flex-name {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.name {
+  text-align: center;
+  color: #3c3c3f;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 16px !important;
+  font-family: Lexend;
+}
+
+.educator-button {
+  border-radius: 20px;
+  background: #144ec0;
+  color: #fbfdff;
+  font-family: Lexend;
+  font-weight: 500;
+  padding: 8px 40px;
+  text-decoration: none;
 }
 </style>
