@@ -17,7 +17,7 @@
           />
         </div>
         <div class="col flex q-ma-md" style="justify-content: center; cursor: pointer;" @click="dialog = true">
-          <img src="/../icons/share.svg" alt="Compartilhar" class="icon-svg" />
+          <img src="/spa/icons/share.svg" alt="Compartilhar" class="icon-svg" />
           <text-caption>Compartilhar atividade</text-caption>
         </div>
         <q-dialog v-model="dialog">
@@ -31,12 +31,12 @@
         <div class="col">
           <div class="duvidas">
             <h6 style="margin: 0px; font-size: 1rem;">Duvidas da atividade ({{ activity.questions.length }})</h6>
-            <div class="duvida row" v-for="act in activity.questions" :key="act.created_at"> 
+            <div class="duvida row" v-for="act in activity.questions" :key="act.created_at">
               <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding-bottom: 0px;">
                 <div>
                   <q-avatar class="avatar" size="25px">
                     <img v-if="img_src" :src="img_src">
-                    <img v-else src="/images/user-icon.jpg">
+                    <img v-else src="/spa/images/user-icon.jpg">
                   </q-avatar>
                   <text-subtitle2 class="text-weight-medium" style="margin-left: 0.8rem;">{{ act.user.name }}</text-subtitle2>
                 </div>
@@ -45,7 +45,7 @@
               <text-subtitle1 class="flex" style="margin-top: -30px; margin-bottom: 10px; margin: 3px; width: 100%; justify-content: center; padding-right: 1rem; white-space: pre-wrap;">{{ act.question }}</text-subtitle1>
               <div class="column">
                 <div class="col-4">
-                  <img src="/../icons/mesage.svg" alt="mensagem" class="icon-svg"/>
+                  <img src="/spa/icons/mesage.svg" alt="mensagem" class="icon-svg"/>
                 </div>
                 <div class="col-10 q-ml-sm" style="color: var(--Azul, #144EC0);">
                   {{ act.response }}
@@ -71,23 +71,23 @@
             />
           </div>
         </div>
-        <div class="row" style="padding: 10px 15px; margin-top: 0px;">
+        <div class="row" style="padding: 10px 15px; margin-top: 0px; cursor: pointer;" @click="redirectToEducator(activity.created_by_user)">
           <text-caption>Por {{ activity.created_by_user.name }}</text-caption>
         </div>
         <div class="row" style="padding: 10px 15px; margin-top: 0px;">
           <text-body1 style="font-size: 1rem;">Por {{ activity.description }}</text-body1>
         </div>
         <h6 style="padding: 10px 15px; margin: 0px;">Comentários sobre a atividade</h6>
-        <div>
-          <div class="row" v-for="act in activity.comments" :key="act.created_at">
-            <q-card style="width: 30%;">
+        <div class="row" style="flex-wrap: nowrap;">
+          <div v-for="act in activity.comments" :key="act.created_at" style="width: 30%;">
+            <q-card>
               <div class="duvida row" style="width: 100%;"> 
                 <div style="width: 100%;">
                   <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding-bottom: 0px;">
                     <div style="width: 100%;">
                       <q-avatar class="avatar" size="25px">
                         <img v-if="img_src" :src="img_src">
-                        <img v-else src="/images/user-icon.jpg">
+                        <img v-else src="/spa/images/user-icon.jpg">
                       </q-avatar>
                       <text-subtitle2 class="text-weight-medium" style="margin-left: 0.8rem;">{{ act.user.name }}</text-subtitle2>
                     </div>
@@ -95,7 +95,7 @@
                   </div>
                   <div class="info row rating flex" style="justify-content: flex-start; align-items: center; margin-left: 2rem; padding-top: 0;">
                     <span>{{ act.note }}</span>
-                    <img src="/icons/half-star.svg" alt="icon" class="icon" style="width: 15px; height: 15px; margin-left: 5px;">
+                    <img src="/spa/icons/half-star.svg" alt="icon" class="icon" style="width: 15px; height: 15px; margin-left: 5px;">
                     <span style="margin-left: 10px; margin-right: 0;">Recomendo</span>
                   </div>
                 </div>
@@ -109,7 +109,7 @@
     </div>
   </div>
 </template>
-  
+
 <script>
 import { ref } from 'vue'
 import ActivityExtra from 'src/components/ActivityExtra.vue';
@@ -137,11 +137,10 @@ export default {
     this.activity = objeto
   },
   async mounted () {
-    await this.getActivitys(); 
+    await this.getActivitys();
   },
   methods: {
     formatDate(date) {
-      console.log('aquiiii', date)
       const formattedDate = new Date(date).toLocaleDateString('pt-BR', {
         day: '2-digit',
         month: '2-digit',
@@ -149,19 +148,19 @@ export default {
       });
       return formattedDate;
     },
-    async getToken() {
-      const token = localStorage.getItem("token");
-      return token;
+    async gettoken_front() {
+      const token_front = localStorage.getItem("token_front");
+      return token_front;
     },
     async onSubmit() {
-      
-      const token = this.getToken()
+
+      const token_front = this.gettoken_front()
       const url = "api/shopping_carts/store";
 
       const headers = {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token_front}`,
       };
 
       let body = {
@@ -194,11 +193,17 @@ export default {
       console.log(body);
       console.log(resposta);
     },
+    redirectToEducator(obj) {
+      this.$router.push({
+        name: "PerfilEducador",
+        params: { id: obj.id },
+      });
+    },
   },
 };
 </script>
 
-  
+
 <style scoped>
 .duvida {
   display: flex;

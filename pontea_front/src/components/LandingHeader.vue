@@ -2,9 +2,9 @@
   <div>
     <q-header view="lHh Lpr lFf">
       <q-toolbar style="height: 80px; background-color: #fbfbfb">
-        <q-btn flat to="/home">
+        <q-btn flat to="/landing">
           <img
-            src="/../images/logo.svg"
+            src="/spa/images/logo.svg"
             alt="Logo"
             class="logo-image"
             style="max-width: 300px; min-width: 150px; z-index: 1"
@@ -20,21 +20,21 @@
             style="color: #616167"
             no-caps
           />
-          <q-route-tab v-show="token == null"
+          <q-route-tab v-show="token_front == null"
             name="entrar"
             label="Entrar"
             to="/login"
             style="color: #144ec0"
             no-caps
           />
-          <q-route-tab v-show="token != null"
+          <q-route-tab v-show="token_front != null"
             name="home"
             label="Home"
             to="/home"
             style="color: #144ec0"
             no-caps
           />
-          <q-route-tab v-show="token == null" name="cadastro" to="/cadastro">
+          <q-route-tab v-show="token_front == null" name="cadastro" to="/cadastro">
             <q-btn  label="Cadastre-se" color="primary" no-caps rounded />
           </q-route-tab>
         </q-tabs>
@@ -49,7 +49,7 @@ export default {
   data() {
     return {
       tab: "",
-      token: localStorage.getItem("token")
+      token_front: localStorage.getItem("token_front")
     };
   },
 };

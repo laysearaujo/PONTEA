@@ -84,11 +84,11 @@ export default {
   methods: {
     async getUserName() {
       const url = "/api/profile";
-      const token = localStorage.getItem("token");
+      const token_front = localStorage.getItem("token_front");
       const headers = {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token_front}`,
       };
 
         let resposta = await fetch(url, {

@@ -14,13 +14,13 @@
               <h1>Seja</h1>
             </div>
             <div id="dir1">
-              <img src="/images/landing/pontea_logo.svg" alt="pontea_logo" />
+              <a href="#cadastro"><img src="/spa/images/landing/pontea_logo.svg" alt="pontea_logo" /></a>
             </div>
           </div>
         </div>
         <div id="kids">
           <div id="subkids">
-            <img src="/images/landing/kids.svg" alt="" />
+            <img src="/spa/images/landing/kids.svg" alt="" />
           </div>
         </div>
       </div>
@@ -30,17 +30,20 @@
       <div class="column" id="body_principal">
         <div class="row" id="conheca">
           <div id="girl">
-            <img src="/images/landing/girl_piao.svg" alt="girl_piao" />
+            <img src="/spa/images/landing/girl_piao.svg" alt="girl_piao" />
           </div>
           <div class="column" id="text_conheca">
             <div id="text_conheca1">
               <h3>Conheça a plataforma</h3>
             </div>
-            <div id="vazio"></div>
+            <div id="vazio">
+              <p>A Pontea é uma plataforma educacional que busca derrubar as barreiras entre professores e crianças autistas através da construção de uma ponte entre todos os educadores do Brasil.<br/>
+Através dela, é possível disponibilizar e adquirir atividades preparadas especialmente para crianças no espectro, tudo isso com a rapidez que só o sistema de categorização de conteúdo da Pontea oferece. Aqui, você encontra atividades categorizadas por nível de suporte, nível de dificuldade, campo de experiência, entre outros filtros que auxiliam você a encontrar com precisão uma atividade adequada para as necessidades do seu estudante.</p>
+            </div>
           </div>
-          <img src="/images/landing/bee.svg" alt="abelha" id="bee" />
+          <img src="/spa/images/landing/bee.svg" alt="abelha" id="bee" />
           <div id="caixa">
-            <img src="/images/landing/blue_box.svg" alt="caixa_azul" />
+            <img src="/spa/images/landing/blue_box.svg" alt="caixa_azul" />
           </div>
         </div>
         <div class="column" id="encontre">
@@ -51,9 +54,9 @@
             <div class="row" id="forma_encontre2">
               <div id="forma_encontre3">
                 <div class="row" id="atividades">
-                  <img src="/images/landing/atv_card1.svg" alt="atv1" />
-                  <img src="/images/landing/atv_card2.svg" alt="atv2" />
-                  <img src="/images/landing/atv_card3.svg" alt="atv3" />
+                  <img src="/spa/images/landing/atv_card1.svg" alt="atv1" />
+                  <img src="/spa/images/landing/atv_card2.svg" alt="atv2" />
+                  <img src="/spa/images/landing/atv_card3.svg" alt="atv3" />
                 </div>
               </div>
             </div>
@@ -70,11 +73,11 @@
             <div id="formas_atraves2">
               <div id="formas_atraves3">
                 <div class="row" id="formas_atraves4">
-                  <img src="/images/landing/area2.svg" alt="card1" />
-                  <img src="/images/landing/area3.svg" alt="card2" />
-                  <img src="/images/landing/area4.svg" alt="card3" />
-                  <img src="/images/landing/area1.svg" alt="card4" />
-                  <img src="/images/landing/area5.svg" alt="card5" />
+                  <img src="/spa/images/landing/area2.svg" alt="card1" />
+                  <img src="/spa/images/landing/area3.svg" alt="card2" />
+                  <img src="/spa/images/landing/area4.svg" alt="card3" />
+                  <img src="/spa/images/landing/area1.svg" alt="card4" />
+                  <img src="/spa/images/landing/area5.svg" alt="card5" />
                 </div>
               </div>
             </div>
@@ -110,11 +113,11 @@
               <div class="column" id="forma_comentario3">
                 <div class="row" id="forma_comentario4">
                   <img
-                    src="/images/landing/coment_card1.svg"
+                    src="/spa/images/landing/coment_card1.svg"
                     alt="card_comentario1"
                   />
                   <img
-                    src="/images/landing/coment_card2.svg"
+                    src="/spa/images/landing/coment_card2.svg"
                     alt="card_comentario2"
                   />
                 </div>
@@ -140,9 +143,9 @@
           </div>
           <div id="formas_baixob">
             <div class="row" id="cards">
-              <img src="/images/landing/dep_card1.svg" alt="dep1" />
-              <img src="/images/landing/dep_card2.svg" alt="dep2" />
-              <img src="/images/landing/dep_card3.svg" alt="dep3" />
+              <img src="/spa/images/landing/dep_card1.svg" alt="dep1" />
+              <img src="/spa/images/landing/dep_card2.svg" alt="dep2" />
+              <img src="/spa/images/landing/dep_card3.svg" alt="dep3" />
             </div>
           </div>
         </div>
@@ -157,13 +160,13 @@
           </div>
           <div class="row" id="logos_redes">
             <div>
-              <img src="/images/landing/ig_logo.svg" alt="logo_youtube" />
+              <img src="/spa/images/landing/ig_logo.svg" alt="logo_youtube" />
             </div>
             <div>
-              <img src="/images/landing/linked_logo.svg" alt="logo_instagram" />
+              <img src="/spa/images/landing/linked_logo.svg" alt="logo_instagram" />
             </div>
             <div>
-              <img src="/images/landing/yt_logo.svg" alt="logo_linkedin" />
+              <img src="/spa/images/landing/yt_logo.svg" alt="logo_linkedin" />
             </div>
           </div>
         </div>
@@ -172,9 +175,9 @@
             <h4>Parceiros</h4>
           </div>
           <div class="row" id="logos_parceiros">
-            <div><img src="/images/landing/cin_logo.svg" alt="logo_cin" /></div>
+            <div><img src="/spa/images/landing/cin_logo.svg" alt="logo_cin" /></div>
             <div>
-              <img src="/images/landing/ufpe_logo.svg" alt="logo_ufpe" />
+              <img src="/spa/images/landing/ufpe_logo.svg" alt="logo_ufpe" />
             </div>
           </div>
         </div>
@@ -277,7 +280,7 @@ export default {
 #dir1 img {
   width: 118px;
   height: 48px;
-  margin-top: 16px;
+  margin-top: 22px;
   margin-left: 8px;
 }
 #body {
@@ -326,6 +329,14 @@ export default {
 #vazio {
   width: 803px;
   height: 24px;
+}
+#vazio p{
+  color: #3c3c3f;
+  text-align: justify;
+  font-family: lexend;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 24px;
 }
 #bee {
   display: flex;

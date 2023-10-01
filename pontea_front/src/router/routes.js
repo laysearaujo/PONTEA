@@ -61,8 +61,8 @@ const routes = [
   {
     path: "/login",
     beforeEnter: (to, from, next) => {
-      const token = localStorage.getItem("token");
-      if (token) {
+      const token_front = localStorage.getItem("token_front");
+      if (token_front) {
         next("/home");
       } else {
         next();
@@ -74,8 +74,8 @@ const routes = [
   {
     path: "/cadastro",
     beforeEnter: (to, from, next) => {
-      const token = localStorage.getItem("token");
-      if (token) {
+      const token_front = localStorage.getItem("token_front");
+      if (token_front) {
         next("/home");
       } else {
         next();

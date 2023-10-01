@@ -11,6 +11,7 @@
         :img_src="teacher.photo_path"
         @click="redirectToEducator(teacher)"
         class="teacher-wrapper"
+        style="cursor: pointer"
       />
     </div>
   </div>
@@ -34,18 +35,18 @@ export default {
     };
   },
   methods: {
-    async getToken() {
-      const token = localStorage.getItem("token");
-      console.log("OLHA AQUI PORRA", token);
-      return token;
+    async gettoken_front() {
+      const token_front = localStorage.getItem("token_front");
+      console.log("OLHA AQUI PORRA", token_front);
+      return token_front;
     },
     async getTeachers() {
       try {
-        const token = await this.getToken();
+        const token_front = await this.gettoken_front();
         const headers = {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token_front}`,
         };
 
         const response = await fetch("/api/teacher", {
@@ -67,7 +68,6 @@ export default {
       }
     },
     redirectToEducator(obj) {
-      const objetoString = JSON.stringify(obj);
       this.$router.push({
         name: "PerfilEducador",
         params: { id: obj.id },

@@ -39,11 +39,14 @@
         :title="item.title"
         :quantity="item.activities_count"
         class="card-wrapper"
+        @click="this.$router.push('/experiencias');"
+        style="cursor: pointer"
       />
     </div>
     <h5 class="sub-title col-12 q-mb-sm">Educadores Bem Avaliados</h5>
     <div class="educadores-avaliados scroll" v-if="teachers.length > 0">
       <TeacherCard
+        style="cursor: pointer"
         v-for="teacher in teachers"
         :key="teacher.name"
         :name="teacher.name"
@@ -92,18 +95,18 @@ export default {
     };
   },
   methods: {
-    async getToken() {
-      const token = localStorage.getItem("token");
-      console.log("token", token);
-      return token;
+    async gettoken_front() {
+      const token_front = localStorage.getItem("token_front");
+      console.log("token_front", token_front);
+      return token_front;
     },
     async getAreas() {
       try {
-        const token = await this.getToken();
+        const token_front = await this.gettoken_front();
         const headers = {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token_front}`,
         };
 
         const response = await fetch("/api/area", {
@@ -126,11 +129,11 @@ export default {
     },
     async getTeachers() {
       try {
-        const token = await this.getToken();
+        const token_front = await this.gettoken_front();
         const headers = {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token_front}`,
         };
 
         const response = await fetch("/api/teacher", {
@@ -158,11 +161,11 @@ export default {
     },
     async getActivitys() {
       try {
-        const token = await this.getToken();
+        const token_front = await this.gettoken_front();
         const headers = {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token_front}`,
         };
 
         const response = await fetch("/api/activity", {

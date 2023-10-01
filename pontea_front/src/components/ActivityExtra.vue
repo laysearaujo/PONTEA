@@ -7,7 +7,7 @@
           <section class="price-rating">
             <div class="price">R$ {{ preco }}</div>
             <div class="rating">
-              <img src="/icons/half-star2.svg" alt="icon" />
+              <img src="/spa/icons/half-star2.svg" alt="icon" />
               {{ nota }}
             </div>
           </section>
@@ -38,17 +38,17 @@ export default {
     defIcon() {
       // Use um condicional para determinar o caminho do ícone com base em CampoDeExperiencia
       if (this.CampoDeExperiencia === "Escuta, fala, pensamento e imaginação") {
-        return "/icons/area5.svg";
+        return "/spa/icons/area5.svg";
       } else if (this.CampoDeExperiencia === "Corpo, gestos e movimento") {
-        return "/icons/area4.svg";
+        return "/spa/icons/area4.svg";
       } else if (
         this.CampoDeExperiencia === "Espaços, tempo e quantidades,..."
       ) {
-        return "/icons/area3.svg";
+        return "/spa/icons/area3.svg";
       } else if (this.CampoDeExperiencia === "Traços, sons, cores e formas") {
-        return "/icons/area2.svg";
+        return "/spa/icons/area2.svg";
       } else {
-        return "/icons/area1.svg";
+        return "/spa/icons/area1.svg";
       }
     },
   },
@@ -77,7 +77,7 @@ export default {
   flex-direction: row-reverse;
   align-items: end;
   flex-shrink: 0;
-  background-image: url("/images/presente.jpeg"); /* Substitua pelo caminho da sua imagem */
+  background-image: url("/spa/images/presente.jpeg"); /* Substitua pelo caminho da sua imagem */
   background-size: cover; /* Ajusta o tamanho da imagem para cobrir a div */
   background-position: center; /* Centraliza a imagem na div */
   background-repeat: no-repeat; /* Evita repetição da imagem */

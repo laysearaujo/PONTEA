@@ -19,7 +19,7 @@
       :cadastro="true"
       titulo="Cadastre-se"
       descricao="e faça parte da comunidade Pontea."
-      img_src="public/images/cadastro-page.jpg"
+      img_src="/spa/images/cadastro-page.jpg"
       @cadastroSubmit="onSubmit"
     />
   </div>
@@ -90,6 +90,6 @@ export default {
   justify-content: center;
   align-items: center;
   background-size: contain;
-  background-image: url("public/images/bg-pattern.png");
+  background-image: url("/spa/images/bg-pattern.png");
 }
 </style>

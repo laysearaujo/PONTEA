@@ -13,21 +13,21 @@
     <div class="flex-name">
       <h2 class="name">{{ user.name }}</h2>
       <router-link to="/perfilCliente" class="icon-button" v-if="showEditBtn">
-        <img src="/../icons/edit.svg" alt="Edit Profile" />
+        <img src="/spa/icons/edit.svg" alt="Edit Profile" />
       </router-link>
     </div>
 
     <div class="rating flex">
       <div class="stars">
         <span> {{ user.note != null ? user.note : 0 }}</span>
-        <img src="/../icons/star.svg" alt="Star" />
+        <img src="/spa/icons/star.svg" alt="Star" />
       </div>
 
       <span>552 avaliações</span>
     </div>
 
     <div class="wallet flex" v-if="user.credit != null">
-      <img src="/../icons/wallet.svg" alt="Edit Profile" />
+      <img src="/spa/icons/wallet.svg" alt="Edit Profile" />
       <p>R$ {{ user.credit != null ? user.credit : 0 }}</p>
     </div>
 
