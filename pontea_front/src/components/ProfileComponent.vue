@@ -10,9 +10,9 @@
       class="rounded-image"
     />
 
-    <div class="name flex">
-      <h2 class="title">{{ user.name }}</h2>
-      <a href="#" class="icon-button">
+    <div class="flex-name">
+      <h2 class="name">{{ user.name }}</h2>
+      <a href="#" class="icon-button" v-if="showEditBtn">
         <img src="/../icons/edit.svg" alt="Edit Profile" />
       </a>
     </div>
@@ -54,6 +54,7 @@ export default {
   name: "ProfileComponent",
   props: {
     showBtn: Boolean,
+    showEditBtn: Boolean,
     user: {
       id: Number,
       name: String,
@@ -192,5 +193,21 @@ h2 {
 .description {
   font-family: Lexend;
   font-weight: 300;
+}
+
+.flex-name {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.name {
+  text-align: center;
+  color: #3c3c3f;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 16px !important;
+  font-family: Lexend;
 }
 </style>

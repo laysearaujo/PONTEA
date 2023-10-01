@@ -1,7 +1,12 @@
 <template>
   <div class="container">
     <div>
-      <ProfileComponent :showBtn="false" v-if="perfil" :user="perfil" />
+      <ProfileComponent
+        :showBtn="false"
+        :showEditBtn="false"
+        v-if="perfil"
+        :user="perfil"
+      />
     </div>
 
     <section class="activities">

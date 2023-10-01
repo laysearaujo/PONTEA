@@ -1,6 +1,11 @@
 <template>
   <div class="container">
-    <ProfileComponent :showBtn="false" v-if="perfil" :user="perfil" />
+    <ProfileComponent
+      :showBtn="false"
+      :showEditBtn="true"
+      v-if="perfil"
+      :user="perfil"
+    />
 
     <div class="historic">
       <h3 class="title">{{ title }}</h3>
@@ -124,6 +129,7 @@ export default {
         }
         const jsonData = await response.json(); // Aguarde a resolução da promessa e obtenha os dados JSON diretamente
         // Agora você tem acesso direto ao objeto JSON
+        console.log(jsonData);
         this.perfil = jsonData.user;
         this.sales_history = jsonData.sales_history;
       } catch (error) {
