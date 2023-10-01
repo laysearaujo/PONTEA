@@ -280,7 +280,7 @@ export default {
 #dir1 img {
   width: 118px;
   height: 48px;
-  margin-top: 19.5px;
+  margin-top: 22px;
   margin-left: 8px;
 }
 #body {

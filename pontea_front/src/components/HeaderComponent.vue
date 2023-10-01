@@ -13,12 +13,14 @@
       style="background-color: #d9dcf9; padding: 1%"
     >
       <div>
-        <img
-          src="/spa/images/logo.svg"
-          alt="Logo"
-          class="logo-image"
-          style="max-width: 300px; min-width: 150px; z-index: 1; height: 40px"
-        />
+        <q-btn flat to="/home">
+          <img
+            src="/spa/images/logo.svg"
+            alt="Logo"
+            class="logo-image"
+            style="max-width: 300px; min-width: 150px; z-index: 1; height: 40px"
+          />
+        </q-btn>
       </div>
       <div class="toolbar-icons">
         <div class="search-input">
