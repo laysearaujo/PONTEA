@@ -1,10 +1,10 @@
 # PONTEA - Inclusive Learning Platform for Children with Autism Spectrum Disorder
 
-Welcome to the SensibiliTEA project repository! Our platform is designed to create inclusive learning environments for children with Autism Spectrum Disorder (ASD). It offers teachers a collaborative space to share and discover customized activities that enhance engagement and development in children with ASD.
+Welcome to the PONTEA project repository! Our platform is designed to create inclusive learning environments for children with Autism Spectrum Disorder (ASD). It offers teachers a collaborative space to share and discover customized activities that enhance engagement and development in children with ASD.
 
 ## Getting Started
 
-These instructions will guide you through setting up and running the SensibiliTEA project on your local machine.
+These instructions will guide you through setting up and running the PONTEA project on your local machine.
 
 ### Prerequisites
 
@@ -35,7 +35,7 @@ Before you begin, make sure you have the following prerequisites installed:
 
 ### Running the Project
 
-Once you've completed the installation process, you can run the SensibiliTEA project using Quasar:
+Once you've completed the installation process, you can run the PONTEA project using Quasar:
 
 1. In the project directory, start the development server:
    ```sh
@@ -46,7 +46,7 @@ Once you've completed the installation process, you can run the SensibiliTEA pro
    
 4. Open your web browser and navigate to the provided address (http://localhost:8080/).
 
-The SensibiliTEA platform should now be up and running, ready for you to explore its features and functionalities.
+The PONTEA platform should now be up and running, ready for you to explore its features and functionalities.
 
 ## Contribution
 
