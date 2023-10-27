@@ -39,7 +39,6 @@ Once you've completed the installation process, you can run the SensibiliTEA pro
 
 1. In the project directory, start the development server:
    ```sh
-    cd quasar-project
     quasar dev
    ```
 
